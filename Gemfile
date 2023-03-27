@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -54,13 +56,11 @@ group :development, :test do
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "rubocop"
+  gem "rubocop-config-prettier"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
 end
+
 
