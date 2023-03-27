@@ -7,6 +7,7 @@ ruby "3.2.0"
 
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
+gem "activeadmin"
 gem "bootsnap", require: false
 gem "devise"
 gem "devise-jwt"
@@ -43,6 +44,7 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem "scss_lint"
 end
 
 group :test do
