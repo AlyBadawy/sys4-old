@@ -51,8 +51,16 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem "capybara"
+  gem "database_cleaner"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "dotenv-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "pry-byebug"
+  gem "pry-rails"
   gem "rspec-rails"
+  gem "shoulda-matchers"
 end
 
 group :development do
@@ -64,4 +72,8 @@ group :development do
   gem "rubocop-rspec"
 end
 
-
+group :test do
+  gem "selenium-webdriver"
+  gem "simplecov"
+  gem "webdrivers"
+end
