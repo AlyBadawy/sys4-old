@@ -10,6 +10,8 @@ require "rspec/rails"
 require "database_cleaner"
 require "capybara/rspec"
 
+require "devise/jwt/test_helpers"
+
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 
 begin

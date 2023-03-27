@@ -20,6 +20,14 @@ RSpec.describe User do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
+  describe "associations" do
+    subject(:user) { build(:user) }
+
+    it "has many associations" do
+      expect(user).to have_many(:allowlisted_jwt)
+    end
+  end
+
   describe "secure password" do
     before do
       @user = build(:user)
