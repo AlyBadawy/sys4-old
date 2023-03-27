@@ -9,6 +9,11 @@ Rails.application.routes.draw do
                  sessions: "users/sessions",
                  registrations: "users/registrations",
                }
+
+    get "/status/ok", to: "status#ok"
+    get "/status/user", to: "status#user"
+
+    get "/account/me", to: "status#me"
   end
 
   root "react#index"
