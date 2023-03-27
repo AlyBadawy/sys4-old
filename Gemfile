@@ -56,6 +56,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "overcommit"
   gem "rubocop"
   gem "rubocop-config-prettier"
   gem "rubocop-performance"
