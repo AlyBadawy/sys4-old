@@ -34,3 +34,8 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+coverage/*
+.DS_Store
+.env*
+yarn-error.log
