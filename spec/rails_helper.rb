@@ -10,6 +10,8 @@ require "rspec/rails"
 require "database_cleaner"
 require "capybara/rspec"
 
+require "devise/jwt/test_helpers"
+
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 
 begin
@@ -29,6 +31,8 @@ RSpec.configure do |config|
   config.after(:each) { DatabaseCleaner.clean }
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
 
   Shoulda::Matchers.configure do |conf|
     conf.integrate do |with|

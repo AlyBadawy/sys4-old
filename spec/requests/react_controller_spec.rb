@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Reacts" do
+RSpec.describe ReactController do
   describe "GET /" do
     it "returns http success" do
       get "/"
