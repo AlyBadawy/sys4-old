@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.x
-          cache: yar
+          cache: yarn
       # Add or replace database setup steps here
       - name: Setup database
         env:
