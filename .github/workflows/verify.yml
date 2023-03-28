@@ -7,21 +7,17 @@ jobs:
     environment: test
     services:
       postgres:
-        image: postgres:15
+        image: postgres:15-alpine
         env:
+          RAILS_ENV: test
+          POSTGRES_HOST: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: sys4_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
         ports:
           - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        # tmpfs makes DB faster by using RAM
-        options: >-
-          --mount type=tmpfs,destination=/var/lib/postgresql/data
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -39,6 +35,17 @@ jobs:
           node-version: 19.x
           cache: yarn
       # Add or replace database setup steps here
+      - name: Setup database
+        env:
+          RAILS_ENV: test
+          POSTGRES_HOST: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci_db_test
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+        run: |
+          cp config/database.ci.yml config/database.yml
+          bundle exec rails db:create
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
