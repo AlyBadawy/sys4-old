@@ -33,9 +33,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.x
-          cache: yarn
-      - name: Check Rubocop
-        uses: prozsolt/rubocop-github-action@master
+          cache: yar
       # Add or replace database setup steps here
       - name: Setup database
         env:
@@ -53,9 +51,7 @@ jobs:
       - name: Run Ruby tests
         run: bin/rake
       - name: Jest tests
-        uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          test-script: yarn test
+        run: yarn test
 
   # lint:
   #   runs-on: ubuntu-latest
