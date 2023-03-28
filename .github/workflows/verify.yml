@@ -34,6 +34,8 @@ jobs:
         with:
           node-version: 19.x
           cache: yarn
+      - name: Check Rubocop
+        uses: prozsolt/rubocop-github-action@master
       # Add or replace database setup steps here
       - name: Setup database
         env:
@@ -45,12 +47,16 @@ jobs:
           POSTGRES_PORT: 5432
         run: |
           cp config/database.ci.yml config/database.yml
-          bundle exec rails db:create
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
-      - name: Run tests
+      - name: Run Ruby tests
         run: bin/rake
+      - name: Jest tests
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          test-script: yarn test
+
   # lint:
   #   runs-on: ubuntu-latest
   #   environment: test
