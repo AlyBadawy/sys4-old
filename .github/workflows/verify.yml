@@ -49,7 +49,7 @@ jobs:
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run Ruby tests
-        run: rspec
+        run: bundle exec rspec
       - name: Jest tests
         run: yarn test
 
