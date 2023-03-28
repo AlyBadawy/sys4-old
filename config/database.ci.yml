@@ -1,0 +1,12 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: postgres
+  host: localhost
+  user: postgres
+  password: postgres
+  port: 5432
+
+test:
+  <<: *default
