@@ -39,7 +39,7 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build": "esbuild app/javascript/application.ts --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
     "lint:fix": "eslint --fix --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*",
     "lint": "eslint --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*",
     "test": "jest --silent --noStackTrace --coverage",
