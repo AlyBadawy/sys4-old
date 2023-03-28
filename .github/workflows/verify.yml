@@ -34,7 +34,8 @@ jobs:
         with:
           node-version: 19.x
           cache: yarn
-      # Add or replace database setup steps here
+      - name: Rubocop
+        run: bundle exec rubocop --parallel
       - name: Setup database
         env:
           RAILS_ENV: test
@@ -49,9 +50,13 @@ jobs:
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run Ruby tests
-        run: bundle exec rspec
+        run: bin/rake
       - name: Jest tests
         run: yarn test
+      - name: Security audit dependencies
+        run: bin/bundler-audit --update
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
 
   # lint:
   #   runs-on: ubuntu-latest
