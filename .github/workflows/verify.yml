@@ -4,6 +4,7 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: test
     services:
       postgres:
         image: postgres:15
@@ -44,6 +45,7 @@ jobs:
         run: bin/rake
   lint:
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
