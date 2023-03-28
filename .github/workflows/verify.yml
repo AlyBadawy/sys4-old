@@ -54,7 +54,7 @@ jobs:
       - name: Jest tests
         run: yarn test
       - name: Security audit dependencies
-        run: bin/bundler-audit --update
+        run: bundle exec bundler-audit --update
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
 

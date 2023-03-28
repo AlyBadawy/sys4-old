@@ -49,6 +49,7 @@ end
 
 group :test do
   gem "brakeman"
+  gem "bundle-audit"
   gem "selenium-webdriver"
   gem "simplecov"
   gem "webdrivers"
