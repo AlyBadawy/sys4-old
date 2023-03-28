@@ -24,6 +24,7 @@ jobs:
           --health-retries 5
     env:
       RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ vars.RAILS_MASTER_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
