@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const content = (
@@ -16,7 +15,10 @@ export const Home = () => {
         </p>
       </main>
       <footer>
-        <Link to='/login'>Login</Link>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem recusandae
+        laboriosam ipsum! Laborum deserunt provident aliquid, quas dolore
+        aspernatur, totam ducimus, consequuntur doloribus rerum blanditiis
+        delectus aliquam quasi nesciunt quidem.
       </footer>
     </section>
   );

@@ -212,7 +212,7 @@ RSpec/NestedGroups:
 
 RSpec/MultipleExpectations:
   Enabled: true
-  Max: 3
+  Max: 5
 
 Style/Documentation:
   Enabled: false

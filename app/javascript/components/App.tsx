@@ -7,7 +7,7 @@ import { PrivateRoute } from '../auth/PrivateRoute';
 import { store } from '../store/store';
 import { Dashboard } from './Dashboard';
 import { Home } from './Home';
-import { Layout } from './Layout';
+import { Layout } from './utils/Layout';
 
 export const App = () => {
   return (

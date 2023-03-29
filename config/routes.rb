@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  # flipper route
+  constraints CanAccessFlipperUI do
+    mount Flipper::UI.app(Flipper) => "/admin/flipper"
+  end
+
   scope :api, defaults: { format: :json } do
     devise_for :users,
                controllers: {
