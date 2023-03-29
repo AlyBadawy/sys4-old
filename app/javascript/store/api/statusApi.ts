@@ -4,7 +4,7 @@ export const StatusApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
     getStatus: builder.query<string, void>({
       query: () => '/status/user',
-      keepUnusedDataFor: 60,
+      keepUnusedDataFor: 3600,
     }),
   }),
 });

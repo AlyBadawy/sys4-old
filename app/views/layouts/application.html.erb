@@ -2,14 +2,30 @@
 <html>
   <head>
     <title>Sys4</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <script>
+      function jsonParse(json, defaultValue) {
+       try {
+         return JSON.parse(json.replace(/&quot;/g, '"'));
+       } catch (_e) {
+         return defaultValue;
+       }
+      }
+       function getMetaContent(name) {
+         var element = document.querySelector("meta[name='" + name + "']");
+         return element ? element.getAttribute('content') : null;
+       }
 
+       window.USER = jsonParse("<%= user_json(current_user) %>", {});
+       window.FLIPPERS = jsonParse("<%= flippers_json(current_user) %>", {});
+       window.RAILS_ENV = "<%= Rails.env %>";
+    </script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
   <body>
     <%= yield %>
   </body>
