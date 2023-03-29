@@ -2,6 +2,7 @@
 
 class User < Account
   include Devise::JWT::RevocationStrategies::Allowlist
+  include Flipper::Identifier
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -10,11 +11,11 @@ class User < Account
 
   self.skip_session_storage = [:http_auth, :params_auth]
 
+  has_many :allowlisted_jwt, dependent: :destroy
+
   validates :email, presence: true,
                     format: /\A\S+@\S+\z/,
                     uniqueness: { case_sensitive: false }
-
-  has_many :allowlisted_jwt, dependent: :destroy
 
   def jwt_payload
     { "Provider" => "SYS4" }
