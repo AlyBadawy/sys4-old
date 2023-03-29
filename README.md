@@ -24,7 +24,7 @@ The following are the modules that make up SYS4:
 
 SYS4 is open source and available on GitHub. To use the application, simply clone the repository, install the dependencies, and start the server.
 
-### Using the CyberBit Wiki
+### Using the Wiki
 
 SYS4 also includes a GitHub wiki that provides a detailed guide to building the application and understanding the technologies used. The wiki includes information about how SYS4 was built, along with information about how to set it up and use it.
 
