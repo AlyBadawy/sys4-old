@@ -4,6 +4,6 @@ declare global {
   }
 }
 
-export const isFlipperEnabled = (feature: string) => {
+export const useFlipper = (feature: string) => {
   return !!window.FLIPPERS[feature];
 };
