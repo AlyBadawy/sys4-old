@@ -24,6 +24,7 @@ ActiveAdmin.register User do
 
   index do
     selectable_column
+    column :id
     column :email
     column :current_sign_in_at
     column :current_sign_in_ip do |au|
@@ -34,14 +35,6 @@ ActiveAdmin.register User do
       end
     end
     column :sign_in_count
-    column :last_sign_in_at
-    column :last_sign_in_ip do |au|
-      if au.last_sign_in_ip
-        link_to au.last_sign_in_ip, "http://who.is/whois-ip/ip-address/#{au.last_sign_in_ip}", target: "_blank", rel: "noopener"
-      else
-        status_tag("Never signed in before", class: "no")
-      end
-    end
     actions
   end
 
