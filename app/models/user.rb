@@ -20,4 +20,8 @@ class User < Account
   def jwt_payload
     { "Provider" => "SYS4" }
   end
+
+  def flipper_id
+    id
+  end
 end
