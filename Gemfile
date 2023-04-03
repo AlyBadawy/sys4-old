@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.0"
+ruby "3.2.2"
 
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
@@ -21,7 +21,7 @@ gem "paper_trail"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rack-cors"
-gem "sassc-rails"
+gem "sassc"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
@@ -47,7 +47,6 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "scss_lint"
 end
 
 group :test do
