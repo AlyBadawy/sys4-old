@@ -10,5 +10,5 @@
   },
   "types": ["node", "jest", "@testing-library/jest-dom"],
   "include": ["app/javascript/**/*.ts*"],
-  "exclude": ["**/*.d.ts"]
+  "exclude": ["./esbuild.config.js"]
 }
