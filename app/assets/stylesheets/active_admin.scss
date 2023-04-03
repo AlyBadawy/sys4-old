@@ -15,3 +15,16 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+.status_tag {
+  border-radius: 8px;
+}
+
+.panel_contents {
+  th.col {
+    min-width: 10rem;
+  }
+  th.col.col-id {
+    min-width: auto;
+  }
+}
