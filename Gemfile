@@ -41,7 +41,11 @@ group :development, :test do
 end
 
 group :development do
+  gem "awesome_print"
   gem "overcommit"
+  gem "pry"
+  gem "pry-awesome_print"
+  gem "pry-doc"
   gem "rubocop"
   gem "rubocop-config-prettier"
   gem "rubocop-performance"
