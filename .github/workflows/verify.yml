@@ -53,7 +53,7 @@ jobs:
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Compile CSS
-        run: rails tailwindcss:build
+        run: bin/rails tailwindcss:build
       - name: Run Ruby tests
         run: bin/rake
       - name: Jest tests
