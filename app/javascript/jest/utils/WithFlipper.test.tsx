@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { WithFlipper } from '../../../components/utils/WithFlipper';
+import { WithFlipper } from '../../components/utils/WithFlipper';
 
 describe('WithFlipper', () => {
   beforeAll(() => {

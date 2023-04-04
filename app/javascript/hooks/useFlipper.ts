@@ -5,5 +5,9 @@ declare global {
 }
 
 export const useFlipper = (feature: string) => {
+  if (!window.FLIPPERS) {
+    return false;
+  }
+
   return !!window.FLIPPERS[feature];
 };
