@@ -39,3 +39,5 @@ coverage/*
 .DS_Store
 .env*
 yarn-error.log
+
+/esbuild_error_*

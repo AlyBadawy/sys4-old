@@ -50,10 +50,10 @@ export const Login = () => {
     <section>
       <p ref={errRef}>{errMsg}</p>
       <h1>Login</h1>
-      <form>
+      <form className='text-black'>
         <input
-          type="email"
-          id="email"
+          type='email'
+          id='email'
           ref={emailRef}
           value={email}
           onChange={(event) => {
@@ -61,8 +61,8 @@ export const Login = () => {
           }}
         />
         <input
-          type="password"
-          id="password"
+          type='password'
+          id='password'
           ref={pwdRef}
           value={password}
           onChange={(event) => {
@@ -70,10 +70,13 @@ export const Login = () => {
           }}
         />
         <button
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
           onClick={(e) => {
             void handleSubmit(e);
           }}
-        ></button>
+        >
+          Login
+        </button>
       </form>
     </section>
   );

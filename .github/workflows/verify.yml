@@ -52,7 +52,8 @@ jobs:
           cp config/database.ci.yml config/database.yml
       - name: Set up database schema
         run: bin/rails db:schema:load
-      # Add or replace test runners here
+      - name: Compile CSS
+        run: bin/rails tailwindcss:build
       - name: Run Ruby tests
         run: bin/rake
       - name: Jest tests

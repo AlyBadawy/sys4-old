@@ -1,15 +1,22 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { GuestRoute } from '../auth/GuestRoute';
-import { Login } from '../auth/Login';
-import { PrivateRoute } from '../auth/PrivateRoute';
-import { store } from '../store/store';
-import { Dashboard } from './Dashboard';
-import { Home } from './Home';
-import { Layout } from './utils/Layout';
+import { GuestRoute } from '../../auth/GuestRoute';
+import { Login } from '../../auth/Login';
+import { PrivateRoute } from '../../auth/PrivateRoute';
+import { Home } from '../home/Home';
+import { Layout } from './Layout';
+import { useFlipper } from '../../hooks/useFlipper';
+import { OfflineApp } from '../home/OfflineApp';
+import { NotFound } from './NotFound';
+import { Dashboard } from '../app/dashboard';
 
-export const App = () => {
+export const S4Routes = () => {
+  if (!useFlipper('app_online')) {
+    return <OfflineApp />;
+  }
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -24,10 +31,11 @@ export const App = () => {
             {/* un-signed in routes */}
 
             <Route element={<PrivateRoute />}>
-              <Route path='dashboard' element={<Dashboard />} />
+              <Route path='app' element={<Dashboard />} />
             </Route>
             {/* Private routes */}
           </Route>
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Provider>
