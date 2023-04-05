@@ -4,4 +4,6 @@ require "simplecov"
 
 SimpleCov.start do
   add_filter "app/admin"
+  add_filter "config/initializers"
+  add_filter "spec"
 end

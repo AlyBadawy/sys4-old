@@ -20,6 +20,14 @@ RSpec.describe AdminUser do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
+  describe "associations" do
+    subject(:admin_user) { build(:admin_user) }
+
+    it "has and belongs to many associations" do
+      expect(admin_user).to have_and_belong_to_many(:groups)
+    end
+  end
+
   describe "secure password" do
     before do
       @user = build(:admin_user)
