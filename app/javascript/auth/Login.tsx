@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/hooks';
 import { useLoginMutation } from './AuthApi';
 import { setCredentials } from './AuthSlice';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 export const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -13,7 +12,7 @@ export const Login = () => {
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
 
-  const [login, { data, isLoading, error }] = useLoginMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
