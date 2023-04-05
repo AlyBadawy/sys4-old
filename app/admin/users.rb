@@ -4,7 +4,14 @@
 ActiveAdmin.register User do
   menu priority: 2, parent: "Account"
 
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, group_ids: []
+
+  controller do
+    def update
+      permitted_params[:user][:group_ids] = permitted_params[:user][:group_ids]&.delete("")
+      super
+    end
+  end
 
   config.filters = false
 
@@ -44,6 +51,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :groups, as: :check_boxes
     end
     f.actions
   end
@@ -72,23 +80,20 @@ ActiveAdmin.register User do
       row :created_at
       row :updated_at
     end
+    panel "Grpups" do
+      table_for user.groups do
+        column :id
+        column :name
+        column :description
+        column "Group Link" do |group|
+          link_to "View", admin_group_path(group)
+        end
+      end
+    end
     panel "User Versions" do
       table_for user.versions do
         column :id
-        column :whodunnit_email do |v|
-          if v.whodunnit
-            Account.find(v.whodunnit).email
-          else
-            status_tag "no", label: "Unknown"
-          end
-        end
-        column :whodunnit_type do |v|
-          if v.whodunnit
-            Account.find(v.whodunnit).type == "AdminUser" ? "Admin" : "User"
-          else
-            status_tag "no", label: "Unknown"
-          end
-        end
+        column :whodunnit
         column :created_at
         column :object_changes
       end

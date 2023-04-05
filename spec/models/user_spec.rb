@@ -26,6 +26,10 @@ RSpec.describe User do
     it "has many associations" do
       expect(user).to have_many(:allowlisted_jwt)
     end
+
+    it "has and belongs to many associations" do
+      expect(user).to have_and_belong_to_many(:groups)
+    end
   end
 
   describe "secure password" do
