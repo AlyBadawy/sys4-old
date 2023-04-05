@@ -43,6 +43,7 @@ end
 
 group :development do
   gem "awesome_print"
+  gem "bullet"
   gem "overcommit"
   gem "pry"
   gem "pry-awesome_print"

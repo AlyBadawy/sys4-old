@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Group < ApplicationRecord
+  has_paper_trail
+
   # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :accounts
 

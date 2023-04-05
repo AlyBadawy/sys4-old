@@ -72,6 +72,16 @@ ActiveAdmin.register AdminUser do
       row :created_at
       row :updated_at
     end
+    panel "Grpups" do
+      table_for admin_user.groups do
+        column :id
+        column :name
+        column :description
+        column "Group Link" do |group|
+          link_to "View", admin_group_path(group)
+        end
+      end
+    end
     panel "User Versions" do
       table_for admin_user.versions do
         column :id
