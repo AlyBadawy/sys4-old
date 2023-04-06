@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_030744) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_033156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -42,6 +42,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_030744) do
     t.index ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true
   end
 
+  create_table "accounts_groups", id: false, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.uuid "group_id", null: false
+    t.index ["account_id", "group_id"], name: "index_accounts_groups_on_account_id_and_group_id"
+    t.index ["account_id"], name: "index_accounts_groups_on_account_id"
+    t.index ["group_id"], name: "index_accounts_groups_on_group_id"
+  end
+
   create_table "allowlisted_jwts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "jti", null: false
     t.string "aud", null: false
@@ -69,6 +77,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_030744) do
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
   end
 
+  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.index ["name"], name: "index_groups_on_name", unique: true
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.string "item_id", null: false
@@ -80,5 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_030744) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "accounts_groups", "accounts"
+  add_foreign_key "accounts_groups", "groups"
   add_foreign_key "allowlisted_jwts", "accounts", column: "user_id", on_delete: :cascade
 end

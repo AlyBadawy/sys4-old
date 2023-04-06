@@ -13,10 +13,6 @@ class User < Account
 
   has_many :allowlisted_jwt, dependent: :destroy
 
-  validates :email, presence: true,
-                    format: /\A\S+@\S+\z/,
-                    uniqueness: { case_sensitive: false }
-
   def jwt_payload
     { "Provider" => "SYS4" }
   end
