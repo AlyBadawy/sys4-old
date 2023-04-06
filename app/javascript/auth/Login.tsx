@@ -7,13 +7,12 @@ import { setCredentials } from './AuthSlice';
 export const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const pwdRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -40,7 +39,6 @@ export const Login = () => {
       navigate('/dashboard');
     } catch (err) {
       setErrMsg((err as Error).message);
-      errRef.current?.focus();
     }
   };
 
@@ -48,7 +46,9 @@ export const Login = () => {
     <h1>Loading...</h1>
   ) : (
     <section>
-      <p ref={errRef}>{errMsg}</p>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access */}
+      {error && <p>{(error as any).data?.error}</p>}
+      {errMsg && <p>{errMsg}</p>}
       <h1>Login</h1>
       <form className='text-black'>
         <input
