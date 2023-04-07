@@ -1,85 +1,100 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/hooks';
 import { useLoginMutation } from './AuthApi';
 import { setCredentials } from './AuthSlice';
 
 export const Login = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const pwdRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    emailRef.current?.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg('');
-  }, [email, password]);
-
-  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await login({ email, password }).unwrap();
-      dispatch(
-        setCredentials({
-          userId: response.id,
-          jwtToken: response.JwtToken,
-          email: response.email,
-          isLoggedIn: true,
-        })
-      );
-      navigate('/dashboard');
-    } catch (err) {
-      setErrMsg((err as Error).message);
-      errRef.current?.focus();
-    }
+    await login({ email, password })
+      .unwrap()
+      .then((res) => {
+        dispatch(
+          setCredentials({
+            userId: res.id,
+            jwtToken: res.JwtToken,
+            email: res.email,
+            isLoggedIn: true,
+          })
+        );
+        navigate('/dashboard');
+      });
   };
 
-  const content = isLoading ? (
-    <h1>Loading...</h1>
-  ) : (
-    <section>
-      <p ref={errRef}>{errMsg}</p>
-      <h1>Login</h1>
-      <form className='text-black'>
-        <input
-          type='email'
-          id='email'
-          ref={emailRef}
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
-        <input
-          type='password'
-          id='password'
-          ref={pwdRef}
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <button
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-          onClick={(e) => {
-            void handleSubmit(e);
-          }}
-        >
-          Login
-        </button>
-      </form>
-    </section>
+  const loginContent = (
+    <form
+      onSubmit={(e) => {
+        void handleSubmit(e);
+      }}
+    >
+      <main className='container mx-auto h-screen flex flex-col'>
+        <div className='border border-cyan-800 animate-pulse bg-cyan-900 opacity-70 mx-5 m-auto flex flex-col p-10 rounded-lg shadow-lg space-y-6 min-w-sm md:w-1/2 md:mx-auto items-center'>
+          <img src='/images/sys4-logo.svg' className='w-1/2' />
+          <h3 className='text-xl font-bold'>Login To your Account!</h3>
+          <input
+            type='email'
+            id='email'
+            placeholder='iLove@sys4.dev'
+            required
+            className='flex-1 p-2 px-4 rounded-full outline-none focus:border-transparent text-gray-800 h-10'
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
+          <div className='flex flex-col'>
+            <input
+              type='password'
+              id='password'
+              placeholder='Password'
+              required
+              className='flex-1 p-2 px-4 rounded-full outline-none focus:border-transparent text-gray-800 h-10'
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+            <p className='m-0 mb-4 ml-4 text-sm'>
+              <Link to='#' className='text-gray-300'>
+                Forgot your password?
+              </Link>
+            </p>
+          </div>
+          <button
+            className={`bg-logoPrimary hover:bg-blue-700 text-logoSecondary font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:hover:bg-logoPrimary disabled:cursor-not-allowed ${
+              isLoading ? 'cursor-progress disabled:cursor-progress' : ''
+            }`}
+            type='submit'
+            disabled={isLoading || !email || !password}
+          >
+            Login{' '}
+            {isLoading && (
+              <img src='/images/ui/spinner.svg' className='inline' />
+            )}
+          </button>
+          <p className='text-red-400'>
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access */}
+            {error && ((error as any).data?.error || 'something went wrong!')}
+          </p>
+          <p className='text-sm'>
+            Do not have an account?{' '}
+            <Link to='#' className='text-gray-300'>
+              <span>Sign up now!</span>
+            </Link>
+          </p>
+        </div>
+      </main>
+    </form>
   );
 
-  return content;
+  return loginContent;
 };
