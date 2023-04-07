@@ -31,7 +31,7 @@ export const Home = () => {
             </div>
 
             {/* Image */}
-            <div className='md:w-1/2'>
+            <div className='md:w-1/2 animate-pulse'>
               <img
                 src='/images/sys4-logo-4.svg'
                 alt='Hero Image'
