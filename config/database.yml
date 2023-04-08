@@ -17,5 +17,5 @@ test:
 production:
   <<: *default
   database: sys4_production
-  username: sys4
+  username: deploy
   password: <%= ENV["SYS4_DATABASE_PASSWORD"] %>
