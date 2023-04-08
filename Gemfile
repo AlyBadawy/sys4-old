@@ -8,6 +8,7 @@ ruby "3.2.2"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
 gem "activeadmin"
+gem "amazing_print"
 gem "bootsnap", require: false
 gem "devise"
 gem "devise-jwt"
@@ -21,6 +22,7 @@ gem "paper_trail"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rack-cors"
+gem "rails_semantic_logger"
 gem "sassc"
 gem "sprockets-rails"
 gem "stimulus-rails"
@@ -50,12 +52,8 @@ group :development, :test do
 end
 
 group :development do
-  gem "awesome_print"
   gem "bullet"
   gem "overcommit"
-  gem "pry"
-  gem "pry-awesome_print"
-  gem "pry-doc"
   gem "rubocop"
   gem "rubocop-config-prettier"
   gem "rubocop-performance"
