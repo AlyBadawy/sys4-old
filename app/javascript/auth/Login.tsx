@@ -26,7 +26,7 @@ export const Login = () => {
             isLoggedIn: true,
           })
         );
-        navigate('/dashboard');
+        navigate('/app');
       });
   };
 
