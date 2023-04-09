@@ -13,8 +13,6 @@ ActiveAdmin.register User do
     end
   end
 
-  config.filters = false
-
   index do
     selectable_column
     column :id
