@@ -35,33 +35,41 @@ ActiveAdmin.register Group do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :name
-      row :description
-      row :users do |group|
-        group.users.count
+    tabs do
+      tab "Group Details" do
+        attributes_table do
+          row :id
+          row :name
+          row :description
+          row :users do |group|
+            group.users.count
+          end
+          row :admins do |group|
+            group.admin_users.count
+          end
+          row :created_at
+          row :updated_at
+        end
       end
-      row :admins do |group|
-        group.admin_users.count
+      tab "Group Versions" do
+        panel "Group Versions" do
+          table_for group.versions do
+            column :id
+            column :whodunnit
+            column :created_at
+            column :object_changes
+          end
+        end
       end
-      row :created_at
-      row :updated_at
-    end
-    panel "Group Versions" do
-      table_for group.versions do
-        column :id
-        column :whodunnit
-        column :created_at
-        column :object_changes
-      end
-    end
-    panel "Users" do
-      table_for group.users do
-        column :id
-        column :email
-        column :user_link do |user|
-          link_to "View", admin_user_path(user)
+      tab "Users" do
+        panel "Users" do
+          table_for group.users do
+            column :id
+            column :email
+            column :user_link do |user|
+              link_to "View", admin_user_path(user)
+            end
+          end
         end
       end
     end

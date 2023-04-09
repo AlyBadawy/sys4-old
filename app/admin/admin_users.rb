@@ -8,21 +8,6 @@ ActiveAdmin.register AdminUser do
 
   config.filters = false
 
-  action_item :new, only: :show do
-    link_to("New Admin", new_resource_path)
-  end
-
-  sidebar "New Admin User" do
-    div { "To add a new admin user, click on 'New Admin User' button above, fill in the user email, passowrd and password confirmation when prompeted to do so. Then, click on 'Create admin user'." }
-    div { "Note, Always consider using a strong password." }
-  end
-  sidebar "View an Admin User details" do
-    div { "From the menu above, click on 'Admin Users', you will get a list of all current users, next to each user, you will find links to view, edit or delete a user. use the 'view' link next to the user you wish to view; This will bring that editor information." }
-  end
-  sidebar "Delete an Admin User" do
-    div { "From the menu above, click on 'Admin Users', you will get a list of all current users, next to each user, you will find links to view, edit or delete a user. use the 'delete' link next to the user you wish to delete, to delete that user." }
-  end
-
   index do
     selectable_column
     column :id
@@ -49,58 +34,66 @@ ActiveAdmin.register AdminUser do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :email
-      row :current_sign_in_at
-      row :current_sign_in_ip do |user|
-        if user.current_sign_in_ip
-          link_to user.current_sign_in_ip, "http://who.is/whois-ip/ip-address/#{user.current_sign_in_ip}", target: "_blank", rel: "noopener"
-        else
-          status_tag "no", label: "Never signed in before"
+    tabs do
+      tab "Admin Details" do
+        attributes_table do
+          row :id
+          row :email
+          row :current_sign_in_at
+          row :current_sign_in_ip do |user|
+            if user.current_sign_in_ip
+              link_to user.current_sign_in_ip, "http://who.is/whois-ip/ip-address/#{user.current_sign_in_ip}", target: "_blank", rel: "noopener"
+            else
+              status_tag "no", label: "Never signed in before"
+            end
+          end
+          row :last_sign_in_at
+          row :last_sign_in_ip do |user|
+            if user.last_sign_in_ip
+              link_to user.last_sign_in_ip, "http://who.is/whois-ip/ip-address/#{user.last_sign_in_ip}", target: "_blank", rel: "noopener"
+            else
+              status_tag "no", label: "Never signed in before"
+            end
+          end
+          row :failed_attempts
+          row :created_at
+          row :updated_at
         end
       end
-      row :last_sign_in_at
-      row :last_sign_in_ip do |user|
-        if user.last_sign_in_ip
-          link_to user.last_sign_in_ip, "http://who.is/whois-ip/ip-address/#{user.last_sign_in_ip}", target: "_blank", rel: "noopener"
-        else
-          status_tag "no", label: "Never signed in before"
-        end
-      end
-      row :failed_attempts
-      row :created_at
-      row :updated_at
-    end
-    panel "Grpups" do
-      table_for admin_user.groups do
-        column :id
-        column :name
-        column :description
-        column "Group Link" do |group|
-          link_to "View", admin_group_path(group)
-        end
-      end
-    end
-    panel "User Versions" do
-      table_for admin_user.versions do
-        column :id
-        column :whodunnit_email do |v|
-          if v.whodunnit
-            Account.find(v.whodunnit).email
-          else
-            status_tag "no", label: "Unknown"
+      tab "Groups" do
+        panel "Grpups" do
+          table_for admin_user.groups do
+            column :id
+            column :name
+            column :description
+            column "Group Link" do |group|
+              link_to "View", admin_group_path(group)
+            end
           end
         end
-        column :whodunnit_type do |v|
-          if v.whodunnit
-            Account.find(v.whodunnit).type == "AdminUser" ? "Admin" : "User"
-          else
-            status_tag "no", label: "Unknown"
+      end
+      tab "User Versions" do
+        panel "User Versions" do
+          table_for admin_user.versions do
+            column :id
+            column :whodunnit_email do |v|
+              if v.whodunnit
+                Account.find(v.whodunnit).email
+              else
+                status_tag "no", label: "Unknown"
+              end
+            end
+            column :whodunnit_type do |v|
+              if v.whodunnit
+                Account.find(v.whodunnit).type == "AdminUser" ? "Admin" : "User"
+              else
+                status_tag "no", label: "Unknown"
+              end
+            end
+            column :created_at
+            column :object_changes
           end
         end
-        column :created_at
-        column :object_changes
       end
     end
   end
