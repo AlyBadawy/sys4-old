@@ -63,7 +63,7 @@ ActiveAdmin.register User do
             end
           end
           row :failed_attempts
-          row :sessions do |user|
+          row :sessions do |_user|
             link_to "Sessions", admin_user_allowlisted_jwts_path(resource)
           end
           row :created_at
