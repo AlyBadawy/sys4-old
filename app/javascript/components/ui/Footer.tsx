@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
-    <footer className='bg-orange-700'>
+    <footer className='bg-cyan-950 mt-8 border-t-2 border-cyan-900 text-gray-400'>
       <div className='container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 space-y-reverse md:flex-row md:space-y-0'>
         <div className='flex flex-col-reverse items-center justify-between space-y-12  space-y-reverse md:flex-col md:space-y-0 md:items-start'>
           <div className='mx-auto my-6 text-center md:hidden'>
@@ -52,9 +53,12 @@ export const Footer = () => {
             <a href='#' className='hover:text-logoPrimary'>
               Contact
             </a>
-            <a href='#' className='hover:text-logoPrimary'>
+            <Link to='/privacy' className='hover:text-logoPrimary'>
               Privacy Policy
-            </a>
+            </Link>
+            <Link to='/terms' className='hover:text-logoPrimary'>
+              Terms of use
+            </Link>
           </div>
         </div>
 
