@@ -7,9 +7,11 @@ export const Dashboard = () => {
   if (error) return <div>Error!</div>;
   return (
     <>
-      <main className='container mx-auto mt-28 px-5 flex'>
-        {data && <>Status is: {JSON.stringify(data)}!</>}
-      </main>
+      <section id='home-hero'>
+        <div className='flex flex-col-reverse items-center px-6 mx-auto mt-24 mb-32 space-y-6 space-y-reverse md:flex-row '>
+          {data && <>Status is: {JSON.stringify(data)}!</>}
+        </div>
+      </section>
     </>
   );
 };

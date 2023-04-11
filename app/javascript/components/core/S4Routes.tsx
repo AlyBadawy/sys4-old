@@ -11,32 +11,45 @@ import { useFlipper } from '../../hooks/useFlipper';
 import { OfflineApp } from '../home/OfflineApp';
 import { NotFound } from './NotFound';
 import { Dashboard } from '../app/dashboard';
+import { PrivacyPolicy } from '../staticPages/PrivacyPolicy';
+import { TermsOfUse } from '../staticPages/TermsOfUse';
 
 export const S4Routes = () => {
-  if (!useFlipper('app_online')) {
-    return <OfflineApp />;
-  }
+  const isOnline = useFlipper('app_online');
 
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home />} />
-            {/* Any Person route */}
+        {isOnline && (
+          <Routes>
+            <Route path='/' element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path='privacy' element={<PrivacyPolicy />} />
+              <Route path='terms' element={<TermsOfUse />} />
+              {/* Any Person route */}
 
-            <Route element={<GuestRoute />}>
-              <Route path='login' element={<Login />} />
-            </Route>
-            {/* un-signed in routes */}
+              <Route element={<GuestRoute />}>
+                <Route path='login' element={<Login />} />
+              </Route>
+              {/* un-signed in routes */}
 
-            <Route element={<PrivateRoute />}>
-              <Route path='app' element={<Dashboard />} />
+              <Route element={<PrivateRoute />}>
+                <Route path='app' element={<Dashboard />} />
+              </Route>
+              {/* Private routes */}
             </Route>
-            {/* Private routes */}
-          </Route>
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+            <Route path='*' element={<Layout />}>
+              <Route path='*' element={<NotFound />} />
+            </Route>
+          </Routes>
+        )}
+        {!isOnline && (
+          <Routes>
+            <Route path='*' element={<Layout />}>
+              <Route path='*' element={<OfflineApp />} />
+            </Route>
+          </Routes>
+        )}
       </BrowserRouter>
     </Provider>
   );

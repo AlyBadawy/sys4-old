@@ -6,7 +6,7 @@ export const GuestRoute = () => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const location = useLocation();
   return isLoggedIn ? (
-    <Navigate to="/dashboard" state={{ from: location }} replace />
+    <Navigate to='/app' state={{ from: location }} replace />
   ) : (
     <Outlet />
   );

@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetStartedButton } from './GetStartedButton';
 import { NavItems } from './NavItems';
+import { Link, useLocation } from 'react-router-dom';
+
+import { LogOutButton } from './LogOutButton';
 
 export const NavBar = () => {
+  const location = useLocation();
+  const [inApp, setInApp] = useState(location.pathname.includes('/app'));
   const hamburgerToggle = () => {
     const menu = document.getElementById('menu');
     const btn = document.getElementById('menu-btn');
     menu?.classList.toggle('hidden');
     btn?.classList.toggle('open');
   };
+
+  useEffect(() => {
+    setInApp(location.pathname.includes('/app'));
+  }, [location.pathname]);
+
   return (
-    <nav className='relative container mx-auto p-2 mb-1'>
+    <nav className='relative container mx-auto p-2 mb-8'>
       <div className='flex items-center justify-between mx-3 md:mx-0'>
         <div className='pt-2'>
-          <img src='/images/sys4-logo.svg' alt='Sys4 Logo' className='h-8' />
+          <Link to='/'>
+            <img src='/images/sys4-logo.svg' alt='Sys4 Logo' className='h-8' />
+          </Link>
         </div>
         <div className='hidden md:flex space-x-8'>
           <NavItems />
         </div>
         <div className='hidden md:block pt-2'>
-          <GetStartedButton />
+          {inApp ? <LogOutButton /> : <GetStartedButton />}
         </div>
         <button
           id='menu-btn'
