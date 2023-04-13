@@ -13,6 +13,7 @@ RSpec.describe StatusController do
   describe "GET /user" do
     it "returns http success when user is signed in" do
       user = create(:user)
+      user.confirm
       sign_in user
       get "/api/status/user"
       expect(response).to have_http_status(:success)
@@ -20,6 +21,7 @@ RSpec.describe StatusController do
 
     it "returns http success when JWT header is present" do
       user = create(:user)
+      user.confirm
       headers = { "Accept" => "application/json",
                   "Content-Type" => "application/json",
                   "JWT-AUD" => "test" }
@@ -38,6 +40,7 @@ RSpec.describe StatusController do
   describe "GET /me" do
     it "returns http success when user is signed in" do
       user = create(:user)
+      user.confirm
       sign_in user
       get "/api/account/me"
       expect(response).to have_http_status(:success)
@@ -46,6 +49,7 @@ RSpec.describe StatusController do
 
     it "returns http success when JWT header is present" do
       user = create(:user)
+      user.confirm
       headers = { "Accept" => "application/json",
                   "Content-Type" => "application/json",
                   "JWT-AUD" => "test" }
