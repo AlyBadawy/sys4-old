@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
-    <footer className='bg-cyan-950 mt-8 border-t-2 border-cyan-900 text-gray-400'>
+    <footer className='bg-cyan-950 mt-8 border-t-2 border-cyan-900 text-gray-400 text-xs'>
       <div className='container flex flex-col-reverse justify-between px-6 py-4 mx-auto space-y-8 space-y-reverse'>
         <div className='flex flex-col-reverse items-center justify-between space-y-6 space-y-reverse md:flex-col'>
           <div className='mx-auto my-2 text-center md:hidden'>
@@ -35,14 +35,14 @@ export const Footer = () => {
             </a>
           </div>
         </div>
-        <div className='flex space-x-4 md:space-x-24 text-sm md:text-md justify-center'>
+        <div className='flex space-x-4 md:space-x-24 md:text-md justify-center'>
           <div className='hidden md:block'>
             <img
               src='/images/sys4-logo-lite.svg'
               alt='Sys4 Logo'
               className='h-8'
             />
-            <div className='mx-auto my-2 text-left text-sm'>
+            <div className='mx-auto my-2 text-left'>
               Copyright &copy; 2023 SYS4. All rights reserved. <br />
               Created by{' '}
               <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
@@ -51,26 +51,26 @@ export const Footer = () => {
             </div>
           </div>
           <div className='flex flex-col space-y-2'>
-            <a href='#' className='hover:text-logoPrimary'>
+            <Link to='/' className='hover:text-logoPrimary'>
               Home
-            </a>
-            <a href='#' className='hover:text-logoPrimary'>
+            </Link>
+            <Link to='/products' className='hover:text-logoPrimary'>
               Products
-            </a>
-            <a href='#' className='hover:text-logoPrimary'>
-              Pricing
-            </a>
-            <a href='#' className='hover:text-logoPrimary'>
+            </Link>
+            <Link to='/prices' className='hover:text-logoPrimary'>
+              Prices
+            </Link>
+            <Link to='/community' className='hover:text-logoPrimary'>
               Community
-            </a>
+            </Link>
           </div>
           <div className='flex flex-col space-y-2'>
-            <a href='#' className='hover:text-logoPrimary'>
+            <Link to='/about' className='hover:text-logoPrimary'>
               About
-            </a>
-            <a href='#' className='hover:text-logoPrimary'>
+            </Link>
+            <Link to='/contact' className='hover:text-logoPrimary'>
               Contact
-            </a>
+            </Link>
             <Link to='/privacy' className='hover:text-logoPrimary'>
               Privacy Policy
             </Link>
