@@ -6,7 +6,8 @@ class User < Account
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :trackable, :timeoutable,
+         :trackable, :timeoutable, :confirmable,
+         :lockable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   self.skip_session_storage = [:http_auth, :params_auth]
