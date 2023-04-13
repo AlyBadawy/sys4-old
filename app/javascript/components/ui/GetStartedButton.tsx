@@ -16,7 +16,7 @@ export const GetStartedButton = () => {
 
   return (
     <Link
-      className='p-2 px-6 bg-logoPrimary rounded-full self-baseline text-black font-bold hover:bg-logoSecondary shadow-md'
+      className='p-2 px-6 bg-logoPrimary rounded-full self-baseline text-black font-bold hover:bg-logoSecondary shadow-md animate-pulse'
       to='/app'
     >
       {isLoggedIn ? 'Get started' : 'Login'}

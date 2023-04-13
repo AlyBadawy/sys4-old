@@ -27,7 +27,7 @@
   opacity: 0.1;
   background-image: url('/images/bg/bg-tablet-pattern.svg');
   background-repeat: no-repeat;
-  background-position: 680px -200px;
+  background-position: 75% -200px;
   background-size: 800px;
   z-index: -1;
 }
@@ -76,4 +76,15 @@
 
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translate(-6px);
+}
+
+a {
+  color: #fff;
+  text-decoration: underline dashed;
+  text-underline-offset: 3px;
+}
+
+nav a,
+a.rounded-full {
+  text-decoration: none;
 }
