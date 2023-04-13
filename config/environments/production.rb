@@ -100,5 +100,7 @@ Rails.application.configure do
   end
   if ENV["LOG_LEVEL"].present?
     config.log_level = ENV["LOG_LEVEL"].downcase.strip.to_sym
+
+    config.action_mailer.default_url_options = { host: "sys4.dev" }
   end
 end
