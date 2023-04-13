@@ -8,7 +8,7 @@ export const Layout = () => {
   return (
     <>
       <div className='flex flex-col min-h-screen '>
-        <main className='container mx-auto flex-1 flex flex-col'>
+        <main className='container mx-auto py-2 flex-1 flex flex-col'>
           <NavBar />
           <Outlet />
         </main>

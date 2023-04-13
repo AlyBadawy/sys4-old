@@ -45,19 +45,19 @@ export const Login = () => {
           id='email'
           placeholder='iLove@sys4.dev'
           required
-          className='flex-1 p-2 px-4 rounded-full outline-none focus:border-transparent text-gray-800 h-10'
+          className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full'
           value={email}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
         />
-        <div className='flex flex-col'>
+        <div className='flex flex-col w-full'>
           <input
             type='password'
             id='password'
             placeholder='Password'
             required
-            className='flex-1 p-2 px-4 rounded-full outline-none focus:border-transparent text-gray-800 h-10'
+            className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10'
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);

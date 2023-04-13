@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const NotFound = () => {
   return (
     <div className='mx-5 m-auto flex flex-col space-y-6 md:w-1/2 md:mx-auto'>
-      <h1 className='text-3xl font-bold align-middle md:text-5xl'>
+      <h1 className='text-xl font-bold align-middle md:text-3xl lg:text-4xl'>
         <Sys4Text />
         04: Page not found!
       </h1>
