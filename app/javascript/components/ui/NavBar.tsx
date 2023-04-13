@@ -42,11 +42,11 @@ export const NavBar = () => {
       <div className='md:hidden relative z-50'>
         <div
           id='menu'
-          className='absolute flex flex-col hidden items-center self-end py-2 mt-2 space-y-2 font-bold bg-cyan-800 sm:w-auto sm:self-center w-32 right-0 drop-shadow-lg rounded-xl'
+          className='absolute flex flex-col hidden items-center self-end py-6 my-2 space-y-2 font-bold bg-cyan-800 sm:w-auto sm:self-center w-32 right-0 drop-shadow-lg rounded-xl'
           onClick={hamburgerToggle}
         >
           <NavItems />
-          <div className='items-center self-center mt-8 pt-4 space-y-6'>
+          <div className='items-center self-center mt-8 mb-6 pt-4 space-y-6'>
             <GetStartedButton />
           </div>
         </div>
