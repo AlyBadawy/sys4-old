@@ -9,13 +9,12 @@ set :repo_url, "git@github.com:sys4-dev/sys4.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :branch, "main"
+set :branch, "45-users-sign-up-and-forgot-password-pages"
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
-
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
