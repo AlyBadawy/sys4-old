@@ -94,6 +94,13 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: "sys4.dev" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mailgun.org",
+    port: 587,
+    user_name: "postmaster@mg.sys4.dev",
+    password: Rails.application.credentials.mailgun_password!,
+  }
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     $stdout.sync = true
