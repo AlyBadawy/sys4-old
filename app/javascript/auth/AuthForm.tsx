@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useLoginMutation, useRegisterMutation } from './AuthApi';
 import { useAppDispatch } from '../store/hooks';
 import { setCredentials } from './AuthSlice';
@@ -16,7 +17,6 @@ type Props = {
 export const AuthForm = ({ action }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [registered, setRegistered] = useState(false);
   const navigate = useNavigate();
 
   const [register, { isLoading: isRegisterLoading, error: registerError }] =
@@ -29,14 +29,33 @@ export const AuthForm = ({ action }: Props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (action === AuthFormAction.Register) {
-      await register({ email, password })
-        .unwrap()
-        .then((_res) => {
-          setRegistered(true);
-        });
-    } else {
-      await login({ email, password })
-        .unwrap()
+      await toast.promise(
+        register({ email, password }).unwrap(),
+        {
+          pending: 'Registering...',
+          success:
+            'Yay! You are registered! Check your email for a confirmation link.',
+          error: 'There was an error registering.',
+        },
+        {
+          toastId: 'register',
+        }
+      );
+    }
+
+    if (action === AuthFormAction.Login) {
+      await toast
+        .promise(
+          login({ email, password }).unwrap(),
+          {
+            pending: 'Signing in...',
+            success: 'Hi! Welcome back! 👋',
+            error: 'There was an error signing in.',
+          },
+          {
+            toastId: 'login',
+          }
+        )
         .then((res) => {
           dispatch(
             setCredentials({
@@ -90,33 +109,23 @@ export const AuthForm = ({ action }: Props) => {
           />
         </div>
         <button
-          className={`bg-logoPrimary hover:bg-blue-700 text-logoSecondary font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:hover:bg-logoPrimary disabled:cursor-not-allowed ${
-            isRegisterLoading || isLoginLoading
-              ? 'cursor-progress disabled:cursor-progress'
-              : ''
-          }`}
+          className={
+            'bg-logoPrimary hover:bg-blue-700 text-logoSecondary font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:hover:bg-logoPrimary disabled:cursor-not-allowed'
+          }
           type='submit'
           disabled={isRegisterLoading || isLoginLoading || !email || !password}
         >
           {action === AuthFormAction.Register ? 'Sign up ' : 'Sign in '}
-          {(isRegisterLoading || isLoginLoading) && (
-            <img src='/images/ui/spinner.svg' className='inline' />
-          )}
         </button>
         <p className='text-red-400 text-center'>
           {registerError &&
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-            ((registerError as any).data?.error || 'something went wrong!')}
+            ((registerError as any).data?.message || 'something went wrong!')}
           {loginError &&
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
             ((loginError as any).data?.error || 'something went wrong!')}
         </p>
-        {registered && (
-          <p className='text-lime-500 text-center'>
-            Registration successful! Please follow instructions in email to
-            confirm your email and login.
-          </p>
-        )}
+
         {action === AuthFormAction.Register && (
           <p className='text-sm'>
             Already have an account?{' '}

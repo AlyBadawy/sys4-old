@@ -8,8 +8,9 @@
     <%= csp_meta_tag %>
     <%= render partial: "shared/window_script" %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "react", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "react", "data-turbo-track": "reload", defer: true %>
   </head>
   <body class="bg-gradient-to-br from-black to-cyan-950 text-white">
     <%= yield %>

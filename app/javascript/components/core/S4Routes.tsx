@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GuestRoute } from '../../auth/GuestRoute';
 import { SignIn } from '../../auth/SingIn';
@@ -20,6 +22,19 @@ export const S4Routes = () => {
 
   return (
     <Provider store={store}>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme='dark'
+      />
       <BrowserRouter>
         {isOnline && (
           <Routes>
