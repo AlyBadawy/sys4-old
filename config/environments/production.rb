@@ -93,6 +93,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.action_mailer.default_url_options = { host: "sys4.dev" }
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     $stdout.sync = true
     config.rails_semantic_logger.add_file_appender = false
@@ -100,7 +102,5 @@ Rails.application.configure do
   end
   if ENV["LOG_LEVEL"].present?
     config.log_level = ENV["LOG_LEVEL"].downcase.strip.to_sym
-
-    config.action_mailer.default_url_options = { host: "sys4.dev" }
   end
 end
