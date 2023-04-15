@@ -16,7 +16,6 @@ set :branch, "main"
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
-
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 

@@ -10,7 +10,7 @@ import { logOut, setCredentials } from '../../auth/AuthSlice';
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://127.0.0.1:3000/api',
+  baseUrl: '/api',
   prepareHeaders: (headers, { getState }) => {
     headers.set('JWT-AUD', 'test');
     const token = (getState() as RootState).auth.jwtToken;

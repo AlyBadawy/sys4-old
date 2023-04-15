@@ -53,6 +53,7 @@ end
 
 group :development do
   gem "bullet"
+  gem "fasterer"
   gem "overcommit"
   gem "rubocop"
   gem "rubocop-config-prettier"

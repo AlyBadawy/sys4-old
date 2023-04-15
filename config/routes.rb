@@ -14,6 +14,7 @@ Rails.application.routes.draw do
                controllers: {
                  sessions: "users/sessions",
                  registrations: "users/registrations",
+                 confirmations: "users/confirmations",
                }
 
     get "/status/ok", to: "status#ok"

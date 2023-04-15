@@ -14,6 +14,13 @@ type User = {
 
 export const AuthApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
+    register: builder.mutation<User, UserLoginData>({
+      query: (credential: UserLoginData) => ({
+        url: '/users/',
+        method: 'POST',
+        body: { user: { ...credential } },
+      }),
+    }),
     login: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
         url: '/users/sign_in',
@@ -31,4 +38,4 @@ export const AuthApi = appApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation } = AuthApi;
+export const { useLoginMutation, useRegisterMutation } = AuthApi;
