@@ -11,9 +11,9 @@ module Users
       yield resource if block_given?
 
       if resource.errors.empty?
-        redirect_to "/login?confirmed=true"
+        redirect_to "/sign_in?confirmed=true"
       else
-        render json: { message: resource.errors.full_messages.first }, status: :unprocessable_entity
+        redirect_to "/sign_in?confirmed=#{resource.errors.full_messages.first}"
       end
     end
   end
