@@ -41,8 +41,26 @@ export const AuthApi = appApi.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+    forgotPassword: builder.mutation<void, { email: string }>({
+      query: (email) => ({
+        url: '/users/password',
+        method: 'POST',
+        body: { user: email },
+      }),
+    }),
+    resetPassword: builder.mutation<void, { password: string; token: string }>({
+      query: ({ password, token }) => ({
+        url: `/users/password?reset_password_token=${token}`,
+        method: 'PUT',
+        body: { user: { password } },
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
-  AuthApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useForgotPasswordMutation,
+} = AuthApi;
