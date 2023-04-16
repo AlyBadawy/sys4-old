@@ -12,6 +12,7 @@ class User < Account
 
   self.skip_session_storage = [:http_auth, :params_auth]
 
+
   def self.revoke_jwt(payload, user)
     jwt = user.allowlisted_jwts.find_by(payload.slice("jti", "aud"))
     jwt&.update(exp: Time.zone.now)
