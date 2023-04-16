@@ -314,5 +314,6 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.devise_jwt_secret_key!
     jwt.aud_header = "JWT-AUD"
+    jwt.expiration_time = 3.days
   end
 end

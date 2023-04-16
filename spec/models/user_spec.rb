@@ -24,7 +24,7 @@ RSpec.describe User do
     subject(:user) { build(:user) }
 
     it "has many associations" do
-      expect(user).to have_many(:allowlisted_jwt)
+      expect(user).to have_many(:allowlisted_jwts)
     end
 
     it "has and belongs to many associations" do

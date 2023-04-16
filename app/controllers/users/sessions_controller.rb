@@ -2,11 +2,11 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    protect_from_forgery with: :null_session
 
     respond_to :json
 
     private
+
 
     def respond_with(_resource, _opts = {})
       render json: current_user, status: :ok
