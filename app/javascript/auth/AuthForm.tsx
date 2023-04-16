@@ -70,17 +70,21 @@ export const AuthForm = ({ action }: Props) => {
       );
     }
     if (action === AuthFormAction.ResetPassword) {
-      await toast.promise(
-        resetPassword({ password, token: resetPasswordToken || '' }).unwrap(),
-        {
-          pending: 'Resetting password...',
-          success: 'Password Changed! Please sign in.',
-          error: 'There was an error resetting your password.',
-        },
-        {
-          toastId: 'reset-password',
-        }
-      );
+      await toast
+        .promise(
+          resetPassword({ password, token: resetPasswordToken || '' }).unwrap(),
+          {
+            pending: 'Resetting password...',
+            success: 'Password Changed! Please sign in.',
+            error: 'There was an error resetting your password.',
+          },
+          {
+            toastId: 'reset-password',
+          }
+        )
+        .then(() => {
+          navigate('/sign_in');
+        });
     }
     if (action === AuthFormAction.Login) {
       await toast
