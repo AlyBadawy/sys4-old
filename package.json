@@ -49,6 +49,7 @@
     "test": "jest --silent --noStackTrace --coverage",
     "test:all": "yarn test && yarn lint && yarn ts:check && bundle exec rspec && rubocop && bundle exec brakeman -q -w2",
     "ts:check": "tsc --project tsconfig.json --noEmit",
-    "ts:watch": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput"
+    "ts:watch": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput",
+    "mail": "mailcatcher --foreground"
   }
 }
