@@ -2,13 +2,12 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-
     respond_to :json
 
     private
 
-
-    def respond_with(_resource, _opts = {})
+    def respond_with(resource, _opts = {})
+      resource.allowlisted_jwts.last&.update(agent: user_agent, ip: request.ip, location: location)
       render json: current_user, status: :ok
     end
 
@@ -24,6 +23,17 @@ module Users
 
     def log_out_failure
       render json: { message: "Hmm nothing happened." }, status: :unauthorized
+    end
+
+    def user_agent
+      "#{request.device_variant} | #{request.os} #{request.os_version} | #{request.browser} #{request.browser_version}"
+    end
+
+    def location
+      loc = Geocoder.search(request.ip).first
+      return unless loc.city && loc.country && loc.region
+
+      "#{loc.city}, #{loc.region}, #{loc.country}"
     end
   end
 end
