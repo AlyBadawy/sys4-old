@@ -5,6 +5,7 @@ import {
   useLoginMutation,
   useRegisterMutation,
   useForgotPasswordMutation,
+  useResetPasswordMutation,
 } from './AuthApi';
 import { useAppDispatch } from '../store/hooks';
 import { setCredentials } from './AuthSlice';
@@ -13,6 +14,7 @@ export enum AuthFormAction {
   Register = 'register',
   Login = 'login',
   ForgotPassword = 'forgot-password',
+  ResetPassword = 'reset-password',
 }
 
 type Props = {
@@ -30,8 +32,13 @@ export const AuthForm = ({ action }: Props) => {
     useLoginMutation();
   const [forgotPassword, { isLoading: isForgotPasswordLoading }] =
     useForgotPasswordMutation();
+  const [resetPassword, { isLoading: isResetPasswordLoading }] =
+    useResetPasswordMutation();
 
   const dispatch = useAppDispatch();
+
+  const queryParameters = new URLSearchParams(window.location.search);
+  const resetPasswordToken = queryParameters.get('reset_password_token');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,6 +62,19 @@ export const AuthForm = ({ action }: Props) => {
         {
           pending: 'Resetting password...',
           success: 'Check your email for a password reset link.',
+          error: 'There was an error resetting your password.',
+        },
+        {
+          toastId: 'forgot-password',
+        }
+      );
+    }
+    if (action === AuthFormAction.ResetPassword) {
+      await toast.promise(
+        resetPassword({ password, token: resetPasswordToken || '' }).unwrap(),
+        {
+          pending: 'Resetting password...',
+          success: 'Password Changed! Please sign in.',
           error: 'There was an error resetting your password.',
         },
         {
@@ -102,19 +122,22 @@ export const AuthForm = ({ action }: Props) => {
         <h3 className='text-xl font-bold'>
           {action === AuthFormAction.Register && 'Create a new account!'}
           {action === AuthFormAction.Login && 'Login to your account!'}
-          {action === AuthFormAction.ForgotPassword && 'Reset your Password!'}
+          {action === AuthFormAction.ForgotPassword && 'Forgot your Password?'}
+          {action === AuthFormAction.ResetPassword && 'Reset your Password!'}
         </h3>
-        <input
-          type='email'
-          id='email'
-          placeholder='iLove@sys4.dev'
-          required
-          className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
+        {action !== AuthFormAction.ResetPassword && (
+          <input
+            type='email'
+            id='email'
+            placeholder='iLove@sys4.dev'
+            required
+            className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
+        )}
         {action !== AuthFormAction.ForgotPassword && (
           <div className='flex flex-col '>
             <input
@@ -144,13 +167,15 @@ export const AuthForm = ({ action }: Props) => {
             isRegisterLoading ||
             isLoginLoading ||
             isForgotPasswordLoading ||
-            !email ||
+            isResetPasswordLoading ||
+            (action !== AuthFormAction.ResetPassword && !email) ||
             (action !== AuthFormAction.ForgotPassword && !password)
           }
         >
           {action === AuthFormAction.Register && 'Sign up '}
           {action === AuthFormAction.Login && 'Sign in '}
-          {action === AuthFormAction.ForgotPassword && 'Reset Password '}
+          {action === AuthFormAction.ForgotPassword && 'Forgot Password '}
+          {action === AuthFormAction.ResetPassword && 'Reset Password '}
         </button>
         <p className='text-red-400 text-center'>
           {registerError &&

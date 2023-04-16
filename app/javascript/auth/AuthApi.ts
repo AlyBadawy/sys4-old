@@ -50,9 +50,10 @@ export const AuthApi = appApi.injectEndpoints({
     }),
     resetPassword: builder.mutation<void, { password: string; token: string }>({
       query: ({ password, token }) => ({
-        url: `/users/password?reset_password_token=${token}`,
+        url: '/users/password',
         method: 'PUT',
-        body: { user: { password } },
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        body: { user: { password: password, reset_password_token: token } },
       }),
     }),
   }),
@@ -63,4 +64,5 @@ export const {
   useRegisterMutation,
   useLogoutMutation,
   useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = AuthApi;

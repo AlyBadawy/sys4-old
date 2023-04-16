@@ -30,6 +30,8 @@ module Users
       self.resource = resource_class.new
       set_minimum_password_length
       resource.reset_password_token = params[:reset_password_token]
+      redirect_to "/reset_password?reset_password_token=#{params[:reset_password_token]}"
+
     end
 
     # PUT /resource/password

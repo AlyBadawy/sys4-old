@@ -16,6 +16,7 @@ import { PrivacyPolicy } from '../staticPages/PrivacyPolicy';
 import { TermsOfUse } from '../staticPages/TermsOfUse';
 import { SignUp } from '../../auth/SignUp';
 import { ForgotPassword } from '../../auth/ForgotPassword';
+import { ResetPassword } from '../../auth/ResetPassword';
 
 export const S4Routes = () => {
   const isOnline = useFlipper('app_online');
@@ -48,6 +49,7 @@ export const S4Routes = () => {
                 <Route path='sign_in' element={<SignIn />} />
                 <Route path='sign_up' element={<SignUp />} />
                 <Route path='forgot_password' element={<ForgotPassword />} />
+                <Route path='reset_password' element={<ResetPassword />} />
               </Route>
               {/* un-signed in routes */}
 
