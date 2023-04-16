@@ -35,7 +35,14 @@ export const AuthApi = appApi.injectEndpoints({
         };
       },
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/users/sign_out',
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = AuthApi;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
+  AuthApi;
