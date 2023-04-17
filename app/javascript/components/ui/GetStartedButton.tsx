@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
-import { LogOutButton } from './LogOutButton';
+import { LogOutButton } from '../../auth/LogOutButton';
 
 export const GetStartedButton = () => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
