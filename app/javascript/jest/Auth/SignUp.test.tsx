@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { SignUp } from '../../auth/SignUp';
 
 describe('Sign Up', () => {
-  it('Shows registeration disabled by default', () => {
+  it('Shows registration disabled by default', () => {
     render(<SignUp />);
     const title = screen.getByText('Registration is currently disabled!');
     expect(title).toBeInTheDocument();
@@ -14,7 +14,7 @@ describe('Sign Up', () => {
     expect(paragraph).toBeInTheDocument();
   });
 
-  it.skip('Shows registeration page when flipper enabled', () => {
+  it.skip('Shows registration page when flipper enabled', () => {
     window.FLIPPERS = { register: true };
     render(<SignUp />);
     const title = screen.getByText('Registration is currently disabled!');
