@@ -25,12 +25,12 @@ export const NavBar = () => {
         </div>
         <button
           id='menu-btn'
-          className='block hamburger focus:ouline-none'
+          className='block hamburger focus:outline-none'
           onClick={hamburgerToggle}
         >
-          <span className='hamburger-top bg-cyan-500'></span>
-          <span className='hamburger-middle bg-cyan-600'></span>
-          <span className='hamburger-bottom bg-cyan-700'></span>
+          <span className='hamburger-top bg-amber-500'></span>
+          <span className='hamburger-middle bg-amber-600'></span>
+          <span className='hamburger-bottom bg-amber-700'></span>
         </button>
       </div>
       <div className='relative z-50'>

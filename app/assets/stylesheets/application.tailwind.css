@@ -2,15 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
+.s4-btn {
+  @apply py-2 px-4 bg-amber-300 rounded-full text-stone-700 font-bold shadow-md hover:enabled:bg-amber-500
+ disabled:opacity-70 disabled:cursor-not-allowed disabled:bg-stone-50 enabled:animate-pulse;
 }
 
-*/
+.s4-text {
+  @apply text-amber-300 animate-pulse opacity-90;
+}
+
+a {
+  @apply text-amber-300 hover:text-cyan-500;
+}
+
+#cookie-consent a {
+  @apply text-stone-500;
+}
 
 #layout-main {
   position: relative;
@@ -76,12 +83,6 @@
 
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translate(-6px);
-}
-
-a {
-  color: #fff;
-  text-decoration: underline dashed;
-  text-underline-offset: 3px;
 }
 
 nav a,

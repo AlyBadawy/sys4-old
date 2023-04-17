@@ -13,7 +13,7 @@ export const Home = () => {
             <h1 className='max-w-md text-4xl font-bold text-center md:text-5xl md:text-left'>
               Unlock the full potential of your systems with <Sys4Text />
             </h1>
-            <p className='max-w-md text-center text-gray-400 md:text-left'>
+            <p className='max-w-md text-center text-cyan-700 md:text-left'>
               <Sys4Text /> provides a comprehensive set of tools and resources
               to cater to different areas of interest, including development,
               socializing with friends, education, health, news, and much more.
@@ -42,7 +42,7 @@ export const Home = () => {
             <h2 className='text-4xl font-bold max-w-sm '>
               <Sys4Text /> is a platform for all your needs
             </h2>
-            <p className='text-logoSecondary max-w-sm md:max-w-md'>
+            <p className='text-cyan-700 max-w-sm md:max-w-md'>
               <Sys4Text /> is divided into different systems to cater to various
               domains of interest. Each system provides a range of tools and
               resources to help users with their tasks and activities. The

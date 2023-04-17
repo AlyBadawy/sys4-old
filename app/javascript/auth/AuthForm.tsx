@@ -121,7 +121,7 @@ export const AuthForm = ({ action }: Props) => {
         void handleSubmit(e);
       }}
     >
-      <div className='border border-cyan-800 animate-pulse bg-cyan-900 opacity-70 mx-5 m-auto flex flex-col p-10 rounded-lg shadow-lg space-y-6 min-w-sm md:w-1/2 md:mx-auto items-center'>
+      <div className='border border-cyan-800 bg-cyan-900 opacity-90 mx-5 m-auto flex flex-col p-10 rounded-lg shadow-lg space-y-6 min-w-sm md:w-1/2 md:mx-auto items-center'>
         <img src='/images/sys4-logo.svg' className='w-1/2' />
         <h3 className='text-xl font-bold'>
           {action === AuthFormAction.Register && 'Create a new account!'}
@@ -156,16 +156,17 @@ export const AuthForm = ({ action }: Props) => {
               }}
             />
             {action === AuthFormAction.Login && (
-              <Link to='/forgot_password' className='px-2 text-sm'>
+              <Link
+                to='/forgot_password'
+                className='text-stone-300 px-2 text-sm'
+              >
                 <span>Forgot password?</span>
               </Link>
             )}
           </div>
         )}
         <button
-          className={
-            'bg-logoPrimary hover:bg-blue-700 text-logoSecondary font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:hover:bg-logoPrimary disabled:cursor-not-allowed'
-          }
+          className={'s4-btn'}
           type='submit'
           disabled={
             isRegisterLoading ||
@@ -201,7 +202,7 @@ export const AuthForm = ({ action }: Props) => {
         {action === AuthFormAction.Login && (
           <p className='text-sm'>
             Don&apos;t have an account?{' '}
-            <Link to='/sign_up' className='text-gray-300'>
+            <Link to='/sign_up' className='text-stone-300'>
               <span>Sign up now!</span>
             </Link>
           </p>

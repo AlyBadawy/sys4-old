@@ -17,11 +17,7 @@ export const LogOutButton = () => {
   };
 
   return (
-    <button
-      type='button'
-      className='p-2 px-6 bg-logoPrimary rounded-full self-baseline text-black font-bold hover:bg-logoSecondary shadow-md'
-      onClick={handleLogout}
-    >
+    <button type='button' className='s4-btn' onClick={handleLogout}>
       Sign Out
     </button>
   );
