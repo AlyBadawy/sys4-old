@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { SignUp } from '../../auth/SignUp';
+import { renderWithRedux } from '../TestUtils';
 
 describe('Sign Up', () => {
   it('Shows registration disabled by default', () => {
-    render(<SignUp />);
+    renderWithRedux(<SignUp />);
     const title = screen.getByText('Registration is currently disabled!');
     expect(title).toBeInTheDocument();
     const paragraph = screen.getByText(
@@ -14,14 +15,12 @@ describe('Sign Up', () => {
     expect(paragraph).toBeInTheDocument();
   });
 
-  it.skip('Shows registration page when flipper enabled', () => {
-    window.FLIPPERS = { register: true };
-    render(<SignUp />);
-    const title = screen.getByText('Registration is currently disabled!');
+  it('Shows registration page when flipper enabled', () => {
+    renderWithRedux(<SignUp />, { register: true });
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const title = screen.getByText('Create a new account!');
     expect(title).toBeInTheDocument();
-    const paragraph = screen.getByText(
-      /Registration for new users is currently disabled./i
-    );
-    expect(paragraph).toBeInTheDocument();
+    const button = screen.getByRole('button', { name: /Sign Up/i });
+    expect(button).toBeInTheDocument();
   });
 });
