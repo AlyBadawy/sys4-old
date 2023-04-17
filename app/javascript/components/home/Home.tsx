@@ -11,8 +11,7 @@ export const Home = () => {
           {/* Hero-Text */}
           <div className='flex flex-col mb-12 space-y-12 md:w-1/2'>
             <h1 className='max-w-md text-4xl font-bold text-center md:text-5xl md:text-left'>
-              Unlock the full potential of your systems with
-              <Sys4Text />
+              Unlock the full potential of your systems with <Sys4Text />
             </h1>
             <p className='max-w-md text-center text-gray-400 md:text-left'>
               <Sys4Text /> provides a comprehensive set of tools and resources
@@ -44,10 +43,10 @@ export const Home = () => {
               <Sys4Text /> is a platform for all your needs
             </h2>
             <p className='text-logoSecondary max-w-sm md:max-w-md'>
-              SYS4 is divided into different systems to cater to various domains
-              of interest. Each system provides a range of tools and resources
-              to help users with their tasks and activities. The following are
-              the systems available in SYS4:
+              <Sys4Text /> is divided into different systems to cater to various
+              domains of interest. Each system provides a range of tools and
+              resources to help users with their tasks and activities. The
+              following are the systems available in <Sys4Text />:
             </p>
           </div>
           <div className='flex flex-col space-y-8 md:w-1/2  md:max-w-md'>
