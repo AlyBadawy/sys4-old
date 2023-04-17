@@ -23,15 +23,9 @@ export const NavBar = () => {
             />
           </Link>
         </div>
-        <div className='hidden md:flex space-x-6'>
-          <NavItems />
-        </div>
-        <div className='hidden md:block pt-2'>
-          <GetStartedButton />
-        </div>
         <button
           id='menu-btn'
-          className='block hamburger md:hidden focus:ouline-none'
+          className='block hamburger focus:ouline-none'
           onClick={hamburgerToggle}
         >
           <span className='hamburger-top bg-cyan-500'></span>
@@ -39,7 +33,7 @@ export const NavBar = () => {
           <span className='hamburger-bottom bg-cyan-700'></span>
         </button>
       </div>
-      <div className='md:hidden relative z-50'>
+      <div className='relative z-50'>
         <div
           id='menu'
           className='absolute flex flex-col hidden items-center self-end py-6 px-2 my-2 space-y-2 font-bold bg-cyan-950 sm:w-auto sm:self-center w-44 right-1 drop-shadow-lg rounded-xl'
