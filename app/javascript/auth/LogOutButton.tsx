@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { logOut } from '../../auth/AuthSlice';
-import { useLogoutMutation } from '../../auth/AuthApi';
+import { useAppDispatch } from '../store/hooks';
+import { logOut } from './AuthSlice';
+import { useLogoutMutation } from './AuthApi';
 import { toast } from 'react-toastify';
 
 export const LogOutButton = () => {

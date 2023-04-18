@@ -4,11 +4,15 @@ import { NavItems } from './NavItems';
 import { Link } from 'react-router-dom';
 
 export const NavBar = () => {
+  const [menuVisibility, setMenuVisibility] = React.useState(false);
+
   const hamburgerToggle = () => {
-    const menu = document.getElementById('menu');
-    const btn = document.getElementById('menu-btn');
-    menu?.classList.toggle('hidden');
-    btn?.classList.toggle('open');
+    // const menu = document.getElementById('menu');
+    // const btn = document.getElementById('menu-btn');
+    // menu?.classList.toggle('hidden');
+    // btn?.classList.toggle('open');
+
+    setMenuVisibility(!menuVisibility);
   };
 
   return (
@@ -25,7 +29,10 @@ export const NavBar = () => {
         </div>
         <button
           id='menu-btn'
-          className='block hamburger focus:outline-none'
+          data-testid='nav-menu-btn'
+          className={`block hamburger focus:outline-none ${
+            menuVisibility ? 'open' : ''
+          }`}
           onClick={hamburgerToggle}
         >
           <span className='hamburger-top bg-amber-500'></span>
@@ -34,16 +41,19 @@ export const NavBar = () => {
         </button>
       </div>
       <div className='relative z-50'>
-        <div
-          id='menu'
-          className='absolute flex flex-col hidden items-center p-4 m-2 space-y-1 bg-cyan-950 w-fit right-1 top-0 drop-shadow-lg rounded-xl'
-          onClick={hamburgerToggle}
-        >
-          <NavItems />
-          <div className='my-6 pt-4'>
-            <GetStartedButton />
+        {menuVisibility && (
+          <div
+            id='menu'
+            data-testid='nav-menu'
+            className='absolute flex flex-col items-center p-4 m-2 space-y-1 bg-cyan-950 w-fit right-1 top-0 drop-shadow-lg rounded-xl'
+            onClick={hamburgerToggle}
+          >
+            <NavItems />
+            <div className='my-6 pt-4'>
+              <GetStartedButton />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );

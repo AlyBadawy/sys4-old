@@ -15,7 +15,6 @@ export const CookieConsent = () => {
 
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
     if (consent !== 'accepted') {
       cookies.set(USER_CONSENT_COOKIE_KEY, 'accepted', { path: '/' });
       setConsent('accepted');

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { setupStore } from '../../store/store';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GuestRoute } from '../../auth/GuestRoute';
@@ -20,6 +20,7 @@ import { ResetPassword } from '../../auth/ResetPassword';
 
 export const S4Routes = () => {
   const isOnline = useFlipper('app_online');
+  const store = setupStore();
 
   return (
     <Provider store={store}>
