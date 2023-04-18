@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Sys4Text } from './Sys4Text';
 
 export const Footer = () => {
   return (
@@ -7,7 +8,7 @@ export const Footer = () => {
       <div className='container flex flex-col-reverse justify-between px-6 py-4 mx-auto space-y-8 space-y-reverse'>
         <div className='flex flex-col-reverse items-center justify-between space-y-6 space-y-reverse md:flex-col'>
           <div className='mx-auto my-2 text-center md:hidden'>
-            Copyright &copy; 2023 SYS4. All rights reserved. <br />
+            Copyright &copy; 2023 <Sys4Text />. All rights reserved. <br />
             Created by{' '}
             <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
               Aly Badawy
@@ -43,7 +44,7 @@ export const Footer = () => {
               className='h-8'
             />
             <div className='mx-auto my-2 text-left'>
-              Copyright &copy; 2023 SYS4. All rights reserved. <br />
+              Copyright &copy; 2023 <Sys4Text />. All rights reserved. <br />
               Created by{' '}
               <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
                 Aly Badawy
@@ -51,32 +52,16 @@ export const Footer = () => {
             </div>
           </div>
           <div className='flex flex-col space-y-2'>
-            <Link to='/' className='hover:text-logoPrimary'>
-              Home
-            </Link>
-            <Link to='/products' className='hover:text-logoPrimary'>
-              Products
-            </Link>
-            <Link to='/prices' className='hover:text-logoPrimary'>
-              Prices
-            </Link>
-            <Link to='/community' className='hover:text-logoPrimary'>
-              Community
-            </Link>
+            <Link to='/'>Home</Link>
+            <Link to='/products'>Products</Link>
+            <Link to='/prices'>Prices</Link>
+            <Link to='/community'>Community</Link>
           </div>
           <div className='flex flex-col space-y-2'>
-            <Link to='/about' className='hover:text-logoPrimary'>
-              About
-            </Link>
-            <Link to='/contact' className='hover:text-logoPrimary'>
-              Contact
-            </Link>
-            <Link to='/privacy' className='hover:text-logoPrimary'>
-              Privacy Policy
-            </Link>
-            <Link to='/terms' className='hover:text-logoPrimary'>
-              Terms of use
-            </Link>
+            <Link to='/about'>About</Link>
+            <Link to='/contact'>Contact</Link>
+            <Link to='/privacy'>Privacy Policy</Link>
+            <Link to='/terms'>Terms of use</Link>
           </div>
         </div>
       </div>

@@ -15,11 +15,8 @@ export const GetStartedButton = () => {
   if (isLoggedIn && inApp) return <LogOutButton />;
 
   return (
-    <Link
-      className='p-2 px-6 bg-logoPrimary rounded-full self-baseline text-black font-bold hover:bg-logoSecondary shadow-md animate-pulse'
-      to='/app'
-    >
-      {isLoggedIn ? 'Get started' : 'Sign in'}
+    <Link className='s4-btn' to='/app'>
+      {isLoggedIn ? 'Dashboard' : 'Sign in'}
     </Link>
   );
 };

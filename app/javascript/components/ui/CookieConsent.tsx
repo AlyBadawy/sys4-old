@@ -27,8 +27,11 @@ export const CookieConsent = () => {
   }
 
   return (
-    <section className='fixed bottom-0 left-0 w-full opacity-90'>
-      <div className='flex flex-col items-start px-5 py-3 space-y-2 bg-gray-200 md:flex-row md:space-y-0 md:items-stretch md:space-x-2'>
+    <section
+      className='fixed bottom-0 left-0 w-full opacity-90'
+      id='cookie-consent'
+    >
+      <div className='flex flex-col items-start px-5 py-3 space-y-2 bg-amber-200 md:flex-row md:space-y-0 md:items-stretch md:space-x-2'>
         <div className='flex items-center flex-grow text-gray-900'>
           <p className='text-sm font-medium'>
             This site uses services that use cookies to deliver better
@@ -38,7 +41,7 @@ export const CookieConsent = () => {
         </div>
         <div className='flex items-center'>
           <button
-            className='p-3 text-sm font-bold text-white uppercase bg-gray-700 whitespace-nowrap'
+            className='p-3 text-sm font-bold text-stone-300 uppercase bg-gray-700 whitespace-nowrap'
             onClick={onClick}
           >
             Got it

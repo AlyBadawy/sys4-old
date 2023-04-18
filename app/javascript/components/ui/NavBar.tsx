@@ -14,7 +14,7 @@ export const NavBar = () => {
   return (
     <nav className='relative container mx-auto p-2 mb-8'>
       <div className='flex items-center justify-between mx-3 md:mx-0'>
-        <div className='pt-2'>
+        <div className='pt-2 animate-pulse'>
           <Link to='/'>
             <img
               src='/images/sys4-logo.svg'
@@ -23,30 +23,24 @@ export const NavBar = () => {
             />
           </Link>
         </div>
-        <div className='hidden md:flex space-x-6'>
-          <NavItems />
-        </div>
-        <div className='hidden md:block pt-2'>
-          <GetStartedButton />
-        </div>
         <button
           id='menu-btn'
-          className='block hamburger md:hidden focus:ouline-none'
+          className='block hamburger focus:outline-none'
           onClick={hamburgerToggle}
         >
-          <span className='hamburger-top bg-cyan-500'></span>
-          <span className='hamburger-middle bg-cyan-600'></span>
-          <span className='hamburger-bottom bg-cyan-700'></span>
+          <span className='hamburger-top bg-amber-500'></span>
+          <span className='hamburger-middle bg-amber-600'></span>
+          <span className='hamburger-bottom bg-amber-700'></span>
         </button>
       </div>
-      <div className='md:hidden relative z-50'>
+      <div className='relative z-50'>
         <div
           id='menu'
-          className='absolute flex flex-col hidden items-center self-end py-6 my-2 space-y-2 font-bold bg-cyan-800 sm:w-auto sm:self-center w-32 right-0 drop-shadow-lg rounded-xl'
+          className='absolute flex flex-col hidden items-center p-4 m-2 space-y-1 bg-cyan-950 w-fit right-1 top-0 drop-shadow-lg rounded-xl'
           onClick={hamburgerToggle}
         >
           <NavItems />
-          <div className='items-center self-center mt-8 mb-6 pt-4 space-y-6'>
+          <div className='my-6 pt-4'>
             <GetStartedButton />
           </div>
         </div>
