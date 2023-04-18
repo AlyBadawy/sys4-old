@@ -2,7 +2,7 @@ import React from 'react';
 import { useGetStatusQuery } from '../../store/api/statusApi';
 
 export const Dashboard = () => {
-  const { data, error, isLoading } = useGetStatusQuery();
+  const { data, isLoading, error } = useGetStatusQuery();
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error!</div>;
   return (
