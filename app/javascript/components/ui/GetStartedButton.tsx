@@ -16,7 +16,7 @@ export const GetStartedButton = () => {
 
   return (
     <Link className='s4-btn' to='/app'>
-      {isLoggedIn ? 'Get started' : 'Sign in'}
+      {isLoggedIn ? 'Dashboard' : 'Sign in'}
     </Link>
   );
 };

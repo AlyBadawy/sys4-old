@@ -7,13 +7,13 @@ export const Home = () => {
   return (
     <>
       <section id='home-hero'>
-        <div className='flex flex-col-reverse items-center px-6 mx-auto mt-24 mb-32 space-y-6 space-y-reverse md:flex-row '>
+        <div className='flex flex-col-reverse items-center px-6 mx-auto mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
           {/* Hero-Text */}
           <div className='flex flex-col mb-12 space-y-12 md:w-1/2'>
             <h1 className='max-w-md text-4xl font-bold text-center md:text-5xl md:text-left'>
               Unlock the full potential of your systems with <Sys4Text />
             </h1>
-            <p className='max-w-md text-center text-cyan-700 md:text-left'>
+            <p className='max-w-md text-center text-stone-400 md:text-left'>
               <Sys4Text /> provides a comprehensive set of tools and resources
               to cater to different areas of interest, including development,
               socializing with friends, education, health, news, and much more.
@@ -42,7 +42,7 @@ export const Home = () => {
             <h2 className='text-4xl font-bold max-w-sm '>
               <Sys4Text /> is a platform for all your needs
             </h2>
-            <p className='text-cyan-700 max-w-sm md:max-w-md'>
+            <p className='text-stone-400 max-w-sm md:max-w-md'>
               <Sys4Text /> is divided into different systems to cater to various
               domains of interest. Each system provides a range of tools and
               resources to help users with their tasks and activities. The

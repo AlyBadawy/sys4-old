@@ -16,6 +16,15 @@ module.exports = {
         logoPrimary: '#9CF8FE',
         logoSecondary: '#4C94AC',
       },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-5deg)' },
+          '50%': { transform: 'rotate(5deg)' },
+        },
+      },
+      animation: {
+        wiggle: 'wiggle 0.5s ease-in-out infinite',
+      },
     },
   },
   plugins: [

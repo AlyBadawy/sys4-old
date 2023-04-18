@@ -14,7 +14,7 @@ export const NavBar = () => {
   return (
     <nav className='relative container mx-auto p-2 mb-8'>
       <div className='flex items-center justify-between mx-3 md:mx-0'>
-        <div className='pt-2'>
+        <div className='pt-2 animate-pulse'>
           <Link to='/'>
             <img
               src='/images/sys4-logo.svg'
@@ -36,11 +36,11 @@ export const NavBar = () => {
       <div className='relative z-50'>
         <div
           id='menu'
-          className='absolute flex flex-col hidden items-center self-end py-6 px-2 my-2 space-y-2 font-bold bg-cyan-950 sm:w-auto sm:self-center w-44 right-1 drop-shadow-lg rounded-xl'
+          className='absolute flex flex-col hidden items-center p-4 m-2 space-y-1 bg-cyan-950 w-fit right-1 top-0 drop-shadow-lg rounded-xl'
           onClick={hamburgerToggle}
         >
           <NavItems />
-          <div className='items-center self-center mt-8 mb-6 pt-4 space-y-6'>
+          <div className='my-6 pt-4'>
             <GetStartedButton />
           </div>
         </div>

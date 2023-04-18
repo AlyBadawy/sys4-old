@@ -46,10 +46,10 @@ export const AuthForm = ({ action }: Props) => {
       await toast.promise(
         register({ email, password }).unwrap(),
         {
-          pending: 'Registering...',
+          pending: 'Signing up...',
           success:
-            'Yay! You are registered! Check your email for a confirmation link.',
-          error: 'There was an error registering.',
+            'Yay! You signed up! Check your email for a confirmation link.',
+          error: 'There was an error signing up.',
         },
         {
           toastId: 'register',
@@ -125,7 +125,7 @@ export const AuthForm = ({ action }: Props) => {
         <img src='/images/sys4-logo.svg' className='w-1/2' />
         <h3 className='text-xl font-bold'>
           {action === AuthFormAction.Register && 'Create a new account!'}
-          {action === AuthFormAction.Login && 'Login to your account!'}
+          {action === AuthFormAction.Login && 'Sign in to your account!'}
           {action === AuthFormAction.ForgotPassword && 'Forgot your Password?'}
           {action === AuthFormAction.ResetPassword && 'Reset your Password!'}
         </h3>
