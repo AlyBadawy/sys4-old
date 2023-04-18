@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useFlipper } from '../hooks/useFlipper';
 import { Sys4Text } from '../components/ui/Sys4Text';
-import { toast } from 'react-toastify';
 import { useRegisterMutation } from './AuthApi';
 import { Link } from 'react-router-dom';
 import { AuthViewsForm } from './AuthViewsForm';
+import { toast } from 'react-toastify';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
