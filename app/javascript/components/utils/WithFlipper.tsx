@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFlipper } from '../../hooks/useFlipper';
+import { useFlipper } from '../../hooks/useWindow';
 
 type WithFlipperProps = {
   children: React.ReactNode;

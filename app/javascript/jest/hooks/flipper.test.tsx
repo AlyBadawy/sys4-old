@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { useFlipper } from '../../hooks/useFlipper';
+import { useFlipper } from '../../hooks/useWindow';
 
 describe('App', () => {
   it('returns the correct value for window.FLIPPERS', () => {
