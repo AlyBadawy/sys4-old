@@ -8,10 +8,11 @@ export const Footer = () => {
       <div className='container flex flex-col-reverse justify-between px-6 py-4 mx-auto space-y-8 space-y-reverse'>
         <div className='flex flex-col-reverse items-center justify-between space-y-6 space-y-reverse md:flex-col'>
           <div className='mx-auto my-2 text-center md:hidden'>
-            Copyright &copy; 2023 <Sys4Text />. All rights reserved. <br />
+            Copyright &copy; 2023 <Sys4Text />. All rights reserved.
+            <br />
             Created by{' '}
             <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
-              Aly Badawy
+              A.B
             </a>
           </div>
           <div className='md:hidden'>
@@ -47,7 +48,7 @@ export const Footer = () => {
               Copyright &copy; 2023 <Sys4Text />. All rights reserved. <br />
               Created by{' '}
               <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
-                Aly Badawy
+                A.B
               </a>
             </div>
           </div>
