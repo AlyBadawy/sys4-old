@@ -8,7 +8,7 @@ import { SignIn } from '../../auth/SingIn';
 import { PrivateRoute } from '../../auth/PrivateRoute';
 import { Home } from '../home/Home';
 import { Layout } from './Layout';
-import { useFlipper } from '../../hooks/useFlipper';
+import { useFlipper } from '../../hooks/useWindow';
 import { OfflineApp } from '../home/OfflineApp';
 import { NotFound } from './NotFound';
 import { Dashboard } from '../app/dashboard';
