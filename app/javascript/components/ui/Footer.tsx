@@ -12,7 +12,7 @@ export const Footer = () => {
             <br />
             Created by{' '}
             <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
-              A.B
+              A.BBB
             </a>
           </div>
           <div className='md:hidden'>
@@ -45,16 +45,17 @@ export const Footer = () => {
               className='h-8'
             />
             <div className='mx-auto my-2 text-left'>
-              Copyright &copy; 2023 <Sys4Text />. All rights reserved. <br />
+              Copyright &copy; 2023 <Sys4Text />. All rights reserved.d
+              <br />
               Created by{' '}
               <a href='https://alybadawy.com' target='_blank' rel='noreferrer'>
-                A.B
+                Aaa.B
               </a>
             </div>
           </div>
           <div className='flex flex-col space-y-2'>
             <Link to='/'>Home</Link>
-            <Link to='/products'>Products</Link>
+            <Link to='/products'>Productss</Link>
             <Link to='/prices'>Prices</Link>
             <Link to='/community'>Community</Link>
           </div>
@@ -62,7 +63,7 @@ export const Footer = () => {
             <Link to='/about'>About</Link>
             <Link to='/contact'>Contact</Link>
             <Link to='/privacy'>Privacy Policy</Link>
-            <Link to='/terms'>Terms of use</Link>
+            <Link to='/terms'>Terms of useee</Link>
           </div>
         </div>
       </div>

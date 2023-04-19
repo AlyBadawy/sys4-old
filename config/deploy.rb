@@ -48,14 +48,19 @@ set :keep_releases, 5
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-
-namespace :nginx do
-    desc "Swift config"
-    task :reload do
+namespace :tailwindcss do
+  desc "compile assets"
+  task :build do
     on roles(:app) do
-        execute :touch, "/home/deploy/#{fetch :application}/current/tmp/restart.txt"
+      within release_path do
+        with :rails_env => fetch(:rails_env) do
+          #   execute :rake, "assets:clobber"
+          execute :rake, "tailwindcss:build"
+        end
+      end
     end
-     end
+  end
 end
 
-after "deploy", "nginx:reload"
+before "deploy:compile_assets", "tailwindcss:build"
+after "deploy:compile_assets", "deploy:cleanup_assets"
