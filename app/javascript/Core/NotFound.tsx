@@ -1,6 +1,6 @@
 import React from 'react';
-import { Sys4Text } from '../ui/Sys4Text';
 import { Link } from 'react-router-dom';
+import { Sys4Text } from '../ui/Sys4Text';
 
 export const NotFound = () => {
   return (

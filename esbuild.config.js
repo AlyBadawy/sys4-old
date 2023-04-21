@@ -20,7 +20,7 @@ require('esbuild').build({
   absWorkingDir: path.join(process.cwd(), 'app/javascript'),
   bundle: true,
   color: true,
-  entryPoints: ['react.ts'],
+  entryPoints: ['react.tsx'],
   external: ['*.ttf'],
   loader: {
     '.png': 'file',

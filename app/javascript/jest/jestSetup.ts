@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import '@testing-library/jest-dom';
 import { fetch, Headers, Request, Response } from 'cross-fetch';
 import { rest } from 'msw';
@@ -16,18 +17,20 @@ global.Request = Request;
 global.Response = Response;
 
 export const handlers = [
-  rest.get('https://pokeapi.co/api/v2/pokemon/*', (_req, res, ctx) => {
-    return res(ctx.json({}));
+  rest.get('http://localhost/api/status/user', (_req, res, ctx) => {
+    return res(ctx.json({ status: 'user ok' }));
+  }),
+  rest.get('http://localhost/api/account/me', (_req, res, ctx) => {
+    return res(
+      ctx.json({
+        id: '48d8325a-6458-4aa7-a1fa-3a53218e4ee9',
+        email: 'user@example.com',
+        created_at: '2023-04-15T20:20:19.067Z',
+        updated_at: '2023-04-21T03:15:34.848Z',
+      })
+    );
   }),
 ];
-
-// This configures a request mocking server with the given request handlers.
-// import dummyPokemon from 'src/tests/dummyPokemon';
-// export const handlers = [
-//   rest.get('https://pokeapi.co/api/v2/pokemon/*', (_req, res, ctx) => {
-//     return res(ctx.json(dummyPokemon));
-//   }),
-// ];
 
 export const server = setupServer(...handlers);
 

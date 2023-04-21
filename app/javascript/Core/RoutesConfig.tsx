@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './Layout';
 import { NotFound } from './NotFound';
 import { Home } from '../home/Home';
@@ -14,7 +13,7 @@ import { Dashboard } from '../app/dashboard';
 import { GuestRoute } from '../auth/GuestRoute';
 import { OfflineApp } from './OfflineApp';
 
-export const OnlineRouter = createBrowserRouter([
+export const OnlineRouterConfig = [
   {
     path: '/',
     element: <Layout />,
@@ -38,13 +37,15 @@ export const OnlineRouter = createBrowserRouter([
       },
     ],
   },
-]);
+];
 
-export const OfflineRouter = createBrowserRouter([
+export const OfflineRouterConfig = [
   {
     path: '/',
     element: <Layout />,
-    errorElement: <NotFound />,
-    children: [{ index: true, element: <OfflineApp /> }],
+    children: [
+      { index: true, element: <OfflineApp /> },
+      { path: '*', element: <OfflineApp /> },
+    ],
   },
-]);
+];
