@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <>
       <section id='home-hero'>
-        <div className='flex flex-col-reverse items-center px-6 mx-auto mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
+        <div className='container mx-auto flex flex-col-reverse items-center px-6 mx-auto mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
           {/* Hero-Text */}
           <div className='flex flex-col mb-12 space-y-12 md:w-1/2'>
             <h1 className='max-w-md text-4xl font-bold text-center md:text-5xl md:text-left'>
@@ -35,11 +35,30 @@ export const Home = () => {
           </div>
         </div>
       </section>
+      <section id='cta' className=' bg-amber-300/60 text-stone-200'>
+        <div className='container mx-auto mb-8 md:mb-24 flex flex-col px-4 my-10 py-10 space-y-12 md:space-y-0 md:flex-row'>
+          <div className='flex flex-col space-y-12 md:w-1/2 text-center md:text-left items-center md:items-start'>
+            <h2 className='text-4xl font-bold max-w-md text-white'>
+              Simple, fast, and secure way to manage your systems
+            </h2>
+          </div>
+          <div className='flex flex-col space-y-8 md:w-1/2 md:max-w-lg'>
+            <p>
+              <Sys4Text /> is a fast, secure, and intuitive platform for
+              managing all your systems in one place. From games to health
+              goals, educational resources, and productivity tools, our
+              user-friendly interface and state-of-the-art security measures
+              help you take control of your systems and unlock their full
+              potential
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section id='home-features'>
-        <div className='flex flex-col px-4 mx-auto my-10 space-y-12 md:space-y-0 md:flex-row'>
+        <div className=' container mx-auto flex flex-col px-4 my-10 space-y-12 md:space-y-0 md:flex-row'>
           <div className='flex flex-col space-y-12 md:w-1/2 text-center md:text-left items-center md:items-start'>
-            <h2 className='text-4xl font-bold max-w-sm '>
+            <h2 className='text-4xl font-bold max-w-sm'>
               <Sys4Text /> is a platform for all your needs
             </h2>
             <p className='text-stone-400 max-w-sm md:max-w-md'>
@@ -49,7 +68,7 @@ export const Home = () => {
               following are the systems available in <Sys4Text />:
             </p>
           </div>
-          <div className='flex flex-col space-y-8 md:w-1/2  md:max-w-md'>
+          <div className='flex flex-col space-y-8 md:w-1/2 md:max-w-md'>
             <SystemSectionItem number='01' title='System for Development'>
               The Development System is a comprehensive resource for software
               developers. It offers a range of tools, including IDEs, compilers,
@@ -86,15 +105,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* <section id='cta' className='bg-orange-700'>
-        <div className='container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 md:py-12 md:flex-row md:space-y-0'>
-          <h2 className='text-5xl font-bold leading-tight text-center text-white md:text-4xl md:max-w-xl md:text-left'>
-            simple, fast, and secure way to manage your systems
-          </h2>
-          <div>Lorem ipsum dolor sit amet</div>
-        </div>
-      </section> */}
     </>
   );
 };

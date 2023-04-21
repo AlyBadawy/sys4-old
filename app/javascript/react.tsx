@@ -1,13 +1,18 @@
+// Entry point for the build script in your package.json
+import '@hotwired/turbo-rails';
+import 'react-toastify/dist/ReactToastify.css';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { S4Routes } from './components/core/S4Routes';
+import { AppRoot } from './Core/AppRoot';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const rootEl = document.getElementById('react-root');
+  const rootEl = document.getElementById('root');
   const root = ReactDOM.createRoot(rootEl!);
+
   root.render(
     <React.StrictMode>
-      <S4Routes />
+      <AppRoot />
     </React.StrictMode>
   );
 });
