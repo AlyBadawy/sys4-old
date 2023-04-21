@@ -1,13 +1,22 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { S4Routes } from './components/core/S4Routes';
+import { Provider } from 'react-redux';
+import { useFlipper } from './hooks/useWindow';
+import { setupStore } from './store/store';
+import { RouterProvider } from 'react-router-dom';
+import { OfflineRouter, OnlineRouter } from './components/core/RoutesConfig';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const rootEl = document.getElementById('react-root');
+  const rootEl = document.getElementById('root');
   const root = ReactDOM.createRoot(rootEl!);
+  const isOnline = useFlipper('app_online');
+  const store = setupStore();
+
   root.render(
     <React.StrictMode>
-      <S4Routes />
+      <Provider store={store}>
+        <RouterProvider router={isOnline ? OnlineRouter : OfflineRouter} />
+      </Provider>
     </React.StrictMode>
   );
 });
