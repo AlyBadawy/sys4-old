@@ -3,16 +3,16 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './Layout';
 import { NotFound } from './NotFound';
 import { Home } from '../home/Home';
-import { PrivacyPolicy } from '../staticPages/PrivacyPolicy';
-import { TermsOfUse } from '../staticPages/TermsOfUse';
-import { GuestRoute } from '../../auth/GuestRoute';
-import { SignIn } from '../../auth/SingIn';
-import { SignUp } from '../../auth/SignUp';
-import { ForgotPassword } from '../../auth/ForgotPassword';
-import { ResetPassword } from '../../auth/ResetPassword';
-import { PrivateRoute } from '../../auth/PrivateRoute';
+import { PrivacyPolicy } from './PrivacyPolicy';
+import { TermsOfUse } from './TermsOfUse';
+import { SignIn } from '../auth/SingIn';
+import { SignUp } from '../auth/SignUp';
+import { ForgotPassword } from '../auth/ForgotPassword';
+import { ResetPassword } from '../auth/ResetPassword';
+import { PrivateRoute } from '../auth/PrivateRoute';
 import { Dashboard } from '../app/dashboard';
-import { OfflineApp } from '../home/OfflineApp';
+import { GuestRoute } from '../auth/GuestRoute';
+import { OfflineApp } from './OfflineApp';
 
 export const OnlineRouter = createBrowserRouter([
   {

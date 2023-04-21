@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFlipper } from '../hooks/useWindow';
-import { Sys4Text } from '../components/ui/Sys4Text';
+import { Sys4Text } from '../ui/Sys4Text';
 import { useRegisterMutation } from './AuthApi';
 import { Link } from 'react-router-dom';
 import { AuthViewsForm } from './AuthViewsForm';

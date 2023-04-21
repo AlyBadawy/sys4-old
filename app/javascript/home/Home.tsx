@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <>
       <section id='home-hero'>
-        <div className='flex flex-col-reverse items-center px-6 mx-auto mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
+        <div className='container mx-auto flex flex-col-reverse items-center px-6 mx-auto mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
           {/* Hero-Text */}
           <div className='flex flex-col mb-12 space-y-12 md:w-1/2'>
             <h1 className='max-w-md text-4xl font-bold text-center md:text-5xl md:text-left'>
@@ -36,8 +36,17 @@ export const Home = () => {
         </div>
       </section>
 
+      <section id='cta' className='bg-amber-300 mb-8 md:mb-24 text-stone-700'>
+        <div className='container mx-auto flex flex-col items-center justify-between px-6 py-16 space-y-12 md:py-12 md:flex-row md:space-y-0'>
+          <h2 className='text-5xl font-bold leading-tight text-center md:text-4xl md:max-w-xl md:text-left'>
+            Simple, fast, and secure way to manage your systems
+          </h2>
+          <div>Lorem ipsum dolor sit amet</div>
+        </div>
+      </section>
+
       <section id='home-features'>
-        <div className='flex flex-col px-4 mx-auto my-10 space-y-12 md:space-y-0 md:flex-row'>
+        <div className=' container mx-auto flex flex-col px-4 mx-auto my-10 space-y-12 md:space-y-0 md:flex-row'>
           <div className='flex flex-col space-y-12 md:w-1/2 text-center md:text-left items-center md:items-start'>
             <h2 className='text-4xl font-bold max-w-sm '>
               <Sys4Text /> is a platform for all your needs
@@ -86,15 +95,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* <section id='cta' className='bg-orange-700'>
-        <div className='container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 md:py-12 md:flex-row md:space-y-0'>
-          <h2 className='text-5xl font-bold leading-tight text-center text-white md:text-4xl md:max-w-xl md:text-left'>
-            simple, fast, and secure way to manage your systems
-          </h2>
-          <div>Lorem ipsum dolor sit amet</div>
-        </div>
-      </section> */}
     </>
   );
 };

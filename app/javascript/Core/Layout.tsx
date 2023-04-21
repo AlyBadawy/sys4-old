@@ -22,7 +22,7 @@ export const Layout = () => {
         theme='dark'
       />
       <div className='flex flex-col min-h-screen' id='layout-main'>
-        <main className='container mx-auto py-2 flex-1 flex flex-col'>
+        <main className='flex-1 mx-4'>
           <NavBar />
           <Outlet />
         </main>
