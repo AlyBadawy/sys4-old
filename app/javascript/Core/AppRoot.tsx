@@ -5,7 +5,7 @@ import { setupStore } from '../store/store';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { OfflineRouterConfig, OnlineRouterConfig } from './RoutesConfig';
 
-export const Root = () => {
+export const AppRoot = () => {
   const isOnline = useFlipper('app_online');
   const store = setupStore();
   const OnlineRouter = createBrowserRouter(OnlineRouterConfig);

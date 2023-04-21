@@ -1,11 +1,11 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { Root } from '../../Core/Root';
+import { AppRoot } from '../../Core/AppRoot';
 
 describe('Root', () => {
   it('Renders the offline page without the flipper', () => {
-    render(<Root />);
+    render(<AppRoot />);
     const paragraph = screen.getByText(
       /is currently offline for maintenance. Our team is working hard to bring the application back online as soon as possible, with all features fully operational/i
     );
@@ -16,7 +16,7 @@ describe('Root', () => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     window.FLIPPERS = { app_online: true };
 
-    render(<Root />);
+    render(<AppRoot />);
     const paragraph = screen.getByText(
       /Unlock the full potential of your systems with/i
     );

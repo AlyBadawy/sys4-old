@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { Root } from './Core/Root';
+import { AppRoot } from './Core/AppRoot';
 
 document.addEventListener('DOMContentLoaded', () => {
   const rootEl = document.getElementById('root');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   root.render(
     <React.StrictMode>
-      <Root />
+      <AppRoot />
     </React.StrictMode>
   );
 });
