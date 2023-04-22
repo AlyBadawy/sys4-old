@@ -10,7 +10,7 @@ export const Layout = () => {
     <>
       <Toasty />
       <div className='flex flex-col min-h-screen' id='layout-main'>
-        <main className='flex-1'>
+        <main className='flex flex-col flex-1'>
           <NavBar />
           <Outlet />
         </main>

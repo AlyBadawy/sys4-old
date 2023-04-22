@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-enum AccountLayout {
+export enum AccountLayout {
   Personal,
   Sessions,
 }
@@ -17,8 +17,8 @@ export const AccountSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLayout: (state, action: PayloadAction<AccountState>) => {
-      state.layout = action.payload.layout;
+    setLayout: (state, action: PayloadAction<AccountLayout>) => {
+      state.layout = action.payload;
     },
   },
 });
