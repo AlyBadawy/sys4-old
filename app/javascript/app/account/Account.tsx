@@ -4,6 +4,8 @@ import { TbArrowsRight } from 'react-icons/tb';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setAccountLayout } from '../../store/slices/LayoutSlice';
 import { AccountLayout } from '../../types/AccountLayout';
+import { PersonalSettings } from './PersonalSettings';
+import { SessionsSettings } from './SessionsSettings';
 
 export const Account = () => {
   const dispatch = useAppDispatch();
@@ -29,8 +31,8 @@ export const Account = () => {
         </button>
       </div>
       <div className='px-4'>
-        {layout === AccountLayout.Personal && 'Personal'}
-        {layout === AccountLayout.Sessions && 'Sessions'}
+        {layout === AccountLayout.Personal && <PersonalSettings />}
+        {layout === AccountLayout.Sessions && <SessionsSettings />}
       </div>
     </div>
   );
