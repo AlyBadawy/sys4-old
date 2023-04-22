@@ -21,7 +21,10 @@ Rails.application.routes.draw do
     get "/status/ok", to: "status#ok"
     get "/status/user", to: "status#user"
 
-    get "/account/me", to: "status#me"
+    scope :account do
+      get "/me", to: "status#me"
+      resources :allowlisted_jwts, only: %i[index show update destroy]
+    end
   end
 
   root "react#index"

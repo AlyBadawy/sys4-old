@@ -1,0 +1,40 @@
+# frozen_string_literal: true
+
+class AllowlistedJwtsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_allowlisted_jwt, only: %i[ show update destroy ]
+
+  # GET /allowlisted_jwts
+  # GET /allowlisted_jwts.json
+  def index
+    @allowlisted_jwts = current_user.allowlisted_jwts
+  end
+
+  # GET /allowlisted_jwts/1
+  # GET /allowlisted_jwts/1.json
+  def show
+  end
+
+  # PATCH/PUT /allowlisted_jwts/1
+  # PATCH/PUT /allowlisted_jwts/1.json
+  def update
+    if @allowlisted_jwt.update(exp: Time.zone.now)
+      render :show, status: :ok, location: @allowlisted_jwt
+    else
+      render json: @allowlisted_jwt.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /allowlisted_jwts/1
+  # DELETE /allowlisted_jwts/1.json
+  def destroy
+    @allowlisted_jwt.destroy
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_allowlisted_jwt
+    @allowlisted_jwt = current_user.allowlisted_jwts.find(params[:id])
+  end
+end
