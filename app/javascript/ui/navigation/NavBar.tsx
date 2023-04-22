@@ -1,5 +1,4 @@
 import React from 'react';
-import { GetStartedButton } from './GetStartedButton';
 import { NavItems } from './NavItems';
 import { Link } from 'react-router-dom';
 
@@ -7,11 +6,6 @@ export const NavBar = () => {
   const [menuVisibility, setMenuVisibility] = React.useState(false);
 
   const hamburgerToggle = () => {
-    // const menu = document.getElementById('menu');
-    // const btn = document.getElementById('menu-btn');
-    // menu?.classList.toggle('hidden');
-    // btn?.classList.toggle('open');
-
     setMenuVisibility(!menuVisibility);
   };
 
@@ -49,9 +43,6 @@ export const NavBar = () => {
             onClick={hamburgerToggle}
           >
             <NavItems />
-            <div className='my-6 pt-4'>
-              <GetStartedButton />
-            </div>
           </div>
         )}
       </div>

@@ -1,9 +1,9 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import * as React from 'react';
-import { useAppSelector } from '../store/hooks';
+import { useSignedIn } from '../hooks/useAuth';
 
 export const GuestRoute = () => {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSignedIn();
   const location = useLocation();
   return isLoggedIn ? (
     <Navigate to='/app' state={{ from: location }} replace />

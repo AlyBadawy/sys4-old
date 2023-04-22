@@ -11,8 +11,9 @@
   @apply text-amber-300 animate-pulse opacity-90;
 }
 
-a {
-  @apply text-amber-300 hover:text-cyan-500;
+a,
+.link {
+  @apply text-amber-300 hover:text-cyan-500 cursor-pointer;
 }
 
 #cookie-consent a {
