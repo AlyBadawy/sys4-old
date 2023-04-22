@@ -1,4 +1,3 @@
-import { accountReducer } from './../app/account/AccountSlice';
 import {
   configureStore,
   PreloadedState,
@@ -8,13 +7,15 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { StatusApi } from './api/statusApi';
 import { appApi } from './api/appApi';
-import { authReducer } from '../auth/AuthSlice';
+import { authReducer } from './slices/AuthSlice';
+import { layoutReducer } from './slices/LayoutSlice';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const rootReducer = combineReducers({
   [appApi.reducerPath]: appApi.reducer,
   status: StatusApi.reducer,
   auth: authReducer,
-  account: accountReducer,
+  layout: layoutReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
@@ -35,3 +36,7 @@ setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore['dispatch'];
+
+// Use throughout the app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

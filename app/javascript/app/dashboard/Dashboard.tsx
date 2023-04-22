@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetStatusQuery } from '../store/api/statusApi';
+import { useGetStatusQuery } from '../../store/api/statusApi';
 
 export const Dashboard = () => {
   const { data, isLoading, error } = useGetStatusQuery();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useResetPasswordMutation } from './AuthApi';
+import { useResetPasswordMutation } from '../store/api/AuthApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { AuthViewsForm } from './AuthViewsForm';

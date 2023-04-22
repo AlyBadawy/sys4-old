@@ -1,4 +1,4 @@
-import { appApi } from '../store/api/appApi';
+import { appApi } from './appApi';
 
 type UserLoginData = {
   email: string;

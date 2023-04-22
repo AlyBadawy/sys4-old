@@ -9,7 +9,7 @@ import { SignUp } from '../auth/SignUp';
 import { ForgotPassword } from '../auth/ForgotPassword';
 import { ResetPassword } from '../auth/ResetPassword';
 import { PrivateRoute } from '../auth/PrivateRoute';
-import { Dashboard } from '../app/dashboard';
+import { Dashboard } from '../app/dashboard/Dashboard';
 import { GuestRoute } from '../auth/GuestRoute';
 import { OfflineApp } from './OfflineApp';
 import { AppContainer } from '../app/AppContainer';
