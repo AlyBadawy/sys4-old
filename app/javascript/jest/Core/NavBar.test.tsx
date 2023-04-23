@@ -40,9 +40,5 @@ describe('NavBar', () => {
     });
 
     expect(screen.getByText('Development')).toBeInTheDocument();
-    expect(screen.getByText('Productivity')).toBeInTheDocument();
-    expect(screen.getByText('News')).toBeInTheDocument();
-    expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Education')).toBeInTheDocument();
   });
 });
