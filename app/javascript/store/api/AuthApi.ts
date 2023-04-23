@@ -1,16 +1,5 @@
+import { User, UserLoginData } from '../../types/Auth';
 import { appApi } from './appApi';
-
-type UserLoginData = {
-  email: string;
-  password: string;
-};
-
-type User = {
-  id: string;
-  email: string;
-  admin: boolean;
-  JwtToken?: string;
-};
 
 export const AuthApi = appApi.injectEndpoints({
   endpoints: (builder) => ({

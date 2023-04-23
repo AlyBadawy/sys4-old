@@ -1,5 +1,41 @@
 import React from 'react';
+import { useGetSessionsQuery } from '../../store/api/SessionsApi';
+import { SessionWrapper } from './SessionWrapper';
+import { FiRefreshCw } from 'react-icons/fi';
 
 export const SessionsSettings = () => {
-  return <div>SessionsSettings</div>;
+  const { data, isLoading, error, refetch, isFetching } = useGetSessionsQuery();
+
+  if (isLoading || isFetching) return <div>Loading...</div>;
+  if (error) return <div>Error!</div>;
+
+  return (
+    <div className='flex flex-col'>
+      <div className='flex border-b-2 border-cyan-950 pt-4 justify-between'>
+        <h3 className='text-xl'>Your sessions:</h3>
+        <button
+          onClick={() => void refetch()}
+          className='flex items-center gap-2 link'
+        >
+          <FiRefreshCw />
+          Refresh
+        </button>
+      </div>
+
+      {data && !isLoading && !isFetching && (
+        <>
+          {data
+            .filter((session) => session.current)
+            .map((session) => (
+              <SessionWrapper session={session} key={session.id} />
+            ))}
+          {data
+            .filter((session) => !session.current)
+            .map((session) => (
+              <SessionWrapper session={session} key={session.id} />
+            ))}
+        </>
+      )}
+    </div>
+  );
 };

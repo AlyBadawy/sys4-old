@@ -7,12 +7,14 @@ class AllowlistedJwtsController < ApplicationController
   # GET /allowlisted_jwts
   # GET /allowlisted_jwts.json
   def index
-    @allowlisted_jwts = current_user.allowlisted_jwts
+    @allowlisted_jwts = current_user.allowlisted_jwts.order(created_at: :desc)
+    @current_jti = current_jti
   end
 
   # GET /allowlisted_jwts/1
   # GET /allowlisted_jwts/1.json
   def show
+    @current_jti = current_jti
   end
 
   # PATCH/PUT /allowlisted_jwts/1
