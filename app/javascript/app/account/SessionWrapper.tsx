@@ -18,7 +18,7 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
   return (
     <div
       key={session.id}
-      className='overflow-hidden shadow-lg bg-cyan-900/10 m-4 p-4 flex items-center gap-6 rounded-xl shadow-black/30'
+      className='shadow-lg bg-cyan-900/10 m-4 p-4 flex items-center gap-6 rounded-xl shadow-black/30'
     >
       <div className='text-3xl'>
         <BiLogIn />

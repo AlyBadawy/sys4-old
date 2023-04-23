@@ -2,11 +2,10 @@ import React from 'react';
 import { useGetSessionsQuery } from '../../store/api/SessionsApi';
 import { SessionWrapper } from './SessionWrapper';
 import { FiRefreshCw } from 'react-icons/fi';
+import { LoadingSession } from './LoadingSession';
 
 export const SessionsSettings = () => {
   const { data, isLoading, error, refetch, isFetching } = useGetSessionsQuery();
-
-  if (isLoading || isFetching) return <div>Loading...</div>;
   if (error) return <div>Error!</div>;
 
   return (
@@ -21,7 +20,7 @@ export const SessionsSettings = () => {
           Refresh
         </button>
       </div>
-
+      {(isLoading || isFetching) && <LoadingSession />}
       {data && !isLoading && !isFetching && (
         <>
           {data
