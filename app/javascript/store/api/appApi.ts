@@ -3,9 +3,7 @@ import {
   FetchArgs,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
-
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
-
 import { logOut, setCredentials } from '../slices/AuthSlice';
 import { RootState } from '../store';
 

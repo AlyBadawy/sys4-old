@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token, if: :json_request?
-
   before_action :set_paper_trail_whodunnit
 
   def user_for_paper_trail
