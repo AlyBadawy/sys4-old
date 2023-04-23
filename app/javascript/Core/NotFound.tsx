@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sys4Text } from '../ui/Sys4Text';
-import { NavBar } from '../ui/NavBar';
+import { NavBar } from '../ui/navigation/NavBar';
 import { Footer } from '../ui/footer/Footer';
 
 export const NotFound = () => {

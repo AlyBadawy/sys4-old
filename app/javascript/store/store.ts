@@ -7,12 +7,15 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { StatusApi } from './api/statusApi';
 import { appApi } from './api/appApi';
-import { authReducer } from '../auth/AuthSlice';
+import { authReducer } from './slices/AuthSlice';
+import { layoutReducer } from './slices/LayoutSlice';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const rootReducer = combineReducers({
   [appApi.reducerPath]: appApi.reducer,
   status: StatusApi.reducer,
   auth: authReducer,
+  layout: layoutReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
@@ -29,8 +32,9 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
 const store = setupStore();
 
 setupListeners(store.dispatch);
-// Infer the `RootState` and `AppDispatch` types from the store itself
+
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = AppStore['dispatch'];
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

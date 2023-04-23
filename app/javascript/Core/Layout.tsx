@@ -2,27 +2,15 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { CookieConsent } from './CookieConsent';
 import { Footer } from '../ui/footer/Footer';
-import { NavBar } from '../ui/NavBar';
-import { ToastContainer } from 'react-toastify';
+import { NavBar } from '../ui/navigation/NavBar';
+import { Toasty } from './Toasty';
 
 export const Layout = () => {
   return (
     <>
-      <ToastContainer
-        position='top-right'
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        pauseOnHover
-        theme='dark'
-      />
+      <Toasty />
       <div className='flex flex-col min-h-screen' id='layout-main'>
-        <main className='flex-1'>
+        <main className='flex flex-col flex-1'>
           <NavBar />
           <Outlet />
         </main>

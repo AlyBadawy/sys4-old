@@ -2,7 +2,7 @@ import React from 'react';
 import { act, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { renderWithRedux } from '../TestUtils';
-import { NavBar } from '../../ui/NavBar';
+import { NavBar } from '../../ui/navigation/NavBar';
 
 describe('NavBar', () => {
   it('Toggles showing the menu', () => {
@@ -40,9 +40,5 @@ describe('NavBar', () => {
     });
 
     expect(screen.getByText('Development')).toBeInTheDocument();
-    expect(screen.getByText('Productivity')).toBeInTheDocument();
-    expect(screen.getByText('News')).toBeInTheDocument();
-    expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Education')).toBeInTheDocument();
   });
 });

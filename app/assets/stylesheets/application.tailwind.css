@@ -11,8 +11,17 @@
   @apply text-amber-300 animate-pulse opacity-90;
 }
 
-a {
-  @apply text-amber-300 hover:text-cyan-500;
+a,
+.link {
+  @apply text-amber-300 enabled:hover:text-cyan-500 cursor-pointer;
+}
+
+.active {
+  @apply border-b-2 border-amber-600 hover:border-cyan-900;
+}
+
+*:disabled {
+  @apply opacity-50 cursor-not-allowed;
 }
 
 #cookie-consent a {

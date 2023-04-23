@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <>
       <section id='home-hero'>
-        <div className='container mx-auto flex flex-col-reverse items-center px-6 mx-auto mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
+        <div className='container mx-auto flex flex-col-reverse items-center px-6 mt-4 mb-6 md:mt-20 md:mb-24 space-y-6 space-y-reverse md:flex-row '>
           {/* Hero-Text */}
           <div className='flex flex-col mb-12 space-y-12 md:w-1/2'>
             <h1 className='max-w-md text-4xl font-bold text-center md:text-5xl md:text-left'>
