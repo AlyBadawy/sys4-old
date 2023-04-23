@@ -1,6 +1,11 @@
 import React from 'react';
 import { TimeWrapper } from '../../ui/TimeWrapper';
-import { FaLaptop, FaLocationArrow, FaTrash } from 'react-icons/fa';
+import {
+  FaLaptop,
+  FaLocationArrow,
+  FaNetworkWired,
+  FaTrash,
+} from 'react-icons/fa';
 import { BiLogOut, BiLogIn, BiHappy, BiSad } from 'react-icons/bi';
 import { Session } from '../../types/Session';
 import {
@@ -33,6 +38,10 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
         <p className='text-sm flex items-center gap-2'>
           <FaLocationArrow />
           {session.location || 'unknown'}
+        </p>
+        <p className='text-sm flex items-center gap-2'>
+          <FaNetworkWired />
+          {session.ip || 'unknown'}
         </p>
         <p
           className={`text-sm flex items-center gap-2 ${

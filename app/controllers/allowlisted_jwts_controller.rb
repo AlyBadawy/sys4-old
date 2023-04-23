@@ -20,11 +20,8 @@ class AllowlistedJwtsController < ApplicationController
   # PATCH/PUT /allowlisted_jwts/1
   # PATCH/PUT /allowlisted_jwts/1.json
   def update
-    if @allowlisted_jwt.update(exp: Time.zone.now)
-      render :show, status: :ok, location: @allowlisted_jwt
-    else
-      render json: @allowlisted_jwt.errors, status: :unprocessable_entity
-    end
+    @allowlisted_jwt.update(exp: Time.zone.now)
+    render :show, status: :ok, location: @allowlisted_jwt
   end
 
   # DELETE /allowlisted_jwts/1

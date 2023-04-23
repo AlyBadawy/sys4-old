@@ -18,26 +18,30 @@ RSpec.describe "/allowlisted_jwts" do
   # This should return the minimal set of attributes required to create a valid
   # AllowlistedJwt. As you add validations to AllowlistedJwt, be sure to
   # adjust the attributes here as well.
+  let(:user) {
+    create(:user)
+  }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the headers
-  # in order to pass any filters (e.g. authentication) defined in
-  # AllowlistedJwtsController, or in your router and rack
-  # middleware. Be sure to keep this updated too.
-  let(:valid_headers) {
-    {}
+    { jti: "jti",
+      aud: "test",
+      exp: 3.days.from_now,
+      user: user,
+      agent: "some agent",
+      ip: "127.0.0.1",
+      location: "unknown" }
   }
 
   describe "GET /index" do
     it "renders a successful response" do
       AllowlistedJwt.create! valid_attributes
-      get allowlisted_jwts_url, headers: valid_headers, as: :json
+      user.confirm
+      sign_in user
+      headers = { "Accept" => "application/json",
+                  "Content-Type" => "application/json",
+                  "JWT-AUD" => "test" }
+      auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
+      get allowlisted_jwts_url, headers: auth_headers
       expect(response).to be_successful
     end
   end
@@ -45,84 +49,61 @@ RSpec.describe "/allowlisted_jwts" do
   describe "GET /show" do
     it "renders a successful response" do
       allowlisted_jwt = AllowlistedJwt.create! valid_attributes
-      get allowlisted_jwt_url(allowlisted_jwt), as: :json
+      user.confirm
+      sign_in user
+      headers = { "Accept" => "application/json",
+                  "Content-Type" => "application/json",
+                  "JWT-AUD" => "test" }
+      auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
+
+      get allowlisted_jwt_url(allowlisted_jwt), headers: auth_headers
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new AllowlistedJwt" do
-        expect {
-          post allowlisted_jwts_url,
-               params: { allowlisted_jwt: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(AllowlistedJwt, :count).by(1)
-      end
-
-      it "renders a JSON response with the new allowlisted_jwt" do
-        post allowlisted_jwts_url,
-             params: { allowlisted_jwt: valid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new AllowlistedJwt" do
-        expect {
-          post allowlisted_jwts_url,
-               params: { allowlisted_jwt: invalid_attributes }, as: :json
-        }.not_to change(AllowlistedJwt, :count)
-      end
-
-      it "renders a JSON response with errors for the new allowlisted_jwt" do
-        post allowlisted_jwts_url,
-             params: { allowlisted_jwt: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to match(a_string_including("application/json"))
-      end
-    end
-  end
-
   describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    it "updates the requested allowlisted_jwt" do
+      allowlisted_jwt = AllowlistedJwt.create! valid_attributes
+      user.confirm
+      sign_in user
+      headers = { "Accept" => "application/json",
+                  "Content-Type" => "application/json",
+                  "JWT-AUD" => "test" }
+      auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
 
-      it "updates the requested allowlisted_jwt" do
-        allowlisted_jwt = AllowlistedJwt.create! valid_attributes
-        patch allowlisted_jwt_url(allowlisted_jwt),
-              params: { allowlisted_jwt: new_attributes }, headers: valid_headers, as: :json
-        allowlisted_jwt.reload
-        skip("Add assertions for updated state")
-      end
+      patch allowlisted_jwt_url(allowlisted_jwt), headers: auth_headers, as: :json
+      allowlisted_jwt.reload
+      expect(response).to have_http_status(:ok)
+      expect(response.content_type).to match(a_string_including("application/json"))
 
-      it "renders a JSON response with the allowlisted_jwt" do
-        allowlisted_jwt = AllowlistedJwt.create! valid_attributes
-        patch allowlisted_jwt_url(allowlisted_jwt),
-              params: { allowlisted_jwt: new_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to match(a_string_including("application/json"))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a JSON response with errors for the allowlisted_jwt" do
-        allowlisted_jwt = AllowlistedJwt.create! valid_attributes
-        patch allowlisted_jwt_url(allowlisted_jwt),
-              params: { allowlisted_jwt: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to match(a_string_including("application/json"))
-      end
+      res = JSON.parse(response.body)
+      expect(res["exp"] <= Time.zone.now).to be_truthy
     end
   end
 
   describe "DELETE /destroy" do
+    it "returns a successful status with no content" do
+      allowlisted_jwt = AllowlistedJwt.create! valid_attributes
+      user.confirm
+      sign_in user
+      headers = { "Accept" => "application/json",
+                  "Content-Type" => "application/json",
+                  "JWT-AUD" => "test" }
+      auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
+      delete allowlisted_jwt_url(allowlisted_jwt), headers: auth_headers, as: :json
+      expect(response).to have_http_status(:no_content)
+    end
+
     it "destroys the requested allowlisted_jwt" do
       allowlisted_jwt = AllowlistedJwt.create! valid_attributes
+      user.confirm
+      sign_in user
+      headers = { "Accept" => "application/json",
+                  "Content-Type" => "application/json",
+                  "JWT-AUD" => "test" }
+      auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
       expect {
-        delete allowlisted_jwt_url(allowlisted_jwt), headers: valid_headers, as: :json
+        delete allowlisted_jwt_url(allowlisted_jwt), headers: auth_headers, as: :json
       }.to change(AllowlistedJwt, :count).by(-1)
     end
   end
