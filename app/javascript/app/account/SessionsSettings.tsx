@@ -33,6 +33,9 @@ export const SessionsSettings = () => {
             .map((session) => (
               <SessionWrapper session={session} key={session.id} />
             ))}
+          <p className='border-t-2 border-cyan-950 text-stone-300 text-xs pt-2'>
+            Sessions that are older than a month will be automatically deleted.
+          </p>
         </>
       )}
     </div>
