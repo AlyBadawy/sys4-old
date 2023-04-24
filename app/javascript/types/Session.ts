@@ -5,6 +5,7 @@ export type Session = {
   jti: string;
   valid: boolean;
   agent: string;
+  deviceType: string;
   ip: string;
   location?: string;
   url: string;
