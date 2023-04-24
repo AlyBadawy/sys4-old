@@ -7,7 +7,7 @@ module Users
     private
 
     def respond_with(resource, _opts = {})
-      resource.allowlisted_jwts.last&.update(agent: user_agent, ip: request.ip, location: location, device_type: user_agent_device)
+      resource.allowlisted_jwts.last&.update(agent: user_agent, ip: request.ip, location: location, device_type: request.device_variant)
       render json: current_user, status: :ok
     end
 
@@ -27,10 +27,6 @@ module Users
 
     def user_agent
       "#{request.os} #{request.os_version} • #{request.browser} #{request.browser_version}"
-    end
-
-    def user_agent_device
-      request.device_variant
     end
 
     def location
