@@ -19,7 +19,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReAuth = async (
+const baseQueryWithAuth = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
   extraOptions: Record<string, unknown>
@@ -28,16 +28,26 @@ const baseQueryWithReAuth = async (
 
   if (result?.error?.status === 401) {
     api.dispatch(logOut());
+    return result;
   }
 
   const state = api.getState() as RootState;
   const userId = state.auth.userId;
   const email = state.auth.email;
   const jwtToken = state.auth.jwtToken;
-  if (!userId || !email) {
+
+  if (
+    (!userId || !email) &&
+    (args as FetchArgs).url !== '/users/sign_in' &&
+    (args as FetchArgs).url !== '/users/sign_out'
+  ) {
     const result = await baseQuery('/account/me', api, extraOptions);
     if (result?.data) {
-      api.dispatch(setCredentials({ userId, email, jwtToken }));
+      const { id, email } = result.data as unknown as {
+        id: string;
+        email: string;
+      };
+      api.dispatch(setCredentials({ userId: id, email, jwtToken }));
     } else {
       api.dispatch(logOut());
     }
@@ -46,6 +56,6 @@ const baseQueryWithReAuth = async (
 };
 
 export const appApi = createApi({
-  baseQuery: baseQueryWithReAuth,
+  baseQuery: baseQueryWithAuth,
   endpoints: (_builder) => ({}),
 });
