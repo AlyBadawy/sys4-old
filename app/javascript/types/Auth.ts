@@ -1,6 +1,8 @@
 export type UserLoginData = {
   email: string;
   password: string;
+  firstName?: string;
+  lastName?: string;
 };
 
 export type User = {

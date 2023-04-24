@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { User, UserLoginData } from '../../types/Auth';
 import { appApi } from './appApi';
 
-export const AuthApi = appApi.injectEndpoints({
+export const UserApi = appApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
@@ -54,4 +55,4 @@ export const {
   useLogoutMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
-} = AuthApi;
+} = UserApi;

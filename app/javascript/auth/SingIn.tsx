@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useLoginMutation } from '../store/api/AuthApi';
+import { useLoginMutation } from '../store/api/UserApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/store';
 import { setCredentials } from '../store/slices/AuthSlice';
