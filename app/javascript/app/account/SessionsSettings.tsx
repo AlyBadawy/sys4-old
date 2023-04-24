@@ -10,7 +10,7 @@ export const SessionsSettings = () => {
 
   return (
     <div className='flex flex-col'>
-      <div className='flex border-b-2 border-cyan-950 pt-4 justify-between'>
+      <div className='flex border-b-2 border-cyan-950 pb-4 justify-between'>
         <h3 className='text-xl'>Your sessions:</h3>
         <button
           onClick={() => void refetch()}

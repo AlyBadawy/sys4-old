@@ -41,3 +41,5 @@ coverage/*
 yarn-error.log
 
 /esbuild_error_*
+
+.byebug*

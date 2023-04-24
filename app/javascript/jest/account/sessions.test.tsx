@@ -26,6 +26,7 @@ describe('Sessions', () => {
       jti: 'test',
       url: 'test',
       exp: new Date(),
+      deviceType: 'pc',
     };
 
     it('renders an expired session', () => {
