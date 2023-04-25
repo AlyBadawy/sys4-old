@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { User, UserLoginData } from '../../types/Auth';
+import { User, UserLoginData } from '../../types/User';
 import { appApi } from './appApi';
 
-export const UserApi = appApi.injectEndpoints({
+const apiWithTag = appApi.enhanceEndpoints({ addTagTypes: ['User'] });
+
+export const UserApi = apiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
@@ -10,6 +12,7 @@ export const UserApi = appApi.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
+      invalidatesTags: ['User'],
     }),
     login: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
@@ -17,6 +20,7 @@ export const UserApi = appApi.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
+      invalidatesTags: ['User'],
       transformResponse: (response: User, meta) => {
         return {
           ...response,
@@ -46,6 +50,25 @@ export const UserApi = appApi.injectEndpoints({
         body: { user: { password: password, reset_password_token: token } },
       }),
     }),
+    updateUser: builder.mutation<User, User>({
+      query: (user) => ({
+        url: '/users/',
+        method: 'PUT',
+        body: {
+          user: {
+            email: user.email,
+            first_name: user.firstName,
+            last_name: user.lastName,
+          },
+        },
+      }),
+      invalidatesTags: ['User'],
+    }),
+    getUser: builder.query<User, void>({
+      query: () => '/account/me',
+      keepUnusedDataFor: 3600,
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -55,4 +78,6 @@ export const {
   useLogoutMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useUpdateUserMutation,
+  useGetUserQuery,
 } = UserApi;

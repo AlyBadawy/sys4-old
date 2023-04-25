@@ -11,6 +11,10 @@
   @apply text-amber-300 animate-pulse opacity-90;
 }
 
+.s4-input {
+  @apply p-2 px-2 rounded-md outline-none border-none text-stone-300 h-10 w-full md:w-fit placeholder:pl-1 placeholder:text-stone-300/30 bg-cyan-950;
+}
+
 a,
 .link {
   @apply text-amber-300 enabled:hover:text-cyan-500 cursor-pointer;

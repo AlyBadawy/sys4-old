@@ -35,8 +35,8 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
         <h1 className='text-white text-lg font-semibold'>
           {session.current && (
             <div className='flex items-center gap-2'>
-              <FaStar className='relative bottom-[1px]  text-green-500' />
-              <span className='text-green-500 hidden md:inline'>
+              <FaStar className='text-green-500' />
+              <span className='text-green-500 hidden md:inline text-sm'>
                 {' '}
                 (Current Session){' • '}
               </span>
