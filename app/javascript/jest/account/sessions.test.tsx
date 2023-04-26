@@ -9,7 +9,7 @@ describe('Sessions', () => {
   describe('SessionsSettings', () => {
     it('renders correctly', () => {
       renderWithRedux(<SessionsSettings />);
-      expect(screen.getByText('Your sessions:')).toBeInTheDocument();
+      expect(screen.getByText('Your Sessions:')).toBeInTheDocument();
       // TODO: Add tests for mocking sessions API and testing the sessions and finding 'Sessions that are older than a month will be automatically deleted.'
     });
   });

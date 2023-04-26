@@ -40,7 +40,7 @@ export const PersonalSettings = () => {
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col' data-testid='personal-settings-page'>
       <div className='flex border-b-2 border-cyan-950 pb-4 justify-between'>
         <h1 className='text-xl font-bold'>Account Settings</h1>
       </div>

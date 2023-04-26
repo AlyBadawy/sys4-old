@@ -9,7 +9,7 @@ export const SessionsSettings = () => {
   if (error) return <div>Error!</div>;
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col' data-testid='sessions-settings-page'>
       <div className='flex border-b-2 border-cyan-950 pb-4 justify-between'>
         <h1 className='text-xl font-bold'>Your Sessions:</h1>
         <button
