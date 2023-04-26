@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useForgotPasswordMutation } from '../store/api/AuthApi';
+import { useForgotPasswordMutation } from '../store/api/UserApi';
 import { AuthViewsForm } from './AuthViewsForm';
 
 export const ForgotPassword = () => {
@@ -29,7 +29,7 @@ export const ForgotPassword = () => {
         id='email'
         placeholder='iLove@sys4.dev'
         required
-        className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
+        className='s4-input rounded-full'
         value={email}
         onChange={(event) => {
           setEmail(event.target.value);

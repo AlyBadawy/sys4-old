@@ -1,7 +1,10 @@
-import { User, UserLoginData } from '../../types/Auth';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { User, UserLoginData } from '../../types/User';
 import { appApi } from './appApi';
 
-export const AuthApi = appApi.injectEndpoints({
+const apiWithTag = appApi.enhanceEndpoints({ addTagTypes: ['User'] });
+
+export const UserApi = apiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
@@ -9,6 +12,7 @@ export const AuthApi = appApi.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
+      invalidatesTags: ['User'],
     }),
     login: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
@@ -16,6 +20,7 @@ export const AuthApi = appApi.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
+      invalidatesTags: ['User'],
       transformResponse: (response: User, meta) => {
         return {
           ...response,
@@ -45,6 +50,28 @@ export const AuthApi = appApi.injectEndpoints({
         body: { user: { password: password, reset_password_token: token } },
       }),
     }),
+    updateUser: builder.mutation<User, User>({
+      query: (user) => ({
+        url: '/users/',
+        method: 'PUT',
+        body: {
+          user: {
+            email: user.email,
+            first_name: user.firstName,
+            last_name: user.lastName,
+            current_password: user.currentPassword,
+            password: user.password,
+            password_confirmation: user.passwordConfirmation,
+          },
+        },
+      }),
+      invalidatesTags: ['User'],
+    }),
+    getUser: builder.query<User, void>({
+      query: () => '/account/me',
+      keepUnusedDataFor: 3600,
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -54,4 +81,6 @@ export const {
   useLogoutMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
-} = AuthApi;
+  useUpdateUserMutation,
+  useGetUserQuery,
+} = UserApi;

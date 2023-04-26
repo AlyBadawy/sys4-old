@@ -17,7 +17,6 @@ export const SessionsApi = apiWithTag.injectEndpoints({
         url: `/account/allowlisted_jwts/${id}`,
         method: 'GET',
       }),
-      providesTags: ['Session'],
     }),
     invokeSession: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({

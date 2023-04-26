@@ -2,6 +2,7 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
+    before_action :authenticate_user!, only: [:update, :destroy]
 
     respond_to :json
 
@@ -25,6 +26,20 @@ module Users
       end
     end
 
+    def update
+      if current_user.update_with_password(user_params)
+        respond_with current_user
+      else
+        set_minimum_password_length
+        render json: { message: resource.errors.full_messages.first }, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      current_user.destroy!
+      head :no_content
+    end
+
     private
 
     def respond_with(resource, _opts = {})
@@ -39,6 +54,10 @@ module Users
 
     def register_failed
       render json: { message: resource.errors.full_messages.first }, status: :unprocessable_entity
+    end
+
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :current_password)
     end
   end
 end

@@ -12,17 +12,28 @@ describe('Account', () => {
 
   it('renders PersonalSettings by default', () => {
     renderWithRedux(<Account />);
-    expect(screen.getByText('PersonalSettings')).toBeInTheDocument();
+    expect(screen.getByTestId('personal-settings-page')).toBeInTheDocument();
+  });
+  it('renders PasswordSettings when Sessions is clicked', async () => {
+    renderWithRedux(<Account />);
+    screen.getByText('Password').click();
+    expect(
+      await screen.findByTestId('password-settings-page')
+    ).toBeInTheDocument();
   });
   it('renders SessionsSettings when Sessions is clicked', async () => {
     renderWithRedux(<Account />);
     screen.getByText('Sessions').click();
-    expect(await screen.findByText('Your sessions:')).toBeInTheDocument();
+    expect(
+      await screen.findByTestId('sessions-settings-page')
+    ).toBeInTheDocument();
   });
   it('renders PersonalSettings when Personal is clicked', async () => {
     renderWithRedux(<Account />);
     screen.getByText('Sessions').click();
     screen.getByText('Personal').click();
-    expect(await screen.findByText('PersonalSettings')).toBeInTheDocument();
+    expect(
+      await screen.findByTestId('personal-settings-page')
+    ).toBeInTheDocument();
   });
 });

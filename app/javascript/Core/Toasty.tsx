@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 export const Toasty = () => {
   return (
     <ToastContainer
-      position='bottom-right'
+      position='top-right'
       autoClose={5000}
       limit={4}
       hideProgressBar={false}

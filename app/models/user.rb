@@ -19,4 +19,8 @@ class User < Account
   def flipper_id
     id
   end
+
+  def to_json(*args)
+    { id: id, email: email, firstName: first_name, lastName: last_name, createdAt: created_at, updatedAt: updated_at, unconfirmedEmail: unconfirmed_email }.to_json(*args)
+  end
 end

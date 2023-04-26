@@ -11,6 +11,10 @@
   @apply text-amber-300 animate-pulse opacity-90;
 }
 
+.s4-input {
+  @apply p-2 px-2 border-none text-amber-300 h-10 placeholder:pl-1 placeholder:text-amber-300/30 bg-cyan-950 w-full outline-none;
+}
+
 a,
 .link {
   @apply text-amber-300 enabled:hover:text-cyan-500 cursor-pointer;
@@ -22,6 +26,10 @@ a,
 
 *:disabled {
   @apply opacity-50 cursor-not-allowed;
+}
+
+label {
+  @apply text-sm;
 }
 
 #cookie-consent a {
@@ -94,9 +102,4 @@ a,
 
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translate(-6px);
-}
-
-nav a,
-a.rounded-full {
-  text-decoration: none;
 }

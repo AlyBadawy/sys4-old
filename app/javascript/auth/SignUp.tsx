@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useFlipper } from '../hooks/useWindow';
 import { Sys4Text } from '../ui/Sys4Text';
-import { useRegisterMutation } from '../store/api/AuthApi';
+import { useRegisterMutation } from '../store/api/UserApi';
 import { Link } from 'react-router-dom';
 import { AuthViewsForm } from './AuthViewsForm';
 import { toast } from 'react-toastify';
+import { PasswordField } from '../ui/PasswordField';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -58,25 +59,19 @@ export const SignUp = () => {
         id='email'
         placeholder='iLove@sys4.dev'
         required
-        className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
+        className='s4-input rounded-full'
         value={email}
         onChange={(event) => {
           setEmail(event.target.value);
         }}
       />
-      <div className='flex flex-col '>
-        <input
-          type='password'
-          id='password'
-          placeholder='Password'
-          required
-          className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-      </div>
+      <PasswordField
+        id='password'
+        placeholder='Password'
+        required
+        onChange={(e) => setPassword(e.target.value)}
+        fullRound={true}
+      />
       <button
         className={'s4-btn'}
         type='submit'
