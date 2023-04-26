@@ -16,7 +16,7 @@ export const PasswordField = (props: Props) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col w-full'>
       {props.label && (
         <label htmlFor='firstName' className=''>
           {props.label}
