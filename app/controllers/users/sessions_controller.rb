@@ -26,6 +26,9 @@ module Users
     end
 
     def user_agent
+      if request.os == "UNKNOWN"
+        "Unknwon client! Probably a toaster."
+      end
       "#{request.os} #{request.os_version} • #{request.browser} #{request.browser_version}"
     end
 

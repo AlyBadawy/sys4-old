@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/store';
 import { setCredentials } from '../store/slices/AuthSlice';
 import { AuthViewsForm } from './AuthViewsForm';
+import { PasswordField } from '../ui/PasswordField';
 
 export const SignIn = () => {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -62,28 +63,25 @@ export const SignIn = () => {
         id='email'
         placeholder='iLove@sys4.dev'
         required
-        className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
+        className='s4-input rounded-full'
         value={email}
         onChange={(event) => {
           setEmail(event.target.value);
         }}
       />
-      <div className='flex flex-col '>
-        <input
-          type='password'
-          id='password'
-          placeholder='Password'
-          required
-          className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <Link to='/forgot_password' className='text-stone-300 px-2 text-sm'>
-          <span>Forgot password?</span>
-        </Link>
-      </div>
+      <PasswordField
+        id='password'
+        placeholder='Password'
+        required
+        onChange={(e) => setPassword(e.target.value)}
+        fullRound={true}
+      />
+      <Link
+        to='/forgot_password'
+        className='text-stone-300 px-2 text-sm self-start'
+      >
+        <span>Forgot password?</span>
+      </Link>
       <button
         className={'s4-btn'}
         type='submit'

@@ -11,7 +11,7 @@ export const SessionsSettings = () => {
   return (
     <div className='flex flex-col'>
       <div className='flex border-b-2 border-cyan-950 pb-4 justify-between'>
-        <h3 className='text-xl font-bold'>Your sessions:</h3>
+        <h1 className='text-xl font-bold'>Your Sessions:</h1>
         <button
           onClick={() => void refetch()}
           className='flex items-center gap-2 link'
@@ -21,13 +21,16 @@ export const SessionsSettings = () => {
         </button>
       </div>
       {(isLoading || isFetching) && <LoadingSession />}
+
       {data && !isLoading && !isFetching && (
         <>
+          <h2 className='text-lg font-bold pt-4'>Current Session:</h2>
           {data
             .filter((session) => session.current)
             .map((session) => (
               <SessionWrapper session={session} key={session.id} />
             ))}
+          <h2 className='text-lg font-bold pt-4'>Other Session:</h2>
           {data
             .filter((session) => !session.current)
             .map((session) => (

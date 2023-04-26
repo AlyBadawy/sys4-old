@@ -3,6 +3,7 @@ import { useResetPasswordMutation } from '../store/api/UserApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { AuthViewsForm } from './AuthViewsForm';
+import { PasswordField } from '../ui/PasswordField';
 
 export const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -34,19 +35,13 @@ export const ResetPassword = () => {
   };
   return (
     <AuthViewsForm title='Reset your Password!' onSubmit={handleSubmit}>
-      <div className='flex flex-col'>
-        <input
-          type='password'
-          id='password'
-          placeholder='Password'
-          required
-          className='flex-1 p-2 px-2 rounded-full outline-none focus:border-transparent text-gray-800 h-10 w-full md:w-fit placeholder:pl-1'
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-      </div>
+      <PasswordField
+        id='password'
+        placeholder='Password'
+        required
+        onChange={(e) => setPassword(e.target.value)}
+        fullRound={true}
+      />
       <button
         className={'s4-btn'}
         type='submit'

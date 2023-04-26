@@ -6,7 +6,7 @@ interface LayoutState {
 }
 
 const initialState: LayoutState = {
-  account: AccountLayout.Personal,
+  account: AccountLayout.Password,
 };
 
 export const LayoutSlice = createSlice({

@@ -1,7 +1,6 @@
 import React from 'react';
 import { TimeWrapper } from '../../ui/TimeWrapper';
 import {
-  FaAngry,
   FaLaptop,
   FaLocationArrow,
   FaMobileAlt,
@@ -15,6 +14,7 @@ import {
   useDeleteSessionMutation,
   useInvokeSessionMutation,
 } from '../../store/api/SessionsApi';
+import { GiToaster } from 'react-icons/gi';
 
 type SessionWrapperProps = {
   session: Session;
@@ -36,11 +36,6 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
           {session.current && (
             <div className='flex items-center gap-2'>
               <FaStar className='text-green-500' />
-              <span className='text-green-500 hidden md:inline text-sm'>
-                {' '}
-                (Current Session){' • '}
-              </span>
-
               <TimeWrapper date={session.createdAt} />
             </div>
           )}
@@ -51,9 +46,9 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
           {['smartphone', 'mobilephone'].includes(session.deviceType) && (
             <FaMobileAlt />
           )}
-          {['appliance', 'crawler', 'misc'].includes(session.deviceType) && (
-            <FaAngry />
-          )}
+          {['appliance', 'crawler', 'misc', 'unknown'].includes(
+            session.deviceType
+          ) && <GiToaster />}
           {session.agent}
         </p>
         <p className='text-sm flex items-center gap-2'>
@@ -82,7 +77,7 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
         <p></p>
       </div>
 
-      <div className='flex md:flex-col md:gap-4 text-sm justify-between w-full md:w-auto'>
+      <div className='flex md:flex-col md:gap-10 text-sm justify-between w-full md:w-auto'>
         {!session.current && (
           <>
             <button

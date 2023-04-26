@@ -12,18 +12,14 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
-      colors: {
-        logoPrimary: '#9CF8FE',
-        logoSecondary: '#4C94AC',
-      },
       keyframes: {
         wiggle: {
-          '0%, 100%': { transform: 'rotate(-5deg)' },
-          '50%': { transform: 'rotate(5deg)' },
+          '0%, 100%': { transform: 'rotate(-2deg)' },
+          '50%': { transform: 'rotate(2deg)' },
         },
       },
       animation: {
-        wiggle: 'wiggle 0.5s ease-in-out infinite',
+        wiggle: 'wiggle 0.7s ease-in-out infinite',
       },
     },
   },

@@ -27,11 +27,11 @@ module Users
     end
 
     def update
-      current_user.update(user_params)
-      if resource.persisted?
-        respond_with resource
+      if current_user.update_with_password(user_params)
+        respond_with current_user
       else
-        respond_with resource.errors
+        set_minimum_password_length
+        render json: { message: resource.errors.full_messages.first }, status: :unprocessable_entity
       end
     end
 
@@ -57,7 +57,7 @@ module Users
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+      params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :current_password)
     end
   end
 end

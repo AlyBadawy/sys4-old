@@ -5,7 +5,7 @@ import { FooterSocial } from './FooterSocial';
 
 export const Footer = () => {
   return (
-    <footer className='bg-cyan-950 border-t-2 border-cyan-900 text-gray-400 text-xs'>
+    <footer className='bg-cyan-950 border-t-2 border-cyan-900 text-gray-400 text-xs mt-2'>
       <div className='container flex flex-col-reverse justify-between px-6 py-4 mx-auto space-y-8 space-y-reverse'>
         <div className='flex flex-col-reverse items-center justify-between space-y-6 space-y-reverse md:flex-col'>
           <div className='mx-auto my-2 text-center md:hidden'>
