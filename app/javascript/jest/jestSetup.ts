@@ -20,16 +20,6 @@ export const handlers = [
   rest.get('http://localhost/api/status/user', (_req, res, ctx) => {
     return res(ctx.json({ status: 'user ok' }));
   }),
-  rest.get('http://localhost/api/account/me', (_req, res, ctx) => {
-    return res(
-      ctx.json({
-        id: '48d8325a-6458-4aa7-a1fa-3a53218e4ee9',
-        email: 'user@example.com',
-        created_at: '2023-04-15T20:20:19.067Z',
-        updated_at: '2023-04-21T03:15:34.848Z',
-      })
-    );
-  }),
 ];
 
 export const server = setupServer(...handlers);

@@ -12,12 +12,6 @@ export const SessionsApi = apiWithTag.injectEndpoints({
       }),
       providesTags: ['Session'],
     }),
-    getSessionById: builder.query<Session, { id: string }>({
-      query: ({ id }) => ({
-        url: `/account/allowlisted_jwts/${id}`,
-        method: 'GET',
-      }),
-    }),
     invokeSession: builder.mutation<void, { id: string }>({
       query: ({ id }) => ({
         url: `/account/allowlisted_jwts/${id}`,
@@ -37,7 +31,6 @@ export const SessionsApi = apiWithTag.injectEndpoints({
 
 export const {
   useGetSessionsQuery,
-  useGetSessionByIdQuery,
   useInvokeSessionMutation,
   useDeleteSessionMutation,
 } = SessionsApi;
