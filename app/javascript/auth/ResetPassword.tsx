@@ -30,8 +30,10 @@ export const ResetPassword = () => {
       )
       .then(() => {
         navigate('/sign_in');
+      })
+      .catch(() => {
+        // do nothing
       });
-    setPassword('');
   };
   return (
     <AuthViewsForm title='Reset your Password!' onSubmit={handleSubmit}>

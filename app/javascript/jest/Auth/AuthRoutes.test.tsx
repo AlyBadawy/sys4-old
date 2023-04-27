@@ -5,7 +5,7 @@ import {
   OfflineRouterConfig,
   OnlineRouterConfig,
 } from '../../Core/RoutesConfig';
-import { simpleRenderWithRedux } from '../TestUtils';
+import { s4RenderWithoutRouter } from '../TestUtils';
 
 describe('AuthRoutes', () => {
   describe('When the App online flipper is on', () => {
@@ -15,7 +15,7 @@ describe('AuthRoutes', () => {
           initialEntries: ['/sign_in'],
         });
 
-        simpleRenderWithRedux(
+        s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
           { auth: { isLoggedIn: false } }
@@ -30,7 +30,7 @@ describe('AuthRoutes', () => {
           initialEntries: ['/app'],
         });
 
-        simpleRenderWithRedux(
+        s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
           { auth: { isLoggedIn: false } }
@@ -48,7 +48,7 @@ describe('AuthRoutes', () => {
           initialEntries: ['/sign_in'],
         });
 
-        simpleRenderWithRedux(
+        s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
           { auth: { isLoggedIn: true } }
@@ -63,7 +63,7 @@ describe('AuthRoutes', () => {
           initialEntries: ['/sign_in'],
         });
 
-        simpleRenderWithRedux(
+        s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
           { auth: { isLoggedIn: true } }
@@ -82,7 +82,7 @@ describe('AuthRoutes', () => {
       const router = createMemoryRouter(OfflineRouterConfig, {
         initialEntries: ['/app'],
       });
-      simpleRenderWithRedux(<RouterProvider router={router} />);
+      s4RenderWithoutRouter(<RouterProvider router={router} />);
       expect(
         screen.getByText(
           /is currently offline for maintenance. Our team is working hard to bring the application back online as soon as possible, with all features fully operational/i

@@ -1,12 +1,12 @@
 import React from 'react';
 import { act, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { NavBar } from '../../ui/navigation/NavBar';
 
 describe('NavBar', () => {
   it('Toggles showing the menu', () => {
-    renderWithRedux(<NavBar />);
+    s4render(<NavBar />);
     let signInBtn = screen.queryByText('Sign in');
     expect(signInBtn).not.toBeInTheDocument();
 
@@ -20,7 +20,7 @@ describe('NavBar', () => {
   });
 
   it('shows Dashboard when user logged in', () => {
-    renderWithRedux(<NavBar />, {}, { auth: { isLoggedIn: true } });
+    s4render(<NavBar />, {}, { auth: { isLoggedIn: true } });
 
     const menuBtn = screen.getByTestId('nav-menu-btn');
     act(() => {
@@ -32,7 +32,7 @@ describe('NavBar', () => {
   });
 
   it('shows navigation items', () => {
-    renderWithRedux(<NavBar />);
+    s4render(<NavBar />);
 
     const menuBtn = screen.getByTestId('nav-menu-btn');
     act(() => {

@@ -1,25 +1,26 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { GetStartedButton } from '../../ui/GetStartedButton';
+import fetchMock from 'fetch-mock';
 
 describe('GetStartedButton', () => {
   it('shows Sign in when not logged in', () => {
-    renderWithRedux(<GetStartedButton />);
+    s4render(<GetStartedButton />);
     expect(screen.getByText('Sign in')).toBeInTheDocument();
     expect(screen.queryByText('Sign out')).not.toBeInTheDocument();
     expect(screen.queryByText('Dashboard')).not.toBeInTheDocument();
   });
 
   it('shows Dashboard in when logged in', () => {
-    renderWithRedux(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
+    s4render(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.queryByText('Sign out')).not.toBeInTheDocument();
     expect(screen.queryByText('Sign in')).not.toBeInTheDocument();
   });
 
-  it('Logout when user is logged in and is in app', () => {
+  it('Logout when user is logged in and is in app', async () => {
     const location = {
       ...window.location,
       pathname: 'http://localhost/app',
@@ -28,9 +29,15 @@ describe('GetStartedButton', () => {
       writable: true,
       value: location,
     });
-    renderWithRedux(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
+    const mocker = fetchMock.delete('/api/users/sign_out', {});
+    s4render(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
     expect(screen.getByText('Sign Out')).toBeInTheDocument();
-    expect(screen.queryByText('Dashboard')).not.toBeInTheDocument();
-    expect(screen.queryByText('Sign in')).not.toBeInTheDocument();
+    act(() => {
+      screen.getByText('Sign Out').click();
+    });
+    await waitFor(() => {
+      expect(mocker.called('/api/users/sign_out')).toBe(true);
+    });
+    fetchMock.reset();
   });
 });

@@ -17,15 +17,12 @@ export const PasswordField = (props: Props) => {
 
   return (
     <div className='flex flex-col w-full'>
-      {props.label && (
-        <label htmlFor='firstName' className=''>
-          {props.label}
-        </label>
-      )}
+      {props.label && <label htmlFor={props.id}>{props.label}</label>}
       <div className='relative flex flex-1'>
         <input
           type={showPassword ? 'text' : 'password'}
           id={props.id}
+          data-testid={`${props.id}-test`}
           ref={props.inputRef}
           placeholder={props.placeholder || ''}
           required={props.required}
@@ -44,6 +41,7 @@ export const PasswordField = (props: Props) => {
             e.preventDefault();
             setShowPassword(!showPassword);
           }}
+          data-testid={`${props.id}-toggle`}
         >
           {showPassword ? <FaEyeSlash /> : <FaEye />}
         </button>

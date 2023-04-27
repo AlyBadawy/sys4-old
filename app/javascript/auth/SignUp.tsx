@@ -11,23 +11,26 @@ export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [register, { isLoading, error }] = useRegisterMutation();
+  const [register, { data, isLoading, error }] = useRegisterMutation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await toast.promise(
-      register({ email, password }).unwrap(),
-      {
-        pending: 'Signing up...',
-        success:
-          'Yay! You signed up! Check your email for a confirmation link.',
-        error: 'There was an error signing up.',
-      },
-      {
-        toastId: 'register',
-      }
-    );
-    setPassword('');
+    await toast
+      .promise(
+        register({ email, password }).unwrap(),
+        {
+          pending: 'Signing up...',
+          success:
+            'Yay! You signed up! Check your email for a confirmation link.',
+          error: 'There was an error signing up.',
+        },
+        {
+          toastId: 'register',
+        }
+      )
+      .catch(() => {
+        // do nothing
+      });
   };
 
   const registerAllowed = useFlipper('register');
@@ -57,6 +60,7 @@ export const SignUp = () => {
       <input
         type='email'
         id='email'
+        data-testid='email'
         placeholder='iLove@sys4.dev'
         required
         className='s4-input rounded-full'
@@ -75,7 +79,7 @@ export const SignUp = () => {
       <button
         className={'s4-btn'}
         type='submit'
-        disabled={isLoading || !email || !password}
+        disabled={isLoading || !email || !password || !!data}
       >
         {isLoading ? 'Signing up...' : 'Sign up'}
       </button>
@@ -83,6 +87,9 @@ export const SignUp = () => {
         {error &&
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
           ((error as any).data?.error || 'something went wrong!')}
+      </p>
+      <p className='text-green-500 text-center'>
+        {data && 'Check your email for a confirmation link!'}
       </p>
       <p className='text-sm'>
         Already have an account?{' '}

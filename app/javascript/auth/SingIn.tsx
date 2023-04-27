@@ -16,16 +16,16 @@ export const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [login, { data, isLoading, error }] = useLoginMutation();
 
   useEffect(() => {
     if (confirmed === 'true') {
       toast.success('Your email has been confirmed. Please sign in.', {
-        toastId: 'emailConfirmed',
+        toastId: 'emailConfirmedOk',
       });
     } else if (confirmed) {
       toast.error(confirmed, {
-        toastId: 'emailConfirmed',
+        toastId: 'emailConfirmedError',
       });
     }
   }, [confirmed]);
@@ -54,6 +54,9 @@ export const SignIn = () => {
           })
         );
         navigate('/app');
+      })
+      .catch(() => {
+        // do nothing
       });
   };
   return (
@@ -61,6 +64,7 @@ export const SignIn = () => {
       <input
         type='email'
         id='email'
+        data-testid='email'
         placeholder='iLove@sys4.dev'
         required
         className='s4-input rounded-full'
@@ -85,7 +89,7 @@ export const SignIn = () => {
       <button
         className={'s4-btn'}
         type='submit'
-        disabled={isLoading || !email || !password}
+        disabled={isLoading || !email || !password || !!data}
       >
         {isLoading ? 'Signing in...' : 'Sign in'}
       </button>

@@ -9,7 +9,7 @@ export const Dashboard = () => {
     <>
       <section id='home-hero'>
         <div className='flex flex-col items-center space-y-6 md:flex-row '>
-          {data && <>Status is: {JSON.stringify(data)}!</>}
+          {data && <p>Status is: {data.email}!</p>}
         </div>
       </section>
     </>

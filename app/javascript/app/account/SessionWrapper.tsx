@@ -83,6 +83,7 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
             <button
               className='flex items-center gap-2 link'
               disabled={!session.valid}
+              data-testid='invoke-session-button'
               onClick={() => {
                 void invokeSession({ id: session.id });
               }}
@@ -91,6 +92,7 @@ export const SessionWrapper = ({ session }: SessionWrapperProps) => {
             </button>
             <button
               className='flex items-center gap-2 link'
+              data-testid='delete-session-button'
               onClick={() => {
                 void deleteSession({ id: session.id });
               }}
