@@ -9,17 +9,21 @@ export const ForgotPassword = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await toast.promise(
-      forgotPassword({ email }).unwrap(),
-      {
-        pending: 'Resetting password...',
-        success: 'Check your email for a password reset link.',
-        error: 'There was an error resetting your password.',
-      },
-      {
-        toastId: 'forgot-password',
-      }
-    );
+    await toast
+      .promise(
+        forgotPassword({ email }).unwrap(),
+        {
+          pending: 'Resetting password...',
+          success: 'Check your email for a password reset link.',
+          error: 'There was an error resetting your password.',
+        },
+        {
+          toastId: 'forgot-password',
+        }
+      )
+      .catch(() => {
+        // do nothing
+      });
   };
 
   return (

@@ -53,6 +53,46 @@ describe('Sessions', () => {
       deviceType: 'smartphone',
     };
 
+    it('renders the current session', async () => {
+      fetchMock.mock('/api/account/me', 200);
+      fetchMock.mock('/api/account/allowlisted_jwts', [
+        { ...session, valid: true, current: true },
+      ]);
+      renderWithRedux(<SessionsSettings />);
+      expect(await screen.findByText('Active')).toBeInTheDocument();
+      expect(screen.queryByText(/Sign out/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/Remove/i)).not.toBeInTheDocument();
+      fetchMock.reset();
+    });
+
+    it('Refetch', async () => {
+      fetchMock.mock('/api/account/me', 200);
+      fetchMock.once('/api/account/allowlisted_jwts', [session]);
+      renderWithRedux(<SessionsSettings />);
+      expect(await screen.findAllByText('127.0.0.1')).toHaveLength(1);
+      fetchMock.mock(
+        '/api/account/allowlisted_jwts',
+        [{ ...session, valid: true, current: true }, session],
+        {
+          overwriteRoutes: false,
+        }
+      );
+      act(() => {
+        screen.getByText('Refresh').click();
+      });
+      expect(await screen.findAllByText('127.0.0.1')).toHaveLength(2);
+    });
+
+    it('Shows an error message when fails to fetch', async () => {
+      fetchMock.mock('/api/account/me', 200);
+      fetchMock.mock('/api/account/allowlisted_jwts', 500);
+      renderWithRedux(<SessionsSettings />);
+      expect(
+        await screen.findByText('Failed to fetch sessions!')
+      ).toBeInTheDocument();
+      fetchMock.reset();
+    });
+
     it('renders an expired session', () => {
       renderWithRedux(<SessionWrapper session={session} />);
       expect(

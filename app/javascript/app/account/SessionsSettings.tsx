@@ -6,7 +6,7 @@ import { LoadingSession } from './LoadingSession';
 
 export const SessionsSettings = () => {
   const { data, isLoading, error, refetch, isFetching } = useGetSessionsQuery();
-  if (error) return <div>Error!</div>;
+  if (error) return <div>Failed to fetch sessions!</div>;
 
   return (
     <div className='flex flex-col' data-testid='sessions-settings-page'>

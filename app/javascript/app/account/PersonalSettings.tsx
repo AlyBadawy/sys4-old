@@ -20,23 +20,27 @@ export const PersonalSettings = () => {
   const email = useRef<HTMLInputElement>(null);
   const currentPassword = useRef<HTMLInputElement>(null);
 
-  const handleSaveButtonClick = async () => {
-    await toast.promise(
-      updateUser({
-        firstName: firstName.current?.value,
-        lastName: lastName.current?.value,
-        email: email.current?.value,
-        currentPassword: currentPassword.current?.value,
-      }).unwrap(),
-      {
-        pending: 'Saving...',
-        success: 'Information saved!',
-        error: 'There was an error while saving your information.',
-      },
-      {
-        toastId: 'updateUser',
-      }
-    );
+  const handleUpdateUser = async () => {
+    await toast
+      .promise(
+        updateUser({
+          firstName: firstName.current?.value,
+          lastName: lastName.current?.value,
+          email: email.current?.value,
+          currentPassword: currentPassword.current?.value,
+        }).unwrap(),
+        {
+          pending: 'Saving...',
+          success: 'Information saved!',
+          error: 'There was an error while saving your information.',
+        },
+        {
+          toastId: 'updateUser',
+        }
+      )
+      .catch(() => {
+        // do nothing
+      });
   };
 
   return (
@@ -109,11 +113,14 @@ export const PersonalSettings = () => {
           label='Current password:'
           inputRef={currentPassword}
         />
-        {updateError && (
+        {(updateError || userError) && (
           <p className='text-sm'>
             {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-              (updateError as any).data?.message || 'something went wrong!'
+              (updateError as any)?.data?.message ||
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+                (userError as any)?.data?.message ||
+                'Something went wrong!'
             }
           </p>
         )}
@@ -122,7 +129,7 @@ export const PersonalSettings = () => {
           className='s4-btn md:max-w-md self-end'
           disabled={userIsLoading || !!userError || updateIsLoading}
           onClick={() => {
-            void handleSaveButtonClick();
+            void handleUpdateUser();
           }}
         >
           {updateIsLoading ? 'Saving...' : 'Save'}

@@ -27,21 +27,25 @@ export const PasswordSettings = () => {
   };
 
   const handleSaveButtonClick = async () => {
-    await toast.promise(
-      updateUser({
-        currentPassword: currentPasswordValue,
-        password: newPasswordValue,
-        passwordConfirmation: confirmPasswordValue,
-      }).unwrap(),
-      {
-        pending: 'Saving...',
-        success: 'Information saved!',
-        error: 'There was an error while saving your information.',
-      },
-      {
-        toastId: 'updateUser',
-      }
-    );
+    await toast
+      .promise(
+        updateUser({
+          currentPassword: currentPasswordValue,
+          password: newPasswordValue,
+          passwordConfirmation: confirmPasswordValue,
+        }).unwrap(),
+        {
+          pending: 'Saving...',
+          success: 'Information saved!',
+          error: 'There was an error while saving your information.',
+        },
+        {
+          toastId: 'updateUser',
+        }
+      )
+      .catch(() => {
+        // do nothing
+      });
   };
 
   return (

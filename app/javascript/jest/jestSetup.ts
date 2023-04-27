@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { fetch, Headers, Request, Response } from 'cross-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import fetchMock from 'fetch-mock';
 
 const mockedUsedNavigate = jest.fn();
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -28,7 +29,10 @@ export const server = setupServer(...handlers);
 beforeAll(() => server.listen());
 
 // Reset any runtime request handlers we may add during the tests.
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  fetchMock.reset();
+  server.resetHandlers();
+});
 
 // Disable the API mocking after the tests finished.
 afterAll(() => server.close());

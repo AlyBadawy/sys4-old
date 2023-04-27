@@ -8,7 +8,7 @@ class StatusController < ApplicationController
   end
 
   def user
-    render json: { status: "user ok" }
+    render json: current_user
   end
 
   def me
