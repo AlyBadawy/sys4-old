@@ -1,6 +1,6 @@
 import React from 'react';
 import { SessionsSettings } from '../../app/account/SessionsSettings';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { act, screen, waitFor } from '@testing-library/react';
 import { SessionWrapper } from '../../app/account/SessionWrapper';
 import { Session } from '../../types/Session';
@@ -23,12 +23,12 @@ const session: Session = {
 describe('Sessions', () => {
   describe('SessionsSettings', () => {
     it('renders correctly', async () => {
-      fetchMock.mock('/api/account/allowlisted_jwts', [
+      fetchMock.get('/api/account/allowlisted_jwts', [
         { ...session, valid: true },
       ]);
       fetchMock.get('/api/account/me', {});
 
-      renderWithRedux(<SessionsSettings />);
+      s4render(<SessionsSettings />);
       expect(screen.getByText('Your Sessions:')).toBeInTheDocument();
       expect(
         await screen.findByText('pc | Mac OSX 10.15.7 | Safari 16.4')
@@ -54,11 +54,11 @@ describe('Sessions', () => {
     };
 
     it('renders the current session', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/account/allowlisted_jwts', [
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.get('/api/account/allowlisted_jwts', [
         { ...session, valid: true, current: true },
       ]);
-      renderWithRedux(<SessionsSettings />);
+      s4render(<SessionsSettings />);
       expect(await screen.findByText('Active')).toBeInTheDocument();
       expect(screen.queryByText(/Sign out/i)).not.toBeInTheDocument();
       expect(screen.queryByText(/Remove/i)).not.toBeInTheDocument();
@@ -66,11 +66,11 @@ describe('Sessions', () => {
     });
 
     it('Refetch', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.once('/api/account/allowlisted_jwts', [session]);
-      renderWithRedux(<SessionsSettings />);
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.getOnce('/api/account/allowlisted_jwts', [session]);
+      s4render(<SessionsSettings />);
       expect(await screen.findAllByText('127.0.0.1')).toHaveLength(1);
-      fetchMock.mock(
+      fetchMock.get(
         '/api/account/allowlisted_jwts',
         [{ ...session, valid: true, current: true }, session],
         {
@@ -84,9 +84,9 @@ describe('Sessions', () => {
     });
 
     it('Shows an error message when fails to fetch', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/account/allowlisted_jwts', 500);
-      renderWithRedux(<SessionsSettings />);
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.get('/api/account/allowlisted_jwts', 500);
+      s4render(<SessionsSettings />);
       expect(
         await screen.findByText('Failed to fetch sessions!')
       ).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe('Sessions', () => {
     });
 
     it('renders an expired session', () => {
-      renderWithRedux(<SessionWrapper session={session} />);
+      s4render(<SessionWrapper session={session} />);
       expect(
         screen.getByText('pc | Mac OSX 10.15.7 | Safari 16.4')
       ).toBeInTheDocument();
@@ -104,7 +104,7 @@ describe('Sessions', () => {
       expect(screen.getByText('Sign out')).toBeDisabled();
     });
     it('renders an active session', () => {
-      renderWithRedux(<SessionWrapper session={{ ...session, valid: true }} />);
+      s4render(<SessionWrapper session={{ ...session, valid: true }} />);
       expect(
         screen.getByText('pc | Mac OSX 10.15.7 | Safari 16.4')
       ).toBeInTheDocument();
@@ -121,7 +121,7 @@ describe('Sessions', () => {
         valid: false,
       });
 
-      renderWithRedux(<SessionWrapper session={{ ...session, valid: true }} />);
+      s4render(<SessionWrapper session={{ ...session, valid: true }} />);
       expect(await screen.findByTestId('invoke-session-button')).toBeEnabled();
       act(() => {
         screen.getByTestId('invoke-session-button').click();
@@ -135,7 +135,7 @@ describe('Sessions', () => {
       fetchMock.get('/api/account/me', {});
       const mocker = fetchMock.delete('/api/account/allowlisted_jwts/test', {});
 
-      renderWithRedux(<SessionWrapper session={{ ...session, valid: true }} />);
+      s4render(<SessionWrapper session={{ ...session, valid: true }} />);
       expect(await screen.findByTestId('invoke-session-button')).toBeEnabled();
       act(() => {
         screen.getByTestId('delete-session-button').click();

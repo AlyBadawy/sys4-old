@@ -4,11 +4,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { RootState, rootReducer } from '../store/store';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { appApi } from '../store/api/appApi';
 
 // As a basic setup, import your same slice reducers
 
-export const renderWithRedux = (
+export const s4render = (
   ui: React.ReactElement,
   flippers?: Record<string, boolean>,
   preloadedState?: Partial<RootState>
@@ -27,12 +28,15 @@ export const renderWithRedux = (
   }
   return render(
     <Provider store={store}>
-      <BrowserRouter>{ui}</BrowserRouter>
+      <BrowserRouter>
+        {ui}
+        <ToastContainer />
+      </BrowserRouter>
     </Provider>
   );
 };
 
-export const simpleRenderWithRedux = (
+export const s4RenderWithoutRouter = (
   ui: React.ReactElement,
   flippers?: Record<string, boolean>,
   preloadedState?: Partial<RootState>

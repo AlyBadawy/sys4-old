@@ -1,16 +1,16 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { Dashboard } from '../../app/dashboard/Dashboard';
 import { screen, waitFor } from '@testing-library/react';
 
 describe('Dashboard', () => {
   it('shows the status', async () => {
-    fetchMock.mock('/api/account/me', {});
-    const mocker = fetchMock.mock('/api/status/user', {
+    fetchMock.get('/api/account/me', {});
+    const mocker = fetchMock.get('/api/status/user', {
       email: 'test@test.com',
     });
-    renderWithRedux(<Dashboard />, {}, { auth: { isLoggedIn: true } });
+    s4render(<Dashboard />, {}, { auth: { isLoggedIn: true } });
     await waitFor(() => {
       expect(mocker.called('/api/status/user')).toBe(true);
     });
@@ -20,9 +20,9 @@ describe('Dashboard', () => {
     fetchMock.reset();
   });
   it('handles errors in api', async () => {
-    fetchMock.mock('/api/account/me', {});
-    const mocker = fetchMock.mock('/api/status/user', 500);
-    renderWithRedux(<Dashboard />, {}, { auth: { isLoggedIn: true } });
+    fetchMock.get('/api/account/me', {});
+    const mocker = fetchMock.get('/api/status/user', 500);
+    s4render(<Dashboard />, {}, { auth: { isLoggedIn: true } });
     await waitFor(() => {
       expect(mocker.called('/api/status/user')).toBe(true);
     });

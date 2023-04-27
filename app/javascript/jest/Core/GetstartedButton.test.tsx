@@ -1,20 +1,20 @@
 import React from 'react';
 import { act, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { GetStartedButton } from '../../ui/GetStartedButton';
 import fetchMock from 'fetch-mock';
 
 describe('GetStartedButton', () => {
   it('shows Sign in when not logged in', () => {
-    renderWithRedux(<GetStartedButton />);
+    s4render(<GetStartedButton />);
     expect(screen.getByText('Sign in')).toBeInTheDocument();
     expect(screen.queryByText('Sign out')).not.toBeInTheDocument();
     expect(screen.queryByText('Dashboard')).not.toBeInTheDocument();
   });
 
   it('shows Dashboard in when logged in', () => {
-    renderWithRedux(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
+    s4render(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.queryByText('Sign out')).not.toBeInTheDocument();
     expect(screen.queryByText('Sign in')).not.toBeInTheDocument();
@@ -30,7 +30,7 @@ describe('GetStartedButton', () => {
       value: location,
     });
     const mocker = fetchMock.delete('/api/users/sign_out', {});
-    renderWithRedux(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
+    s4render(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
     expect(screen.getByText('Sign Out')).toBeInTheDocument();
     act(() => {
       screen.getByText('Sign Out').click();

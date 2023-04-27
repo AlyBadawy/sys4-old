@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { act, screen, waitFor } from '@testing-library/react';
 import fetchMock from 'fetch-mock';
 import { User } from '../../types/User';
@@ -16,8 +16,8 @@ const user: User = {
 
 describe('PersonalSettings', () => {
   it('renders correctly', async () => {
-    fetchMock.mock('/api/account/me', user);
-    renderWithRedux(<PersonalSettings />);
+    fetchMock.get('/api/account/me', user);
+    s4render(<PersonalSettings />);
     expect(screen.getByText('Personal Information')).toBeInTheDocument();
     await waitFor(() =>
       expect(screen.getByLabelText('First name:')).toHaveValue('john')
@@ -31,11 +31,11 @@ describe('PersonalSettings', () => {
     fetchMock.reset();
   });
   it('shows a message for unconfirmed email', async () => {
-    fetchMock.mock('/api/account/me', {
+    fetchMock.get('/api/account/me', {
       ...user,
       unconfirmedEmail: 'notYet@test.com',
     });
-    renderWithRedux(<PersonalSettings />);
+    s4render(<PersonalSettings />);
     expect(screen.getByText('Personal Information')).toBeInTheDocument();
     expect(
       await screen.findByText(/Your email is unconfirmed/i)
@@ -44,8 +44,8 @@ describe('PersonalSettings', () => {
   });
 
   it('shows a message for error loading', async () => {
-    fetchMock.mock('/api/account/me', 500);
-    renderWithRedux(<PersonalSettings />);
+    fetchMock.get('/api/account/me', 500);
+    s4render(<PersonalSettings />);
     expect(screen.getByText('Personal Information')).toBeInTheDocument();
     expect(
       await screen.findByText(/Something went wrong!/i)
@@ -54,9 +54,9 @@ describe('PersonalSettings', () => {
   });
 
   it('updates user info', async () => {
-    const meMocker = fetchMock.mock('/api/account/me', user);
-    const mocker = fetchMock.mock('/api/users/', user);
-    renderWithRedux(<PersonalSettings />);
+    const meMocker = fetchMock.get('/api/account/me', user);
+    const mocker = fetchMock.put('/api/users/', user);
+    s4render(<PersonalSettings />);
     expect(screen.getByText('Personal Information')).toBeInTheDocument();
     await userEvent.type(screen.getByLabelText('Current password:'), 'old');
     act(() => screen.getByText('Save').click());
@@ -68,9 +68,9 @@ describe('PersonalSettings', () => {
     fetchMock.reset();
   });
   it('shows a message when password update failed', async () => {
-    fetchMock.mock('/api/account/me', user);
-    const mocker = fetchMock.mock('/api/users/', 500);
-    renderWithRedux(<PersonalSettings />);
+    fetchMock.get('/api/account/me', user);
+    const mocker = fetchMock.put('/api/users/', 500);
+    s4render(<PersonalSettings />);
     await userEvent.type(screen.getByLabelText('Current password:'), 'old');
     act(() => screen.getByRole('button', { name: 'Save' }).click());
     await waitFor(() => expect(mocker.called('/api/users/')).toBe(true));

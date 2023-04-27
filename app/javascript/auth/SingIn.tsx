@@ -21,11 +21,11 @@ export const SignIn = () => {
   useEffect(() => {
     if (confirmed === 'true') {
       toast.success('Your email has been confirmed. Please sign in.', {
-        toastId: 'emailConfirmed',
+        toastId: 'emailConfirmedOk',
       });
     } else if (confirmed) {
       toast.error(confirmed, {
-        toastId: 'emailConfirmed',
+        toastId: 'emailConfirmedError',
       });
     }
   }, [confirmed]);

@@ -31,6 +31,7 @@ export const ForgotPassword = () => {
       <input
         type='email'
         id='email'
+        data-testid='email'
         placeholder='iLove@sys4.dev'
         required
         className='s4-input rounded-full'

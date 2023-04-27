@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { act, screen, waitFor } from '@testing-library/react';
 import fetchMock from 'fetch-mock';
 import { User } from '../../types/User';
@@ -16,15 +16,15 @@ const user: User = {
 
 describe('PasswordSettings', () => {
   it('renders correctly', () => {
-    fetchMock.mock('/api/account/me', user);
-    renderWithRedux(<PasswordSettings />);
+    fetchMock.get('/api/account/me', user);
+    s4render(<PasswordSettings />);
     expect(screen.getByText('Change Password')).toBeInTheDocument();
     fetchMock.reset();
   });
 
   it('Changes the input values', async () => {
-    fetchMock.mock('/api/account/me', user);
-    renderWithRedux(<PasswordSettings />);
+    fetchMock.get('/api/account/me', user);
+    s4render(<PasswordSettings />);
     await userEvent.type(screen.getByLabelText('Current password:'), 'old');
     await userEvent.type(screen.getByLabelText('New password:'), 'new');
     await userEvent.type(screen.getByLabelText('Confirm password:'), 'new');
@@ -34,9 +34,9 @@ describe('PasswordSettings', () => {
     fetchMock.reset();
   });
   it('makes an API call to update password', async () => {
-    fetchMock.mock('/api/account/me', user);
-    const mocker = fetchMock.mock('/api/users/', user);
-    renderWithRedux(<PasswordSettings />);
+    fetchMock.get('/api/account/me', user);
+    const mocker = fetchMock.put('/api/users/', user);
+    s4render(<PasswordSettings />);
     await userEvent.type(screen.getByLabelText('Current password:'), 'old');
     await userEvent.type(screen.getByLabelText('New password:'), 'new');
     await userEvent.type(screen.getByLabelText('Confirm password:'), 'new');
@@ -45,12 +45,12 @@ describe('PasswordSettings', () => {
     fetchMock.reset();
   });
   it('shows a message when password update failed', async () => {
-    fetchMock.mock('/api/account/me', user);
-    const mocker = fetchMock.mock('/api/users/', {
+    fetchMock.get('/api/account/me', user);
+    const mocker = fetchMock.put('/api/users/', {
       status: 500,
       body: { message: 'Incorrect current password' },
     });
-    renderWithRedux(<PasswordSettings />);
+    s4render(<PasswordSettings />);
     await userEvent.type(screen.getByLabelText('Current password:'), 'old');
     await userEvent.type(screen.getByLabelText('New password:'), 'new');
     await userEvent.type(screen.getByLabelText('Confirm password:'), 'new');
@@ -62,9 +62,9 @@ describe('PasswordSettings', () => {
     fetchMock.reset();
   });
   it('shows a default message when password update failed', async () => {
-    fetchMock.mock('/api/account/me', user);
-    const mocker = fetchMock.mock('/api/users/', 500);
-    renderWithRedux(<PasswordSettings />);
+    fetchMock.get('/api/account/me', user);
+    const mocker = fetchMock.put('/api/users/', 500);
+    s4render(<PasswordSettings />);
     await userEvent.type(screen.getByLabelText('Current password:'), 'old');
     await userEvent.type(screen.getByLabelText('New password:'), 'new');
     await userEvent.type(screen.getByLabelText('Confirm password:'), 'new');

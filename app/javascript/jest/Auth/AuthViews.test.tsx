@@ -1,10 +1,10 @@
 import React from 'react';
-import { screen, act } from '@testing-library/react';
+import { screen, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import fetchMock from 'fetch-mock';
 import userEvent from '@testing-library/user-event';
 import { SignUp } from '../../auth/SignUp';
-import { renderWithRedux } from '../TestUtils';
+import { s4render } from '../TestUtils';
 import { SignIn } from '../../auth/SingIn';
 import { ForgotPassword } from '../../auth/ForgotPassword';
 import { ResetPassword } from '../../auth/ResetPassword';
@@ -12,7 +12,7 @@ import { ResetPassword } from '../../auth/ResetPassword';
 describe('Auth Views', () => {
   describe('Sign Up', () => {
     it('Shows registration disabled by default', () => {
-      renderWithRedux(<SignUp />);
+      s4render(<SignUp />);
       const title = screen.getByText('Registration is currently disabled!');
       expect(title).toBeInTheDocument();
       const paragraph = screen.getByText(
@@ -22,7 +22,7 @@ describe('Auth Views', () => {
     });
 
     it('Shows registration page when flipper enabled', () => {
-      renderWithRedux(<SignUp />, { register: true });
+      s4render(<SignUp />, { register: true });
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const title = screen.getByText('Create a new account!');
       expect(title).toBeInTheDocument();
@@ -30,12 +30,12 @@ describe('Auth Views', () => {
       expect(button).toBeInTheDocument();
     });
     it('signs up a user', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/users/', {
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.post('/api/users/', {
         id: 'test',
         email: 'success@example.com',
       });
-      renderWithRedux(<SignUp />, { register: true });
+      s4render(<SignUp />, { register: true });
       await screen.findByText('Create a new account!');
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');
       await userEvent.type(screen.getByTestId('password-test'), 'password');
@@ -47,9 +47,9 @@ describe('Auth Views', () => {
       fetchMock.reset();
     });
     it('shows a default error on api failure', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/users/', 500);
-      renderWithRedux(<SignUp />, { register: true });
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.post('/api/users/', 500);
+      s4render(<SignUp />, { register: true });
       await screen.findByText('Create a new account!');
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');
       await userEvent.type(screen.getByTestId('password-test'), 'password');
@@ -60,12 +60,12 @@ describe('Auth Views', () => {
       fetchMock.reset();
     });
     it('shows an error message on api failure', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/users/', {
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.post('/api/users/', {
         status: 500,
         body: { error: 'Email is invalid' },
       });
-      renderWithRedux(<SignUp />, { register: true });
+      s4render(<SignUp />, { register: true });
       await screen.findByText('Create a new account!');
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');
       await userEvent.type(screen.getByTestId('password-test'), 'password');
@@ -74,10 +74,9 @@ describe('Auth Views', () => {
       fetchMock.reset();
     });
   });
-
   describe('Sign In', () => {
     it('Shows Sing in page', () => {
-      renderWithRedux(<SignIn />);
+      s4render(<SignIn />);
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const title = screen.getByText('Sign in to your account!');
       expect(title).toBeInTheDocument();
@@ -85,12 +84,12 @@ describe('Auth Views', () => {
       expect(button).toBeInTheDocument();
     });
     it('signs in a user', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/users/sign_in', {
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.post('/api/users/sign_in', {
         id: 'test',
         email: 'success@example.com',
       });
-      renderWithRedux(<SignIn />, { register: true });
+      s4render(<SignIn />);
       await screen.findByText('Sign in to your account!');
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');
       await userEvent.type(screen.getByTestId('password-test'), 'password');
@@ -99,9 +98,9 @@ describe('Auth Views', () => {
       fetchMock.reset();
     });
     it('shows a default error on api failure', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/users/sign_in', 500);
-      renderWithRedux(<SignIn />, { register: true });
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.post('/api/users/sign_in', 500);
+      s4render(<SignIn />);
       await screen.findByText('Sign in to your account!');
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');
       await userEvent.type(screen.getByTestId('password-test'), 'password');
@@ -112,12 +111,12 @@ describe('Auth Views', () => {
       fetchMock.reset();
     });
     it('shows an error message on sign in api failure', async () => {
-      fetchMock.mock('/api/account/me', 200);
-      fetchMock.mock('/api/users/sign_in', {
+      fetchMock.get('/api/account/me', 200);
+      fetchMock.post('/api/users/sign_in', {
         status: 500,
         body: { error: 'Email is invalid' },
       });
-      renderWithRedux(<SignIn />);
+      s4render(<SignIn />);
       await screen.findByText('Sign in to your account!');
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');
       await userEvent.type(screen.getByTestId('password-test'), 'password');
@@ -128,22 +127,83 @@ describe('Auth Views', () => {
   });
   describe('Forgot Password', () => {
     it('Shows Forgot password page', () => {
-      renderWithRedux(<ForgotPassword />);
+      s4render(<ForgotPassword />);
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const title = screen.getByText('Forgot your Password?');
       expect(title).toBeInTheDocument();
       const button = screen.getByRole('button', { name: /Forgot Password/i });
       expect(button).toBeInTheDocument();
     });
+    it('calls an API to forgot password', async () => {
+      fetchMock.get('/api/account/me', 200);
+      const mocker = fetchMock.post('/api/users/password', 200);
+      s4render(<ForgotPassword />);
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      await userEvent.type(screen.getByTestId('email'), 'test@test.com');
+      act(() => screen.getByText(/Forgot Password/i).click());
+      await waitFor(() =>
+        expect(mocker.called('/api/users/password')).toBe(true)
+      );
+      expect(
+        await screen.findByText(/Check your email for a password reset link./i)
+      ).toBeInTheDocument();
+      fetchMock.reset();
+    });
+    it('Shows an error message on API failure', async () => {
+      fetchMock.get('/api/account/me', 200);
+      const mocker = fetchMock.post('/api/users/password', 500);
+      s4render(<ForgotPassword />);
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      await userEvent.type(screen.getByTestId('email'), 'test@test.com');
+      act(() => screen.getByText(/Forgot Password/i).click());
+      await waitFor(() =>
+        expect(mocker.called('/api/users/password')).toBe(true)
+      );
+      expect(
+        await screen.findByText(/There was an error resetting your password./i)
+      ).toBeInTheDocument();
+      fetchMock.reset();
+    });
   });
   describe('Reset Password', () => {
     it('Shows reset password page', () => {
-      renderWithRedux(<ResetPassword />);
+      s4render(<ResetPassword />);
       // eslint-disable-next-line testing-library/prefer-screen-queries
       const title = screen.getByText('Reset your Password!');
       expect(title).toBeInTheDocument();
       const button = screen.getByRole('button', { name: /Reset Password/i });
       expect(button).toBeInTheDocument();
+    });
+
+    it('calls an API to reset password', async () => {
+      fetchMock.get('/api/account/me', 200);
+      const mocker = fetchMock.put('/api/users/password', 200);
+      s4render(<ResetPassword />);
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      await userEvent.type(screen.getByTestId('password-test'), 'somePassword');
+      act(() => screen.getByText(/Reset Password/i).click());
+      await waitFor(() =>
+        expect(mocker.called('/api/users/password')).toBe(true)
+      );
+      expect(
+        await screen.findByText(/Password Changed! Please sign in./i)
+      ).toBeInTheDocument();
+      fetchMock.reset();
+    });
+    it('Shows an error message on API failure', async () => {
+      fetchMock.get('/api/account/me', 200);
+      const mocker = fetchMock.put('/api/users/password', 500);
+      s4render(<ResetPassword />);
+      // eslint-disable-next-line testing-library/prefer-screen-queries
+      await userEvent.type(screen.getByTestId('password-test'), '123');
+      act(() => screen.getByText(/Reset Password/i).click());
+      await waitFor(() =>
+        expect(mocker.called('/api/users/password')).toBe(true)
+      );
+      expect(
+        await screen.findByText(/There was an error resetting your password./i)
+      ).toBeInTheDocument();
+      fetchMock.reset();
     });
   });
 });
