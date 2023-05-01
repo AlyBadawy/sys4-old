@@ -12,6 +12,8 @@ class User < Account
 
   self.skip_session_storage = [:http_auth, :params_auth]
 
+  has_many :requests, dependent: :destroy, inverse_of: :user
+
   def jwt_payload
     { "Provider" => "SYS4" }
   end

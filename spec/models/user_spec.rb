@@ -30,6 +30,10 @@ RSpec.describe User do
     it "has and belongs to many associations" do
       expect(user).to have_and_belong_to_many(:groups)
     end
+
+    it "has many requests" do
+      expect(user).to have_many(:requests)
+    end
   end
 
   describe "secure password" do

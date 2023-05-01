@@ -5,10 +5,10 @@ class Group < ApplicationRecord
 
   # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :accounts
-
   # rubocop:enable Rails/HasAndBelongsToMany
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :max_requests, presence: true
 
   def users
     accounts.where(type: "User")
