@@ -27,16 +27,15 @@ export const PasswordField = (props: Props) => {
           placeholder={props.placeholder || ''}
           required={props.required}
           disabled={props.disabled}
-          className={`flex-1 s4-input ${
-            props.fullRound ? 'rounded-l-full' : 'rounded-l-md'
+          className={`flex-1 s4-input pr-12 ${
+            props.fullRound ? 'rounded-full' : 'rounded-md'
           }`}
           onChange={props.onChange}
         />
         <button
-          className={`px-2 ${
-            props.fullRound ? 'rounded-r-full' : 'rounded-r-md'
-          } bg-cyan-950 text-lg`}
+          className='pl-2 pr-4 text-lg absolute inset-y-0 right-0 text-stone-300'
           disabled={props.disabled}
+          type='button'
           onClick={(e) => {
             e.preventDefault();
             setShowPassword(!showPassword);
