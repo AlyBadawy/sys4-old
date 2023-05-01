@@ -25,4 +25,18 @@ class User < Account
   def to_json(*args)
     { id: id, email: email, firstName: first_name, lastName: last_name, createdAt: created_at, updatedAt: updated_at, unconfirmedEmail: unconfirmed_email }.to_json(*args)
   end
+
+  def max_requests
+    return 0 unless confirmed_at
+
+    groups.map(&:max_requests).max || 0
+  end
+
+  def used_requests(time_frame: 15.minutes)
+    requests.where("created_at > ?", Time.current - time_frame).count
+  end
+
+  def can_make_request?(time_frame: 15.minutes)
+    used_requests(time_frame: time_frame) < max_requests
+  end
 end

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :group do
-    name { "MyString" }
+    name { Faker::Lorem.word }
     max_requests { 10 }
   end
 end
