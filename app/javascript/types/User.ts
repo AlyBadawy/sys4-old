@@ -9,10 +9,15 @@ export type User = {
   id?: string;
   email?: string;
   unconfirmedEmail?: string;
-  JwtToken?: string;
   firstName?: string;
   lastName?: string;
-  createdAt?: string;
+  maxRequests?: number;
+  usedRequests?: number;
+  canMakeRequests?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  JwtToken?: string;
+  isLoggedIn?: boolean;
   currentPassword?: string;
   password?: string;
   passwordConfirmation?: string;
