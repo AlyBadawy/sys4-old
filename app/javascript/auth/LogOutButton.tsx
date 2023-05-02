@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch } from '../store/store';
-import { logOut } from '../store/slices/AuthSlice';
+import { logOut } from '../store/slices/UserSlice';
 import { useLogoutMutation } from '../store/api/UserApi';
 import { toast } from 'react-toastify';
 

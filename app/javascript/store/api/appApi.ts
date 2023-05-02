@@ -4,14 +4,14 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
-import { logOut, setCredentials } from '../slices/AuthSlice';
+import { logOut, setUser } from '../slices/UserSlice';
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '/api',
   prepareHeaders: (headers, { getState }) => {
     headers.set('JWT-AUD', 'test');
-    const token = (getState() as RootState).auth.jwtToken;
+    const token = (getState() as RootState).user.jwtToken;
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
@@ -32,12 +32,12 @@ const baseQueryWithAuth = async (
   }
 
   const state = api.getState() as RootState;
-  const userId = state.auth.userId;
-  const email = state.auth.email;
-  const jwtToken = state.auth.jwtToken;
+  const id = state.user.id;
+  const email = state.user.email;
+  const jwtToken = state.user.jwtToken;
 
   if (
-    (!userId || !email) &&
+    (!id || !email) &&
     (args as FetchArgs).url !== '/users/sign_in' &&
     (args as FetchArgs).url !== '/users/sign_out'
   ) {
@@ -47,7 +47,7 @@ const baseQueryWithAuth = async (
         id: string;
         email: string;
       };
-      api.dispatch(setCredentials({ userId: id, email, jwtToken }));
+      api.dispatch(setUser({ id, email, jwtToken }));
     } else {
       api.dispatch(logOut());
     }

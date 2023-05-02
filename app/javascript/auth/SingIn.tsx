@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useLoginMutation } from '../store/api/UserApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/store';
-import { setCredentials } from '../store/slices/AuthSlice';
+import { setUser } from '../store/slices/UserSlice';
 import { AuthViewsForm } from './AuthViewsForm';
 import { PasswordField } from '../ui/PasswordField';
 
@@ -46,8 +46,8 @@ export const SignIn = () => {
       )
       .then((res) => {
         dispatch(
-          setCredentials({
-            userId: res.id,
+          setUser({
+            id: res.id,
             jwtToken: res.jwtToken,
             email: res.email,
             isLoggedIn: true,

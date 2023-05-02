@@ -7,14 +7,14 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { StatusApi } from './api/statusApi';
 import { appApi } from './api/appApi';
-import { authReducer } from './slices/AuthSlice';
 import { layoutReducer } from './slices/LayoutSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { userReducer } from './slices/UserSlice';
 
 export const rootReducer = combineReducers({
   [appApi.reducerPath]: appApi.reducer,
   status: StatusApi.reducer,
-  auth: authReducer,
+  user: userReducer,
   layout: layoutReducer,
 });
 
