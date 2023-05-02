@@ -4,7 +4,7 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
-import { logOut, setUser } from '../slices/UserSlice';
+import { logOut } from '../slices/UserSlice';
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
@@ -31,27 +31,6 @@ const baseQueryWithAuth = async (
     return result;
   }
 
-  const state = api.getState() as RootState;
-  const id = state.user.id;
-  const email = state.user.email;
-  const jwtToken = state.user.jwtToken;
-
-  if (
-    (!id || !email) &&
-    (args as FetchArgs).url !== '/users/sign_in' &&
-    (args as FetchArgs).url !== '/users/sign_out'
-  ) {
-    const result = await baseQuery('/account/me', api, extraOptions);
-    if (result?.data) {
-      const { id, email } = result.data as unknown as {
-        id: string;
-        email: string;
-      };
-      api.dispatch(setUser({ id, email, jwtToken }));
-    } else {
-      api.dispatch(logOut());
-    }
-  }
   return result;
 };
 

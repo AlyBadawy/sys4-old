@@ -13,13 +13,38 @@ export const UserSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
-      state = { ...state, ...action.payload, isLoggedIn: true };
-      localStorage.setItem('jwtToken', action.payload.jwtToken || '');
+      state.id = action.payload.id || state.id;
+      state.email = action.payload.email || state.email;
+      state.unconfirmedEmail = action.payload.unconfirmedEmail || state.unconfirmedEmail;
+      state.firstName = action.payload.firstName || state.firstName;
+      state.lastName = action.payload.lastName || state.lastName;
+      state.maxRequests = action.payload.maxRequests || state.maxRequests;
+      state.usedRequests = action.payload.usedRequests || state.usedRequests;
+      state.canMakeRequests = action.payload.canMakeRequests || state.canMakeRequests;
+      state.createdAt = action.payload.createdAt || state.createdAt;
+      state.updatedAt = action.payload.updatedAt || state.updatedAt;
+      state.jwtToken = action.payload.jwtToken || state.jwtToken;
+      state.isLoggedIn = true || state.isLoggedIn;
+      if (action.payload.jwtToken) {
+        localStorage.setItem('jwtToken', action.payload.jwtToken);
+      } else {
+        localStorage.removeItem('jwtToken');
+      }
     },
 
     logOut: (state, _action: PayloadAction<void>) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      state = {...initialState, isLoggedIn: false, jwtToken: undefined};
+      state.id = undefined;
+      state.email = undefined;
+      state.unconfirmedEmail = undefined;
+      state.firstName = undefined;
+      state.lastName = undefined;
+      state.maxRequests = undefined;
+      state.usedRequests = undefined;
+      state.canMakeRequests = undefined;
+      state.createdAt = undefined;
+      state.updatedAt = undefined;
+      state.jwtToken = undefined;
+      state.isLoggedIn = false;
       localStorage.removeItem('jwtToken');
     },
   },

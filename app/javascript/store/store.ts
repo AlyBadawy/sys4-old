@@ -10,6 +10,7 @@ import { appApi } from './api/appApi';
 import { layoutReducer } from './slices/LayoutSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { userReducer } from './slices/UserSlice';
+import { middlewares } from './middlewares';
 
 export const rootReducer = combineReducers({
   [appApi.reducerPath]: appApi.reducer,
@@ -26,7 +27,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
       getDefaultMiddleware({
         immutableCheck: false,
         serializableCheck: false,
-      }).concat(appApi.middleware),
+      }).concat(middlewares),
   });
 
 const store = setupStore();

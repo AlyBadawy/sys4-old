@@ -2,7 +2,7 @@
 import { User, UserLoginData } from '../../types/User';
 import { appApi } from './appApi';
 
-const apiWithTag = appApi.enhanceEndpoints({ addTagTypes: ['User'] });
+const apiWithTag = appApi.enhanceEndpoints({ addTagTypes: ['User', 'Session'] });
 
 export const UserApi = apiWithTag.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,15 +12,16 @@ export const UserApi = apiWithTag.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['User', 'Session'],
     }),
+
     login: builder.mutation<User, UserLoginData>({
       query: (credential: UserLoginData) => ({
         url: '/users/sign_in',
         method: 'POST',
         body: { user: { ...credential } },
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['User', 'Session'],
       transformResponse: (response: User, meta) => {
         return {
           ...response,
@@ -29,12 +30,15 @@ export const UserApi = apiWithTag.injectEndpoints({
         };
       },
     }),
+
     logout: builder.mutation<void, void>({
       query: () => ({
         url: '/users/sign_out',
         method: 'DELETE',
       }),
+      invalidatesTags: ['User', 'Session'],
     }),
+
     forgotPassword: builder.mutation<void, { email: string }>({
       query: (email) => ({
         url: '/users/password',
@@ -42,6 +46,7 @@ export const UserApi = apiWithTag.injectEndpoints({
         body: { user: email },
       }),
     }),
+    
     resetPassword: builder.mutation<void, { password: string; token: string }>({
       query: ({ password, token }) => ({
         url: '/users/password',
@@ -50,6 +55,7 @@ export const UserApi = apiWithTag.injectEndpoints({
         body: { user: { password: password, reset_password_token: token } },
       }),
     }),
+
     updateUser: builder.mutation<User, User>({
       query: (user) => ({
         url: '/users/',
@@ -67,6 +73,7 @@ export const UserApi = apiWithTag.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+
     getUser: builder.query<User, void>({
       query: () => '/account/me',
       keepUnusedDataFor: 3600,

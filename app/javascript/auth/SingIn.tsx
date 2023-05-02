@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import { useLoginMutation } from '../store/api/UserApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/store';
-import { setUser } from '../store/slices/UserSlice';
 import { AuthViewsForm } from './AuthViewsForm';
 import { PasswordField } from '../ui/PasswordField';
+import { setUser } from '../store/slices/UserSlice';
 
 export const SignIn = () => {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -46,12 +46,7 @@ export const SignIn = () => {
       )
       .then((res) => {
         dispatch(
-          setUser({
-            id: res.id,
-            jwtToken: res.jwtToken,
-            email: res.email,
-            isLoggedIn: true,
-          })
+          setUser({jwtToken: res.jwtToken})
         );
         navigate('/app');
       })
