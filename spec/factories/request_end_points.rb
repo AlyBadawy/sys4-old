@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :request_end_point do
-    name { "MyString" }
+    name { Faker::Lorem.word }
     description { "MyString" }
     max_requests { 10 }
   end
