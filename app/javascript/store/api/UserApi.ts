@@ -24,7 +24,7 @@ export const UserApi = apiWithTag.injectEndpoints({
       transformResponse: (response: User, meta) => {
         return {
           ...response,
-          JwtToken:
+          jwtToken:
             meta?.response?.headers.get('Authorization')?.split(' ')[1] || '',
         };
       },

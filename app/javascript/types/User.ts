@@ -16,7 +16,7 @@ export type User = {
   canMakeRequests?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
-  JwtToken?: string;
+  jwtToken?: string;
   isLoggedIn?: boolean;
   currentPassword?: string;
   password?: string;

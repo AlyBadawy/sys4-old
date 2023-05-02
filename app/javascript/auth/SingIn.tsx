@@ -48,7 +48,7 @@ export const SignIn = () => {
         dispatch(
           setCredentials({
             userId: res.id,
-            jwtToken: res.JwtToken,
+            jwtToken: res.jwtToken,
             email: res.email,
             isLoggedIn: true,
           })
