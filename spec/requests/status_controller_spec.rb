@@ -55,12 +55,24 @@ RSpec.describe StatusController do
                   "JWT-AUD" => "test" }
       auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
       get "/api/account/me", headers: auth_headers
+      user.reload
       expect(response).to have_http_status(:success)
+      expect(response.body).to eq(user.to_json)
     end
 
     it "returns http unauthorized when user is not signed in" do
       get "/api/account/me"
       expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "includes request information" do
+      user = create(:user)
+      user.confirm
+      sign_in user
+      get "/api/account/me"
+      expect(JSON.parse(response.body)).to have_key("maxRequests")
+      expect(JSON.parse(response.body)).to have_key("usedRequests")
+      expect(JSON.parse(response.body)).to have_key("canMakeRequests")
     end
   end
 end

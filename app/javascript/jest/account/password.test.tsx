@@ -11,7 +11,7 @@ const user: User = {
   email: 'test@test.com',
   firstName: 'john',
   lastName: 'smith',
-  createdAt: '2023-04-26T11:39:08.148Z',
+  createdAt: new Date('2023-04-26T11:39:08.148Z'),
 };
 
 describe('PasswordSettings', () => {
