@@ -17,6 +17,7 @@ ActiveAdmin.register User do
     selectable_column
     column :id
     column :email
+    column :max_requests
     column :current_sign_in_at
     column :current_sign_in_ip do |user|
       if user.current_sign_in_ip

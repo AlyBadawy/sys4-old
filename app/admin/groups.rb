@@ -4,7 +4,7 @@
 ActiveAdmin.register Group do
   menu priority: 3, parent: "Account"
 
-  permit_params :name, :description
+  permit_params :name, :description, :max_requests
 
   action_item :new, only: :show do
     link_to("New Group", new_resource_path)
@@ -15,6 +15,7 @@ ActiveAdmin.register Group do
     column :id
     column :name
     column :description
+    column :max_requests
     column :users do |group|
       group.users.count
     end
@@ -30,6 +31,7 @@ ActiveAdmin.register Group do
     f.inputs "Group Details" do
       f.input :name
       f.input :description
+      f.input :requests
     end
     f.actions
   end
@@ -41,6 +43,7 @@ ActiveAdmin.register Group do
           row :id
           row :name
           row :description
+          row :requests
           row :users do |group|
             group.users.count
           end

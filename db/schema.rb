@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_24_180603) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_200552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -88,7 +88,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_180603) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.integer "max_requests", default: 0
     t.index ["name"], name: "index_groups_on_name", unique: true
+  end
+
+  create_table "request_end_points", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.integer "max_requests", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_request_end_points_on_name", unique: true
+  end
+
+  create_table "requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "request_end_point_id", null: false
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_end_point_id"], name: "index_requests_on_request_end_point_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "versions", force: :cascade do |t|
@@ -105,4 +125,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_180603) do
   add_foreign_key "accounts_groups", "accounts"
   add_foreign_key "accounts_groups", "groups"
   add_foreign_key "allowlisted_jwts", "accounts", column: "user_id", on_delete: :cascade
+  add_foreign_key "requests", "accounts", column: "user_id"
+  add_foreign_key "requests", "request_end_points"
 end

@@ -12,6 +12,7 @@ RSpec.describe Group do
     subject(:group) { build(:group) }
 
     it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:max_requests) }
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
   end
 
@@ -29,9 +30,13 @@ RSpec.describe Group do
 
       user1 = create(:user)
       user2 = create(:user)
+      admin_user1 = create(:admin_user)
+      admin_user2 = create(:admin_user)
 
       user1.groups << group
       user2.groups << group
+      admin_user1.groups << group
+      admin_user2.groups << group
       expect(group.users).to eq([user1, user2])
     end
   end
@@ -40,9 +45,13 @@ RSpec.describe Group do
     it "returns all admin_users in the group" do
       group = create(:group)
 
+      user1 = create(:user)
+      user2 = create(:user)
       admin_user1 = create(:admin_user)
       admin_user2 = create(:admin_user)
 
+      user1.groups << group
+      user2.groups << group
       admin_user1.groups << group
       admin_user2.groups << group
       expect(group.admin_users).to eq([admin_user1, admin_user2])
