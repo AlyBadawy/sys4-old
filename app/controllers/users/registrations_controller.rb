@@ -27,6 +27,7 @@ module Users
     end
 
     def update
+      current_user.unconfirmed_email = nil if user_params[:email] == current_user.email
       if current_user.update_with_password(user_params)
         respond_with current_user
       else
