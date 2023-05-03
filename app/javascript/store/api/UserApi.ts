@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { User, UserLoginData } from '../../types/User';
+import { User } from '../../types/User';
 import { appApi } from './appApi';
 
-const apiWithTag = appApi.enhanceEndpoints({ addTagTypes: ['User', 'Session'] });
+type UserLoginData = Pick<User, 'email' | 'password'> & {resetPasswordToken?: string};
+
+const apiWithTag = appApi.enhanceEndpoints({ addTagTypes: ['User'] });
 
 export const UserApi = apiWithTag.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,7 +14,7 @@ export const UserApi = apiWithTag.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
-      invalidatesTags: ['User', 'Session'],
+      invalidatesTags: ['User'],
     }),
 
     login: builder.mutation<User, UserLoginData>({
@@ -21,13 +23,21 @@ export const UserApi = apiWithTag.injectEndpoints({
         method: 'POST',
         body: { user: { ...credential } },
       }),
-      invalidatesTags: ['User', 'Session'],
+      invalidatesTags: ['User'],
       transformResponse: (response: User, meta) => {
         return {
           ...response,
           jwtToken:
             meta?.response?.headers.get('Authorization')?.split(' ')[1] || '',
         };
+      },
+      async onQueryStarted(_user, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
+        dispatch(
+          UserApi.util.updateQueryData('getUser', undefined, (draft) => {
+            Object.assign(draft, data);
+          })
+        );
       },
     }),
 
@@ -36,23 +46,23 @@ export const UserApi = apiWithTag.injectEndpoints({
         url: '/users/sign_out',
         method: 'DELETE',
       }),
-      invalidatesTags: ['User', 'Session'],
+      invalidatesTags: ['User'],
     }),
 
-    forgotPassword: builder.mutation<void, { email: string }>({
-      query: (email) => ({
+    forgotPassword: builder.mutation<void, User>({
+      query: ({email}) => ({
         url: '/users/password',
         method: 'POST',
-        body: { user: email },
+        body: { user: { email } },
       }),
     }),
     
-    resetPassword: builder.mutation<void, { password: string; token: string }>({
-      query: ({ password, token }) => ({
+    resetPassword: builder.mutation<void, UserLoginData>({
+      query: ({ password, resetPasswordToken }) => ({
         url: '/users/password',
         method: 'PUT',
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        body: { user: { password: password, reset_password_token: token } },
+        body: { user: { password, reset_password_token: resetPasswordToken } },
       }),
     }),
 
@@ -71,7 +81,14 @@ export const UserApi = apiWithTag.injectEndpoints({
           },
         },
       }),
-      invalidatesTags: ['User'],
+      async onQueryStarted(_user, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
+        dispatch(
+          UserApi.util.updateQueryData('getUser', undefined, (draft) => {
+            Object.assign(draft, data);
+          })
+        );
+      },
     }),
 
     getUser: builder.query<User, void>({
