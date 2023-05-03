@@ -6,6 +6,7 @@ import {
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { logOut } from '../slices/UserSlice';
 import { RootState } from '../store';
+import { toast } from 'react-toastify';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '/api',
@@ -29,6 +30,16 @@ const baseQueryWithAuth = async (
   if (result?.error?.status === 401) {
     api.dispatch(logOut());
     return result;
+  }
+  if (result.error?.status === 500 || result.error?.status === 'PARSING_ERROR') {
+    toast.error('There was an error with the server; please try again later', {
+      toastId: 'serverError',
+    });
+  }
+  if (result.error?.status === 'TIMEOUT_ERROR' || result.error?.status === 'FETCH_ERROR' ) {
+    toast.error('You seem to be disconnected from the Internet; please try again later', {
+      toastId: 'fetchError',
+    });
   }
 
   return result;

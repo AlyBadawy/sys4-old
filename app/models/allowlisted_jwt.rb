@@ -9,6 +9,8 @@ class AllowlistedJwt < ApplicationRecord
 
   def self.jwt_revoked?(jwt_payload, user)
     jwt = user.allowlisted_jwts.find_by(jti: jwt_payload["jti"])
+    return true unless jwt
+
     !jwt.valid
   end
 

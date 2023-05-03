@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../types/User';
+import { toast } from 'react-toastify';
 
 type UserState = Pick<User, 'id' | 'email' | 'jwtToken' | 'isLoggedIn'>;
 
@@ -32,6 +33,9 @@ export const UserSlice = createSlice({
       state.jwtToken = undefined;
       state.isLoggedIn = false;
       localStorage.removeItem('jwtToken');
+      toast.info('You are now signed out', {
+        toastId: 'logout',
+      });
     },
   },
 });
