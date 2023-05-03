@@ -62,9 +62,6 @@ describe('PersonalSettings', () => {
     act(() => screen.getByText('Save').click());
     await waitFor(() => expect(meMocker.called('/api/account/me')).toBe(true));
     await waitFor(() => expect(mocker.called('/api/users/')).toBe(true));
-    await waitFor(() =>
-      expect(meMocker.calls('/api/account/me')).toHaveLength(2)
-    );
     fetchMock.reset();
   });
   it('shows a message when password update failed', async () => {

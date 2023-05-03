@@ -16,8 +16,12 @@ export const LayoutSlice = createSlice({
     setAccountLayout: (state, action: PayloadAction<AccountLayout>) => {
       state.account = action.payload;
     },
+
+    resetLayout: (state, _action: PayloadAction<void>) => {
+      state.account = AccountLayout.Personal;
+    }
   },
 });
 
-export const { setAccountLayout } = LayoutSlice.actions;
+export const { setAccountLayout, resetLayout } = LayoutSlice.actions;
 export const layoutReducer = LayoutSlice.reducer;

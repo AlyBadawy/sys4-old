@@ -14,7 +14,7 @@ describe('GetStartedButton', () => {
   });
 
   it('shows Dashboard in when logged in', () => {
-    s4render(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
+    s4render(<GetStartedButton />, {}, { user: { isLoggedIn: true } });
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.queryByText('Sign out')).not.toBeInTheDocument();
     expect(screen.queryByText('Sign in')).not.toBeInTheDocument();
@@ -30,7 +30,7 @@ describe('GetStartedButton', () => {
       value: location,
     });
     const mocker = fetchMock.delete('/api/users/sign_out', {});
-    s4render(<GetStartedButton />, {}, { auth: { isLoggedIn: true } });
+    s4render(<GetStartedButton />, {}, { user: { isLoggedIn: true } });
     expect(screen.getByText('Sign Out')).toBeInTheDocument();
     act(() => {
       screen.getByText('Sign Out').click();

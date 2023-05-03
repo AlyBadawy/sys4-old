@@ -11,7 +11,8 @@ const signedInMenu = (
 
 const signedOutMenu = (
   <>
-    <Link to='/app/development'>Development</Link>
+    <Link to='/about'>About</Link>
+    <Link to='/contact'>Contact Us</Link>
   </>
 );
 

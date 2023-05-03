@@ -12,13 +12,13 @@ export const ResetPassword = () => {
   const navigate = useNavigate();
 
   const queryParameters = new URLSearchParams(window.location.search);
-  const resetPasswordToken = queryParameters.get('reset_password_token');
+  const resetPasswordToken = queryParameters.get('reset_password_token') || '';
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await toast
       .promise(
-        resetPassword({ password, token: resetPasswordToken || '' }).unwrap(),
+        resetPassword({ password, resetPasswordToken }).unwrap(),
         {
           pending: 'Resetting password...',
           success: 'Password Changed! Please sign in.',

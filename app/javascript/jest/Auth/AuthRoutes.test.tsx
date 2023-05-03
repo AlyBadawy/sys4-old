@@ -18,7 +18,7 @@ describe('AuthRoutes', () => {
         s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
-          { auth: { isLoggedIn: false } }
+          { user: { isLoggedIn: false } }
         );
 
         expect(
@@ -33,7 +33,7 @@ describe('AuthRoutes', () => {
         s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
-          { auth: { isLoggedIn: false } }
+          { user: { isLoggedIn: false } }
         );
 
         expect(
@@ -51,7 +51,7 @@ describe('AuthRoutes', () => {
         s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
-          { auth: { isLoggedIn: true } }
+          { user: { isLoggedIn: true } }
         );
 
         expect(
@@ -66,7 +66,7 @@ describe('AuthRoutes', () => {
         s4RenderWithoutRouter(
           <RouterProvider router={router} />,
           {},
-          { auth: { isLoggedIn: true } }
+          { user: { isLoggedIn: true } }
         );
 
         expect(
