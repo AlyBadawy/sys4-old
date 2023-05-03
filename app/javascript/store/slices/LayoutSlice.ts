@@ -23,5 +23,5 @@ export const LayoutSlice = createSlice({
   },
 });
 
-export const { setAccountLayout } = LayoutSlice.actions;
+export const { setAccountLayout, resetLayout } = LayoutSlice.actions;
 export const layoutReducer = LayoutSlice.reducer;
