@@ -32,12 +32,16 @@ export const UserApi = apiWithTag.injectEndpoints({
         };
       },
       async onQueryStarted(_user, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled;
-        dispatch(
-          UserApi.util.updateQueryData('getUser', undefined, (draft) => {
-            Object.assign(draft, data);
-          })
-        );
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            UserApi.util.updateQueryData('getUser', undefined, (draft) => {
+              Object.assign(draft, data);
+            })
+          );
+        } catch (_error) {
+          // do nothing
+        }
       },
     }),
 
@@ -82,12 +86,16 @@ export const UserApi = apiWithTag.injectEndpoints({
         },
       }),
       async onQueryStarted(_user, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled;
-        dispatch(
-          UserApi.util.updateQueryData('getUser', undefined, (draft) => {
-            Object.assign(draft, data);
-          })
-        );
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            UserApi.util.updateQueryData('getUser', undefined, (draft) => {
+              Object.assign(draft, data);
+            })
+          );
+        } catch (_error) {
+          // do nothing
+        }
       },
     }),
 

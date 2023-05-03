@@ -136,7 +136,7 @@ describe('Auth Views', () => {
     });
     it('calls an API to forgot password', async () => {
       fetchMock.get('/api/account/me', 200);
-      const mocker = fetchMock.post('/api/users/password', 200);
+      const mocker = fetchMock.post('/api/users/password', 201);
       s4render(<ForgotPassword />);
       // eslint-disable-next-line testing-library/prefer-screen-queries
       await userEvent.type(screen.getByTestId('email'), 'test@test.com');

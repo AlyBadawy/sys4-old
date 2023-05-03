@@ -10,7 +10,7 @@ describe('Dashboard', () => {
     const mocker = fetchMock.get('/api/status/user', {
       email: 'test@test.com',
     });
-    s4render(<Dashboard />, {}, { auth: { isLoggedIn: true } });
+    s4render(<Dashboard />, {}, { user: { isLoggedIn: true } });
     await waitFor(() => {
       expect(mocker.called('/api/status/user')).toBe(true);
     });
@@ -22,7 +22,7 @@ describe('Dashboard', () => {
   it('handles errors in api', async () => {
     fetchMock.get('/api/account/me', {});
     const mocker = fetchMock.get('/api/status/user', 500);
-    s4render(<Dashboard />, {}, { auth: { isLoggedIn: true } });
+    s4render(<Dashboard />, {}, { user: { isLoggedIn: true } });
     await waitFor(() => {
       expect(mocker.called('/api/status/user')).toBe(true);
     });

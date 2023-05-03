@@ -5,7 +5,6 @@ import { useSignedIn } from '../../hooks/useAuth';
 
 const signedInMenu = (
   <>
-    <Link to='/app'>Dashboard</Link>
     <Link to='/app/account'>Account</Link>
   </>
 );

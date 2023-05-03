@@ -20,7 +20,7 @@ describe('NavBar', () => {
   });
 
   it('shows Dashboard when user logged in', () => {
-    s4render(<NavBar />, {}, { auth: { isLoggedIn: true } });
+    s4render(<NavBar />, {}, { user: { isLoggedIn: true } });
 
     const menuBtn = screen.getByTestId('nav-menu-btn');
     act(() => {
@@ -39,6 +39,6 @@ describe('NavBar', () => {
       menuBtn.click();
     });
 
-    expect(screen.getByText('Development')).toBeInTheDocument();
+    expect(screen.getByText('About')).toBeInTheDocument();
   });
 });
