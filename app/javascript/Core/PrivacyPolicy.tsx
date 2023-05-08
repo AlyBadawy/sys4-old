@@ -3,7 +3,7 @@ import { Sys4Text } from '../ui/Sys4Text';
 
 export const PrivacyPolicy = () => {
   return (
-    <>
+    <div className="s4-container">
       <section id='privacy-policy'>
         <h3 className='text-5xl mb-8 font-bold'>Privacy policy</h3>
         <div className='max-w-5xl'>
@@ -119,7 +119,7 @@ export const PrivacyPolicy = () => {
           </ul>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
