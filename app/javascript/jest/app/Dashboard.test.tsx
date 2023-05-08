@@ -1,7 +1,7 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 import { s4render } from '../TestUtils';
-import { Dashboard } from '../../app/dashboard/Dashboard';
+import Dashboard from '../../app/dashboard/Dashboard';
 import { screen, waitFor } from '@testing-library/react';
 
 describe('Dashboard', () => {

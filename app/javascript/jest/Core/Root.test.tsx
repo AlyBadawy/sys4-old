@@ -4,9 +4,9 @@ import '@testing-library/jest-dom/extend-expect';
 import { AppRoot } from '../../Core/AppRoot';
 
 describe('Root', () => {
-  it('Renders the offline page without the flipper', () => {
+  it('Renders the offline page without the flipper', async () => {
     render(<AppRoot />);
-    const paragraph = screen.getByText(
+    const paragraph = await screen.findByText(
       /is currently offline for maintenance. Our team is working hard to bring the application back online as soon as possible, with all features fully operational/i
     );
     expect(paragraph).toBeInTheDocument();

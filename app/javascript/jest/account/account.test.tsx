@@ -1,7 +1,7 @@
 import React from 'react';
 import { s4render } from '../TestUtils';
 import { screen } from '@testing-library/react';
-import { Account } from '../../app/account/Account';
+import Account from '../../app/account/Account';
 
 describe('Account', () => {
   it('renders correctly', () => {

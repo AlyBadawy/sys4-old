@@ -78,16 +78,14 @@ describe('AuthRoutes', () => {
   });
 
   describe('When the App online flipper is off', () => {
-    it('Renders app offline page', () => {
+    it('Renders app offline page', async () => {
       const router = createMemoryRouter(OfflineRouterConfig, {
         initialEntries: ['/app'],
       });
       s4RenderWithoutRouter(<RouterProvider router={router} />);
-      expect(
-        screen.getByText(
-          /is currently offline for maintenance. Our team is working hard to bring the application back online as soon as possible, with all features fully operational/i
-        )
-      ).toBeInTheDocument();
+      expect(await screen.findByText(
+        /is currently offline for maintenance. Our team is working hard to bring the application back online as soon as possible, with all features fully operational/i
+      )).toBeInTheDocument();
     });
   });
 });
