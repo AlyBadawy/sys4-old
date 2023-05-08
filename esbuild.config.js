@@ -21,6 +21,9 @@ require('esbuild').build({
   absWorkingDir: path.join(process.cwd(), 'app/javascript'),
   bundle: true,
   color: true,
+  assetNames: '[name]-[hash].digested',
+  chunkNames: '[name]-[hash].digested',
+  logLevel: 'info',
   entryPoints: ['react.tsx'],
   external: ['*.ttf'],
   loader: {
