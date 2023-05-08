@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sys4Text } from '../ui/Sys4Text';
 
-export const TermsOfUse = () => {
+const TermsOfUse = () => {
   return (
     <>
       <section id='terms-of-use'>
@@ -78,3 +78,5 @@ export const TermsOfUse = () => {
     </>
   );
 };
+
+export default TermsOfUse;

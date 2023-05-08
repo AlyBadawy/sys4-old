@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sys4Text } from '../ui/Sys4Text';
 
-export const OfflineApp = () => {
+const OfflineApp = () => {
   return (
     <div className='mx-5 m-auto flex flex-col space-y-6 md:w-1/2 md:mx-auto'>
       <h1 className='text-3xl font-bold align-middle md:text-5xl'>
@@ -19,3 +19,5 @@ export const OfflineApp = () => {
     </div>
   );
 };
+
+export default OfflineApp;

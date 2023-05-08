@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetStatusQuery } from '../../store/api/statusApi';
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const { data, isLoading, error } = useGetStatusQuery();
 
   if (isLoading) return <div>Loading...</div>;
@@ -16,3 +16,5 @@ export const Dashboard = () => {
     </>
   );
 };
+
+export default Dashboard;
