@@ -15,7 +15,16 @@
   .s4-input {
     @apply py-2 px-4 border-none text-amber-300 h-10 placeholder:pl-1 placeholder:text-amber-300/30 bg-cyan-950 w-full outline-none focus:ring-2 focus:ring-amber-300/50;
   }
+
+  .s4-container {
+    @apply container mx-auto flex flex-col p-4 flex-1;
+  }
 }
+
+body {
+  @apply bg-gradient-to-br from-black to-cyan-950 text-stone-300;
+}
+
 a,
 .link {
   @apply text-amber-300 enabled:hover:text-cyan-500 cursor-pointer;

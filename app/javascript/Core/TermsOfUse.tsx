@@ -1,9 +1,9 @@
 import React from 'react';
 import { Sys4Text } from '../ui/Sys4Text';
 
-export const TermsOfUse = () => {
+const TermsOfUse = () => {
   return (
-    <>
+    <div className="s4-container">
       <section id='terms-of-use'>
         <h3 className='text-5xl mb-8 font-bold'>Terms of use</h3>
         <div className='max-w-5xl'>
@@ -75,6 +75,8 @@ export const TermsOfUse = () => {
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 };
+
+export default TermsOfUse;

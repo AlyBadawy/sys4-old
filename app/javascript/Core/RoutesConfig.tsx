@@ -1,19 +1,22 @@
-import * as React from 'react';
+import React, { lazy } from 'react';
 import { Layout } from './Layout';
 import { NotFound } from './NotFound';
 import { Home } from '../home/Home';
-import { PrivacyPolicy } from './PrivacyPolicy';
-import { TermsOfUse } from './TermsOfUse';
+
 import { SignIn } from '../auth/SingIn';
 import { SignUp } from '../auth/SignUp';
 import { ForgotPassword } from '../auth/ForgotPassword';
 import { ResetPassword } from '../auth/ResetPassword';
 import { PrivateRoute } from '../auth/PrivateRoute';
-import { Dashboard } from '../app/dashboard/Dashboard';
 import { GuestRoute } from '../auth/GuestRoute';
-import { OfflineApp } from './OfflineApp';
 import { AppContainer } from '../app/AppContainer';
-import { Account } from '../app/account/Account';
+import { ElmLoader } from './suspenders/ElmLoader';
+
+const PrivacyPolicy = lazy(() => import('./PrivacyPolicy'));
+const TermsOfUse = lazy(() => import('./TermsOfUse'));
+const Dashboard = lazy(() => import('../app/dashboard/Dashboard'));
+const Account = lazy(() => import('../app/account/Account'));
+const OfflineApp = lazy(() => import('./OfflineApp'));
 
 export const OnlineRouterConfig = [
   {
@@ -22,8 +25,8 @@ export const OnlineRouterConfig = [
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'privacy', element: <PrivacyPolicy /> },
-      { path: 'terms', element: <TermsOfUse /> },
+      { path: 'privacy', element: <ElmLoader elm={<PrivacyPolicy />} /> },
+      { path: 'terms', element: <ElmLoader elm={<TermsOfUse />} /> },
       {
         element: <GuestRoute />,
         children: [
@@ -40,8 +43,8 @@ export const OnlineRouterConfig = [
             path: 'app',
             element: <AppContainer />,
             children: [
-              { index: true, element: <Dashboard /> },
-              { path: 'account', element: <Account /> },
+              { index: true, element: <ElmLoader elm={<Dashboard />} /> },
+              { path: 'account', element: <ElmLoader elm={<Account />} /> },
             ],
           },
         ],
@@ -55,8 +58,8 @@ export const OfflineRouterConfig = [
     path: '/',
     element: <Layout />,
     children: [
-      { index: true, element: <OfflineApp /> },
-      { path: '*', element: <OfflineApp /> },
+      { index: true, element: <ElmLoader elm={<OfflineApp />} /> },
+      { path: '*', element: <ElmLoader elm={<OfflineApp />} /> },
     ],
   },
 ];

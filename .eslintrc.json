@@ -15,6 +15,7 @@
     "plugin:jest/style",
     "plugin:testing-library/react"
   ],
+  "ignorePatterns": ["node_modules/", "app/assets/build/", "esbuild.config.js"],
   "settings": {
     "react": {
       "version": "detect"
@@ -28,7 +29,7 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module"
-  }, 
+  },
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
     "no-console": "error",

@@ -9,7 +9,7 @@ import { BsPerson } from 'react-icons/bs';
 import { TbArrowsRight } from 'react-icons/tb';
 import { MdPassword } from 'react-icons/md';
 
-export const Account = () => {
+const Account = () => {
   const layout = useAppSelector((state) => state.layout.account);
   return (
     <div className='flex flex-col w-full gap-2 md:flex-row flex-1 py-2'>
@@ -38,3 +38,5 @@ export const Account = () => {
     </div>
   );
 };
+
+export default Account;
