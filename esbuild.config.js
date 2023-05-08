@@ -1,6 +1,7 @@
 const railsEnv = process.env.RAILS_ENV || 'development';
-const optimize = railsEnv !== 'development';
 const errorFilePath = `esbuild_error_${railsEnv}.txt`;
+
+const isProduction = ['production', 'staging'].includes(railsEnv);
 
 const watch = process.argv.includes('--watch');
 
@@ -23,12 +24,22 @@ require('esbuild').build({
   entryPoints: ['react.tsx'],
   external: ['*.ttf'],
   loader: {
+    '.jpeg': 'file',
+    '.jpg': 'file',
+    '.json': 'json',
+    '.locale.json': 'file',
     '.png': 'file',
     '.svg': 'file',
   },
-  minify: optimize,
+  minify: isProduction,
   outdir: path.join(process.cwd(), 'app/assets/builds'),
   plugins: [importGlob(), sassPlugin({ cache: true })],
-  sourcemap: true,
+  sourcemap: !isProduction,
   watch: watch && { onRebuild: handleError },
+  incremental: watch,
+  tsconfig: '../../tsconfig.json',
+  format: 'esm',
+  splitting: true,
+  inject: ['./react-shim.ts'],
+  mainFields: ['module', 'main', 'browser'],
 });

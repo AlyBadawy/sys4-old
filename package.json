@@ -54,6 +54,7 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
+    "build:watch": "node esbuild.config.js --watch",
     "lint": "eslint --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*",
     "lint:fix": "eslint --fix --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*",
     "mail": "mailcatcher --foreground",
