@@ -1,13 +1,21 @@
+// PACKAGES
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useLoginMutation } from '../store/api/UserApi';
 import { Link, useNavigate } from 'react-router-dom';
+
+// STORE
+import { useLoginMutation } from '../store/api/UserApi';
 import { useAppDispatch } from '../store/store';
-import { AuthViewsForm } from './AuthViewsForm';
-import { PasswordField } from '../ui/PasswordField';
 import { setUser } from '../store/slices/UserSlice';
 
-export const SignIn = () => {
+// AUTHVIEWSFORM';
+import { AuthViewsForm } from './AuthViewsForm';
+
+// UI
+import { PasswordField } from '../ui/PasswordField';
+
+
+const SignIn = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const confirmed = queryParameters.get('confirmed');
 
@@ -102,3 +110,5 @@ export const SignIn = () => {
     </AuthViewsForm>
   );
 };
+
+export default SignIn;

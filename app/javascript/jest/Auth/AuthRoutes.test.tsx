@@ -10,7 +10,7 @@ import { s4RenderWithoutRouter } from '../TestUtils';
 describe('AuthRoutes', () => {
   describe('When the App online flipper is on', () => {
     describe('When the user is not logged in', () => {
-      it('Visiting the login page is okay', () => {
+      it('Visiting the login page is okay', async () => {
         const router = createMemoryRouter(OnlineRouterConfig, {
           initialEntries: ['/sign_in'],
         });
@@ -21,8 +21,7 @@ describe('AuthRoutes', () => {
           { user: { isLoggedIn: false } }
         );
 
-        expect(
-          screen.getByText(/Sign in to your account/i)
+        expect(await screen.findByText(/Sign in to your account/i)
         ).toBeInTheDocument();
       });
       it('Visiting the app page routes to the login page', () => {

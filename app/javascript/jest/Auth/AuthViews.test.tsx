@@ -1,14 +1,20 @@
+// PACKAGES
 import React from 'react';
 import { screen, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import fetchMock from 'fetch-mock';
 import userEvent from '@testing-library/user-event';
-import { SignUp } from '../../auth/SignUp';
-import { s4render } from '../TestUtils';
-import { SignIn } from '../../auth/SingIn';
-import { ForgotPassword } from '../../auth/ForgotPassword';
-import { ResetPassword } from '../../auth/ResetPassword';
 
+// AUTH
+import SignUp from '../../auth/SignUp';
+import SignIn from '../../auth/SingIn';
+import ForgotPassword from '../../auth/ForgotPassword';
+import ResetPassword from '../../auth/ResetPassword';
+
+// TESTUTILS';
+import { s4render } from '../TestUtils';
+
+// TESTS
 describe('Auth Views', () => {
   describe('Sign Up', () => {
     it('Shows registration disabled by default', () => {
