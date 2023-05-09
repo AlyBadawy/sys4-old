@@ -24,6 +24,7 @@ export const NavBar = () => {
         <button
           id='menu-btn'
           data-testid='nav-menu-btn'
+          aria-label='Navigation Menu'
           className={`block hamburger focus:outline-none ${
             menuVisibility ? 'open' : ''
           }`}
