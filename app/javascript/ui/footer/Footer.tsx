@@ -32,16 +32,16 @@ export const Footer = () => {
             </div>
           </div>
           <div className='flex flex-col space-y-2'>
-            <Link to='/'>Home</Link>
-            <Link to='/products'>Products</Link>
-            <Link to='/prices'>Prices</Link>
-            <Link to='/community'>Community</Link>
+            <Link to='/' aria-label='Home'>Home</Link>
+            <Link to='/products' aria-label='Products'>Products</Link>
+            <Link to='/prices' aria-label='Prices'>Prices</Link>
+            <Link to='/community' aria-label='Community'>Community</Link>
           </div>
           <div className='flex flex-col space-y-2'>
-            <Link to='/about'>About</Link>
-            <Link to='/contact'>Contact</Link>
-            <Link to='/privacy'>Privacy Policy</Link>
-            <Link to='/terms'>Terms of use</Link>
+            <Link to='/about' aria-label='About'>About</Link>
+            <Link to='/contact' aria-label='Contact us'>Contact</Link>
+            <Link to='/privacy' aria-label='Privacy Policy'>Privacy Policy</Link>
+            <Link to='/terms' aria-label='Terms of use'>Terms of use</Link>
           </div>
         </div>
       </div>
