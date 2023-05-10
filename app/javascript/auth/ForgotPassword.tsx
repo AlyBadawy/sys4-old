@@ -1,11 +1,7 @@
-// PACKAGES
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-// STORE
 import { useForgotPasswordMutation } from '../store/api/UserApi';
-// AUTHVIEWSFORM';
 import { AuthViewsForm } from './AuthViewsForm';
-
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');

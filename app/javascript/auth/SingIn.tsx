@@ -1,19 +1,11 @@
-// PACKAGES
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-
-// STORE
+import { toast } from 'react-toastify';
 import { useLoginMutation } from '../store/api/UserApi';
-import { useAppDispatch } from '../store/store';
 import { setUser } from '../store/slices/UserSlice';
-
-// AUTHVIEWSFORM';
+import { useAppDispatch } from '../store/store';
 import { AuthViewsForm } from './AuthViewsForm';
-
-// UI
 import { PasswordField } from '../ui/PasswordField';
-
 
 const SignIn = () => {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -53,9 +45,7 @@ const SignIn = () => {
         }
       )
       .then((res) => {
-        dispatch(
-          setUser({jwtToken: res.jwtToken})
-        );
+        dispatch(setUser({ jwtToken: res.jwtToken }));
         navigate('/app');
       })
       .catch(() => {

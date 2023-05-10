@@ -1,31 +1,22 @@
-// PACKAGES
 import React, { lazy } from 'react';
-// LAYOUT';
-import { Layout } from './Layout';
-// HOME
-import { Home } from '../home/Home';
-// AUTH
-import { PrivateRoute } from '../auth/PrivateRoute';
 import { GuestRoute } from '../auth/GuestRoute';
+import { PrivateRoute } from '../auth/PrivateRoute';
+import { Home } from '../home/Home';
+import { Layout } from './Layout';
+import { ElmLoader } from './suspenders/ElmLoader';
 const SignIn = lazy(() => import('../auth/SingIn'));
 const SignUp = lazy(() => import('../auth/SignUp'));
 const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
 const ResetPassword = lazy(() => import('../auth/ResetPassword'));
-// SUSPENDERS
-import { ElmLoader } from './suspenders/ElmLoader';
-// Static Pages;
 const PrivacyPolicy = lazy(() => import('./PrivacyPolicy'));
 const TermsOfUse = lazy(() => import('./TermsOfUse'));
 const OfflineApp = lazy(() => import('./OfflineApp'));
-// APP
 const Dashboard = lazy(() => import('../app/dashboard/Dashboard'));
 const Account = lazy(() => import('../app/account/Account'));
 const AppContainer = lazy(() => import('../app/AppContainer'));
 
-// NOTFOUND';
 const NotFound = lazy(() => import('./NotFound'));
 
-// ROUTES
 export const OnlineRouterConfig = [
   {
     path: '/',
@@ -40,8 +31,14 @@ export const OnlineRouterConfig = [
         children: [
           { path: 'sign_in', element: <ElmLoader elm={<SignIn />} /> },
           { path: 'sign_up', element: <ElmLoader elm={<SignUp />} /> },
-          { path: 'forgot_password', element: <ElmLoader elm={<ForgotPassword /> } /> },
-          { path: 'reset_password', element: <ElmLoader elm={<ResetPassword /> } /> },
+          {
+            path: 'forgot_password',
+            element: <ElmLoader elm={<ForgotPassword />} />,
+          },
+          {
+            path: 'reset_password',
+            element: <ElmLoader elm={<ResetPassword />} />,
+          },
         ],
       },
       {

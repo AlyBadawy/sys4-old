@@ -1,15 +1,9 @@
-// PACKAGES
-import React from 'react';
-import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-
-// CORE
+import { screen } from '@testing-library/react';
+import React from 'react';
 import NotFound from '../../Core/NotFound';
-
-// TESTUTILS';
 import { s4render } from '../TestUtils';
 
-// TESTS
 describe('NotFound', () => {
   it('Renders the Not Found Page page', () => {
     s4render(<NotFound />);
