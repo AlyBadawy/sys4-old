@@ -40,6 +40,6 @@ coverage/*
 .env*
 yarn-error.log
 
-/esbuild_error_*
+/esbuild_error_*.*
 
 .byebug*
