@@ -4,7 +4,7 @@ import { Sys4Text } from '../ui/Sys4Text';
 import { NavBar } from '../ui/navigation/NavBar';
 import { Footer } from '../ui/footer/Footer';
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <div className='flex flex-col min-h-screen' id='layout-main'>
       <main className='flex flex-col flex-1 mx-4'>
@@ -40,3 +40,5 @@ export const NotFound = () => {
     </div>
   );
 };
+
+export default NotFound;

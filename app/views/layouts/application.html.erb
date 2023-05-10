@@ -20,6 +20,7 @@
     <meta name="description" content="SYS4 is a fast, secure, and intuitive platform for managing all your systems in one place. From games to health goals, educational resources, and productivity tools, our user-friendly interface and state-of-the-art security measures help you take control of your systems and unlock their full potential.">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#083445"/>
+    <link rel="preload" fetchpriority="high" as="image" href="/images/sys4-logo-4.svg">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
@@ -27,9 +28,12 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <link  media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"
+      />
+    <link rel="manifest" href="/manifest.json">
     <%= render partial: "shared/window_script" %>
     <%= javascript_include_tag "react", "data-turbo-track": "reload", defer: true, type: "module" %>
+    <script src="/sw.js" defer="defer" ></script>
   </head>
   <body>
     <%= yield %>

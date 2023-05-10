@@ -1,12 +1,11 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { SignIn } from '../../auth/SingIn';
+import { screen } from '@testing-library/react';
+import React from 'react';
+import SignIn from '../../auth/SingIn';
 import { s4render } from '../TestUtils';
 
 describe('Sing In page with a confirmed Email Error', () => {
   it('Shows a error message on email confirmed error', async () => {
-    // delete window;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, no-global-assign
     window = Object.create(window);
     const location = {

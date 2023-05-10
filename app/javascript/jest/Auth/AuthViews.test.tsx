@@ -1,13 +1,13 @@
-import React from 'react';
-import { screen, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import fetchMock from 'fetch-mock';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SignUp } from '../../auth/SignUp';
+import fetchMock from 'fetch-mock';
+import React from 'react';
+import ForgotPassword from '../../auth/ForgotPassword';
+import ResetPassword from '../../auth/ResetPassword';
+import SignUp from '../../auth/SignUp';
+import SignIn from '../../auth/SingIn';
 import { s4render } from '../TestUtils';
-import { SignIn } from '../../auth/SingIn';
-import { ForgotPassword } from '../../auth/ForgotPassword';
-import { ResetPassword } from '../../auth/ResetPassword';
 
 describe('Auth Views', () => {
   describe('Sign Up', () => {

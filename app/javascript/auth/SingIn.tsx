@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useLoginMutation } from '../store/api/UserApi';
-import { Link, useNavigate } from 'react-router-dom';
+import { setUser } from '../store/slices/UserSlice';
 import { useAppDispatch } from '../store/store';
 import { AuthViewsForm } from './AuthViewsForm';
 import { PasswordField } from '../ui/PasswordField';
-import { setUser } from '../store/slices/UserSlice';
 
-export const SignIn = () => {
+const SignIn = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const confirmed = queryParameters.get('confirmed');
 
@@ -45,9 +45,7 @@ export const SignIn = () => {
         }
       )
       .then((res) => {
-        dispatch(
-          setUser({jwtToken: res.jwtToken})
-        );
+        dispatch(setUser({ jwtToken: res.jwtToken }));
         navigate('/app');
       })
       .catch(() => {
@@ -102,3 +100,5 @@ export const SignIn = () => {
     </AuthViewsForm>
   );
 };
+
+export default SignIn;

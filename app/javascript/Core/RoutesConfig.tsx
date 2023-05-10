@@ -1,28 +1,27 @@
 import React, { lazy } from 'react';
-import { Layout } from './Layout';
-import { NotFound } from './NotFound';
-import { Home } from '../home/Home';
-
-import { SignIn } from '../auth/SingIn';
-import { SignUp } from '../auth/SignUp';
-import { ForgotPassword } from '../auth/ForgotPassword';
-import { ResetPassword } from '../auth/ResetPassword';
-import { PrivateRoute } from '../auth/PrivateRoute';
 import { GuestRoute } from '../auth/GuestRoute';
-import { AppContainer } from '../app/AppContainer';
+import { PrivateRoute } from '../auth/PrivateRoute';
+import { Home } from '../home/Home';
+import { Layout } from './Layout';
 import { ElmLoader } from './suspenders/ElmLoader';
-
+const SignIn = lazy(() => import('../auth/SingIn'));
+const SignUp = lazy(() => import('../auth/SignUp'));
+const ForgotPassword = lazy(() => import('../auth/ForgotPassword'));
+const ResetPassword = lazy(() => import('../auth/ResetPassword'));
 const PrivacyPolicy = lazy(() => import('./PrivacyPolicy'));
 const TermsOfUse = lazy(() => import('./TermsOfUse'));
+const OfflineApp = lazy(() => import('./OfflineApp'));
 const Dashboard = lazy(() => import('../app/dashboard/Dashboard'));
 const Account = lazy(() => import('../app/account/Account'));
-const OfflineApp = lazy(() => import('./OfflineApp'));
+const AppContainer = lazy(() => import('../app/AppContainer'));
+
+const NotFound = lazy(() => import('./NotFound'));
 
 export const OnlineRouterConfig = [
   {
     path: '/',
     element: <Layout />,
-    errorElement: <NotFound />,
+    errorElement: <ElmLoader elm={<NotFound />} />,
     children: [
       { index: true, element: <Home /> },
       { path: 'privacy', element: <ElmLoader elm={<PrivacyPolicy />} /> },
@@ -30,10 +29,16 @@ export const OnlineRouterConfig = [
       {
         element: <GuestRoute />,
         children: [
-          { path: 'sign_in', element: <SignIn /> },
-          { path: 'sign_up', element: <SignUp /> },
-          { path: 'forgot_password', element: <ForgotPassword /> },
-          { path: 'reset_password', element: <ResetPassword /> },
+          { path: 'sign_in', element: <ElmLoader elm={<SignIn />} /> },
+          { path: 'sign_up', element: <ElmLoader elm={<SignUp />} /> },
+          {
+            path: 'forgot_password',
+            element: <ElmLoader elm={<ForgotPassword />} />,
+          },
+          {
+            path: 'reset_password',
+            element: <ElmLoader elm={<ResetPassword />} />,
+          },
         ],
       },
       {
@@ -41,7 +46,7 @@ export const OnlineRouterConfig = [
         children: [
           {
             path: 'app',
-            element: <AppContainer />,
+            element: <ElmLoader elm={<AppContainer />} />,
             children: [
               { index: true, element: <ElmLoader elm={<Dashboard />} /> },
               { path: 'account', element: <ElmLoader elm={<Account />} /> },

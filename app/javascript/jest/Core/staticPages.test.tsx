@@ -44,7 +44,6 @@ describe('Static Pages', () => {
       s4render(<TermsOfUse />);
 
       expect(screen.getByText(/Use of Application/)).toBeInTheDocument();
-      // expect(screen.getByText(/User Account/)).toBeInTheDocument();
       expect(screen.getByText(/Intellectual Property/)).toBeInTheDocument();
       expect(screen.getByText(/Disclaimer of Warranties/)).toBeInTheDocument();
       expect(screen.getByText(/Limitation of Liability/)).toBeInTheDocument();
