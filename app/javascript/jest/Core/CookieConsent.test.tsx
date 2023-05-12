@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { s4render } from '../TestUtils';
-import { CookieConsent } from '../../Core/CookieConsent';
+import { CookieConsent } from '../../Core/legalPages/CookieConsent';
 
 describe('CookieConsent', () => {
   it('renders correctly with the paragraph', () => {

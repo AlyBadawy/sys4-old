@@ -7,7 +7,7 @@ import { AuthViewsForm } from './AuthViewsForm';
 import { toast } from 'react-toastify';
 import { PasswordField } from '../ui/PasswordField';
 
-const SignUp = () => {
+export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -100,5 +100,3 @@ const SignUp = () => {
     </AuthViewsForm>
   );
 };
-
-export default SignUp;

@@ -418,6 +418,8 @@ GEM
       net-ssh (>= 2.8.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    sys-cpu (1.0.6)
+      ffi (~> 1.1)
     tailwindcss-rails (2.0.28-arm64-darwin)
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.28-x86_64-linux)
@@ -507,6 +509,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
+  sys-cpu
   tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data

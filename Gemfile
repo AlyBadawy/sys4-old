@@ -32,6 +32,8 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
+gem "sys-cpu"
+
 gem "capistrano", "~> 3.11"
 gem "capistrano-passenger", "~> 0.2.0"
 gem "capistrano-rails", "~> 1.4"

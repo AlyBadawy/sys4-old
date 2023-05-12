@@ -7,7 +7,7 @@ import { useAppDispatch } from '../store/store';
 import { AuthViewsForm } from './AuthViewsForm';
 import { PasswordField } from '../ui/PasswordField';
 
-const SignIn = () => {
+export const SignIn = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const confirmed = queryParameters.get('confirmed');
 
@@ -100,5 +100,3 @@ const SignIn = () => {
     </AuthViewsForm>
   );
 };
-
-export default SignIn;
