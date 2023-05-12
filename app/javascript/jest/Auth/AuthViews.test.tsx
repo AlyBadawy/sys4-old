@@ -3,10 +3,10 @@ import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'fetch-mock';
 import React from 'react';
-import ForgotPassword from '../../auth/ForgotPassword';
-import ResetPassword from '../../auth/ResetPassword';
-import SignUp from '../../auth/SignUp';
-import SignIn from '../../auth/SingIn';
+import { ForgotPassword } from '../../auth/ForgotPassword';
+import { ResetPassword } from '../../auth/ResetPassword';
+import { SignIn } from '../../auth/SignIn';
+import { SignUp } from '../../auth/SignUp';
 import { s4render } from '../TestUtils';
 
 describe('Auth Views', () => {

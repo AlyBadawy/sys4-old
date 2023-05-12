@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import { screen } from '@testing-library/react';
 import React from 'react';
-import SignIn from '../../auth/SingIn';
+import { SignIn } from '../../auth/SignIn';
 import { s4render } from '../TestUtils';
 
 describe('Sing In page with a confirmed Email', () => {

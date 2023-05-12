@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthViewsForm } from './AuthViewsForm';
 import { PasswordField } from '../ui/PasswordField';
 
-const ResetPassword = () => {
+export const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
@@ -54,5 +54,3 @@ const ResetPassword = () => {
     </AuthViewsForm>
   );
 };
-
-export default ResetPassword;

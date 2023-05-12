@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useForgotPasswordMutation } from '../store/api/UserApi';
 import { AuthViewsForm } from './AuthViewsForm';
 
-const ForgotPassword = () => {
+export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
@@ -46,5 +46,3 @@ const ForgotPassword = () => {
     </AuthViewsForm>
   );
 };
-
-export default ForgotPassword;

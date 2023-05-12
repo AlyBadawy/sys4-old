@@ -19,6 +19,11 @@
   .s4-container {
     @apply container mx-auto flex flex-col p-4 flex-1;
   }
+
+  p,
+  ul {
+    @apply my-2;
+  }
 }
 
 body {

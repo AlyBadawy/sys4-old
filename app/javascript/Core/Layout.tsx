@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { CookieConsent } from './CookieConsent';
+import { CookieConsent } from './legalPages/CookieConsent';
 import { Footer } from '../ui/footer/Footer';
 import { NavBar } from '../ui/navigation/NavBar';
 import { Toasty } from './Toasty';

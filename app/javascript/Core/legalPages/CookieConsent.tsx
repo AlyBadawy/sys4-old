@@ -35,7 +35,8 @@ export const CookieConsent = () => {
           <p className='text-sm font-medium'>
             This site uses services that use cookies to deliver better
             experience and analyze traffic. You can learn more about the
-            services we use at our <Link to='/privacy'>Privacy Policy</Link>.
+            services we use at our <Link to='/privacy'>Privacy Policy</Link> and{' '}
+            <Link to='/cookies'>Cookies policy</Link>.
           </p>
         </div>
         <div className='flex items-center'>
